@@ -6,9 +6,9 @@
     <Version>1.0</Version>
     <Website>http://www.spectere.net/</Website>
   </Information>
-  <Global>
+  <Configuration>
     <FirstPage>Intro</FirstPage>
-  </Global>
+  </Configuration>
   <Pages>
     <Page Name="Intro">
       <Text>You find yourself in a white room. There is an exit to the north.</Text>

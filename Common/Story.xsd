@@ -4,8 +4,8 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element name="Information" type="InformationType" minOccurs="1" maxOccurs="1" />
-        <xs:element name="Global" type="GlobalType" minOccurs="1" maxOccurs="1" />
-        <xs:element name="Pages">
+        <xs:element name="Configuration" type="ConfigurationType" minOccurs="1" maxOccurs="1" />
+        <xs:element name="Pages" minOccurs="1" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Page" type="PageType" minOccurs="1" maxOccurs="unbounded" />
@@ -25,7 +25,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="GlobalType">
+  <xs:complexType name="ConfigurationType">
     <xs:sequence>
       <xs:element name="FirstPage" type="xs:string" minOccurs="1" maxOccurs="1" />
     </xs:sequence>
