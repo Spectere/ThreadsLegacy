@@ -243,3 +243,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# Auto-generated files
+Threads.Interpreter/Schema/*
+
