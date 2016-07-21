@@ -13,6 +13,7 @@
           </xs:complexType>
         </xs:element>
       </xs:sequence>
+      <xs:attribute name="Format" use="required" type="xs:integer" />
     </xs:complexType>
   </xs:element>
 

@@ -1,6 +1,6 @@
-Story File v0.1
+Story File - format 0
 
-Story
+Story (Format)
 	Information [1]
 		Name - [1] Name of story.
 		Author - [0-1] Author's name.
