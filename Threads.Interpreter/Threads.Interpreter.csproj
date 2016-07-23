@@ -41,13 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schema\Story.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Schema\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>"$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1A\@InstallationFolder)bin\NETFX 4.5.1 Tools\xsd.exe" $(SolutionDir)\Common\Story.xsd /c /n:Threads.Interpreter.Schema /o:$(ProjectDir)\Schema</PreBuildEvent>
+    <PreBuildEvent>if not exist "$(ProjectDir)Schema" mkdir "$(ProjectDir)Schema"
+"$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1A\@InstallationFolder)bin\NETFX 4.5.1 Tools\xsd.exe" $(SolutionDir)\Common\Story.xsd /c /n:Threads.Interpreter.Schema /o:$(ProjectDir)Schema</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
