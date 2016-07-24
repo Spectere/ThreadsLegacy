@@ -11,7 +11,7 @@ namespace Threads.Player {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class StoryWindow : Window {
-        private Engine _engine;
+        private readonly Engine _engine;
 
         public StoryWindow() {
             InitializeComponent();
