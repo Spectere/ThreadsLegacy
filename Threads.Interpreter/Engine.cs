@@ -30,6 +30,7 @@ namespace Threads.Interpreter {
         public void Load(string filename) {
             // TODO: Write a proper exception handler.
             var serializer = new XmlSerializer(typeof(Story));
+
             Story = (Story)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
 
             Restart();

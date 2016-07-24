@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -53,19 +54,14 @@ namespace Threads.Player {
             }
         }
 
-        private void StoryWindow_OnLoaded(object sender, RoutedEventArgs e) {
-            _engine.Load(@"D:\Projects\Threads\Samples\basic.xml");
-            DisplayPage();
-        }
-
         private void StoryWindow_OnKeyDown(object sender, KeyEventArgs e) {
             // System keys.
             if(e.Key == Key.F9) {
-                _engine.Restart();
-                DisplayPage();
+                RestartGame();
             }
 
-            // Handle game input.
+            // Handle game input (if a page is active).
+            if(_engine.CurrentPage == null) return;
             var inKey = e.Key.ToString().ToUpper();
 
             /* Adjust numeric entry.
@@ -81,6 +77,36 @@ namespace Threads.Player {
                     return;
                 }
             }
+        }
+
+        private void Load_OnClick(object sender, RoutedEventArgs e) {
+            var fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Threads Story (*.XML)|*.xml|All Files (*.*)|*.*";
+            fileDialog.Multiselect = false;
+
+            var result = fileDialog.ShowDialog() ?? false;
+            if(!result) return;
+
+            _engine.Load(fileDialog.FileName);
+            DisplayPage();
+        }
+
+        private void Restart_OnClick(object sender, RoutedEventArgs e) {
+            RestartGame();
+        }
+
+        private void RestartGame() {
+            try {
+                _engine.Restart();
+                DisplayPage();
+            } catch(StoryNotLoadedException) { /* null handler */ }
+        }
+
+        private void StoryWindow_OnMouseMove(object sender, MouseEventArgs e) {
+            if(e.GetPosition(stack).Y < 64)
+                menu.Visibility = Visibility.Visible;
+            else
+                menu.Visibility = Visibility.Collapsed;
         }
     }
 }
