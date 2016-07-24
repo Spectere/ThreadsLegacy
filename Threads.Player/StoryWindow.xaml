@@ -8,13 +8,27 @@
         Title="Threads" Height="640" Width="600"
         KeyDown="StoryWindow_OnKeyDown"
         MouseMove="StoryWindow_OnMouseMove">
+    <!--<Style x:Key="MenuItemStyle" TargetType="MenuItem">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="BorderBrush" Value="Gray"/>
+        <Setter Property="Background" Value="Silver"/>
+        <Setter Property="Margin" Value="4.0"/>
+    </Style>-->
+    <Window.Resources>
+        <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+            <Setter Property="Background" Value="Silver"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="4.0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Name="stack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </ScrollViewer>
         <Menu x:Name="menu" Height="Auto" VerticalAlignment="Top" Visibility="Hidden">
-            <MenuItem Header="Load" Click="Load_OnClick" FontSize="18" BorderBrush="Gray" Background="Silver" Margin="4.0"/>
-            <MenuItem Header="Restart" Click="Restart_OnClick" FontSize="18" BorderBrush="Gray" Background="Silver" Margin="4.0"/>
+            <MenuItem Click="Load_OnClick" Style="{StaticResource MenuItemStyle}" Header="Load"/>
+            <MenuItem Click="Restart_OnClick" Style="{StaticResource MenuItemStyle}" Header="Restart"/>
         </Menu>
     </Grid>
 </Window>
