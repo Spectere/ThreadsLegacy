@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\PageNotFoundException.cs" />
+    <Compile Include="Transform.cs" />
     <Compile Include="Types\Choice.cs" />
     <Compile Include="Types\Configuration.cs" />
     <Compile Include="Types\Information.cs" />

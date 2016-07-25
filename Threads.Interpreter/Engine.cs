@@ -1,9 +1,8 @@
 ﻿using StorySerializer = Threads.Interpreter.Schema.Story;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
 using Threads.Interpreter.Exceptions;
-using Threads.Interpreter.Schema;
+using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter {
     /// <summary>
@@ -21,6 +20,11 @@ namespace Threads.Interpreter {
         private StorySerializer _story;
 
         /// <summary>
+        /// The validated form of the story file.
+        /// </summary>
+        public Story Story { get; private set; }
+
+        /// <summary>
         /// Loads a story file into the interpreter and initializes the engine
         /// </summary>
         /// <param name="filename">The path to the story file.</param>
@@ -29,6 +33,7 @@ namespace Threads.Interpreter {
             var serializer = new XmlSerializer(typeof(StorySerializer));
 
             _story = (StorySerializer)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
+            Story = Transform.TransformStory(_story);
 
             Restart();
         }
