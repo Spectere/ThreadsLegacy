@@ -26,7 +26,7 @@ namespace Threads.Interpreter {
         /// <param name="filename">The path to the story file.</param>
         public void Load(string filename) {
             // TODO: Write a proper exception handler.
-            var serializer = new XmlSerializer(typeof(Story));
+            var serializer = new XmlSerializer(typeof(StorySerializer));
 
             _story = (StorySerializer)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
 
