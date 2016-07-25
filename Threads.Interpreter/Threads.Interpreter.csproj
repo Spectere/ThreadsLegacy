@@ -40,10 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Types\Choice.cs" />
+    <Compile Include="Types\Configuration.cs" />
+    <Compile Include="Types\Information.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\Story.cs" />
     <Compile Include="Exceptions\StoryNotLoadedException.cs" />
+    <Compile Include="Types\Page.cs" />
+    <Compile Include="Types\Story.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

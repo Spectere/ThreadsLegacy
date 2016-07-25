@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using StorySerializer = Threads.Interpreter.Schema.Story;
+using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using Threads.Interpreter.Exceptions;
@@ -17,12 +18,7 @@ namespace Threads.Interpreter {
         /// <summary>
         /// A raw view of the data included in the loaded story file.
         /// </summary>
-        private Story _story;
-
-        /// <summary>
-        /// A reference to the current page in the story.
-        /// </summary>
-        private PageType _currentPage;
+        private StorySerializer _story;
 
         /// <summary>
         /// Loads a story file into the interpreter and initializes the engine
@@ -32,7 +28,7 @@ namespace Threads.Interpreter {
             // TODO: Write a proper exception handler.
             var serializer = new XmlSerializer(typeof(Story));
 
-            _story = (Story)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
+            _story = (StorySerializer)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
 
             Restart();
         }
@@ -42,7 +38,7 @@ namespace Threads.Interpreter {
         /// </summary>
         public void Restart() {
             if(_story == null) throw new StoryNotLoadedException();
-            _currentPage = _story.Pages.First(e => e.Name == _story.Configuration.FirstPage);
+            //_currentPage = _story.Pages.First(e => e.Name == _story.Configuration.FirstPage);
         }
 
         /// <summary>
@@ -50,9 +46,9 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="choice">The choice object that the player selected.</param>
         /// <returns>The page that the choice leads to.</returns>
-        public PageType SubmitChoice(PageTypeChoice choice) {
+        /*public PageType SubmitChoice(PageTypeChoice choice) {
             _currentPage = _story.Pages.First(e => e.Name == choice.Target);
             return _currentPage;
-        }
+        }*/
     }
 }
