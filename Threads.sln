@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads.Interpreter", "Threads.Interpreter\Threads.Interpreter.csproj", "{212C4CAB-42DB-47A9-84C3-8F264AE4C3D5}"
 EndProject
@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4C6D0A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{3295FFAE-B9EA-4BF1-A673-C4E0B52F2CD2}"
 	ProjectSection(SolutionItems) = preProject
-		Documentation\LICENSE.txt = Documentation\LICENSE.txt
+		Documentation\marker-outline.txt = Documentation\marker-outline.txt
 		Documentation\xml-outline.txt = Documentation\xml-outline.txt
 	EndProjectSection
 EndProject

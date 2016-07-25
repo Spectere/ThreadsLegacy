@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using Threads.Interpreter.Exceptions;
 using Threads.Interpreter.Schema;
 
 namespace Threads.Interpreter {
@@ -16,12 +17,12 @@ namespace Threads.Interpreter {
         /// <summary>
         /// A raw view of the data included in the loaded story file.
         /// </summary>
-        public Story Story { get; private set; }
+        private Story _story;
 
         /// <summary>
         /// A reference to the current page in the story.
         /// </summary>
-        public PageType CurrentPage { get; private set; }
+        private PageType _currentPage;
 
         /// <summary>
         /// Loads a story file into the interpreter and initializes the engine
@@ -31,7 +32,7 @@ namespace Threads.Interpreter {
             // TODO: Write a proper exception handler.
             var serializer = new XmlSerializer(typeof(Story));
 
-            Story = (Story)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
+            _story = (Story)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
 
             Restart();
         }
@@ -40,8 +41,8 @@ namespace Threads.Interpreter {
         /// Restarts the game engine.
         /// </summary>
         public void Restart() {
-            if(Story == null) throw new StoryNotLoadedException();
-            CurrentPage = Story.Pages.First(e => e.Name == Story.Configuration.FirstPage);
+            if(_story == null) throw new StoryNotLoadedException();
+            _currentPage = _story.Pages.First(e => e.Name == _story.Configuration.FirstPage);
         }
 
         /// <summary>
@@ -50,8 +51,8 @@ namespace Threads.Interpreter {
         /// <param name="choice">The choice object that the player selected.</param>
         /// <returns>The page that the choice leads to.</returns>
         public PageType SubmitChoice(PageTypeChoice choice) {
-            CurrentPage = Story.Pages.First(e => e.Name == choice.Target);
-            return CurrentPage;
+            _currentPage = _story.Pages.First(e => e.Name == choice.Target);
+            return _currentPage;
         }
     }
 }

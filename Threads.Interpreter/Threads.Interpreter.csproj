@@ -43,7 +43,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\Story.cs" />
-    <Compile Include="StoryNotLoadedException.cs" />
+    <Compile Include="Exceptions\StoryNotLoadedException.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

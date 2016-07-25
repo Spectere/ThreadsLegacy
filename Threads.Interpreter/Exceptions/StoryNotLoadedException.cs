@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Threads.Interpreter {
+namespace Threads.Interpreter.Exceptions {
     /// <summary>
     /// Represents the error that occurs if an engine action is taken when a story file is not loaded.
     /// </summary>
