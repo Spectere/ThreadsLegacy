@@ -23,6 +23,6 @@ namespace Threads.Interpreter.Types {
         /// <summary>
         /// The pages contained in the story.
         /// </summary>
-        public List<Page> Pages { get; set; }
+        public IEnumerable<Page> Pages { get; set; }
     }
 }
