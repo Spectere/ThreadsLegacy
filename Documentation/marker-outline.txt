@@ -1,0 +1,7 @@
+Marker v0
+
+\ - Displays the following character as-is.
+*text* - Bold
+_text_ - Italics
+^2^ - Superscript
+`3` - Subscript
