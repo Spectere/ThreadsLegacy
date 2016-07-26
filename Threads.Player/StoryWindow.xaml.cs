@@ -2,9 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Threads.Interpreter;
 using Threads.Interpreter.Exceptions;
-using Threads.Interpreter.Schema;
+using Threads.Interpreter.Types;
 
 namespace Threads.Player {
     /// <summary>
@@ -20,13 +21,12 @@ namespace Threads.Player {
         }
 
         private void Choice_Click(object sender, RoutedEventArgs e) {
-            var choice = (PageTypeChoice)((Button)sender).Tag;
-            //_engine.SubmitChoice(choice);
+            var choice = (Choice)((Button)sender).Tag;
+            _engine.SubmitChoice(choice);
             DisplayPage();
         }
 
         private void DisplayPage() {
-            /*
             var page = _engine.CurrentPage;
 
             stack.Children.Clear();
@@ -42,9 +42,9 @@ namespace Threads.Player {
             stack.Children.Add(text);
 
             // Display choices.
-            foreach(var choice in page.Choice ?? new PageTypeChoice[0]) {
+            foreach(var choice in page.Choices) {
                 var button = new Button {
-                    Content = string.Format($"{choice.Shortcut}) {choice.Value}"),
+                    Content = string.Format($"{choice.Shortcut}) {choice.Text}"),
                     FontFamily = new FontFamily("Cambria"),
                     FontSize = 18.0,
                     Margin = new Thickness(40.0, 0.0, 40.0, 7.5),
@@ -53,7 +53,6 @@ namespace Threads.Player {
                 button.Click += Choice_Click;
                 stack.Children.Add(button);
             }
-            */
         }
 
         private void StoryWindow_OnKeyDown(object sender, KeyEventArgs e) {
@@ -63,22 +62,22 @@ namespace Threads.Player {
             }
 
             // Handle game input (if a page is active).
-            //if(_engine.CurrentPage == null) return;
+            if(_engine.CurrentPage == null) return;
             var inKey = e.Key.ToString().ToUpper();
 
             /* Adjust numeric entry.
              *   D? - number row
              *   NUMPAD? - numeric keypad */
-            /*if((inKey.StartsWith("D") && inKey.Length == 2) || inKey.StartsWith("NUMPAD"))
+            if((inKey.StartsWith("D") && inKey.Length == 2) || inKey.StartsWith("NUMPAD"))
                 inKey = inKey.Substring(inKey.Length - 1, 1);
 
-            foreach(var choice in _engine.CurrentPage.Choice ?? new PageTypeChoice[0]) {
-                if(inKey == choice.Shortcut.ToUpper()) {
+            foreach(var choice in _engine.CurrentPage.Choices) {
+                if(inKey == choice.Shortcut.ToString().ToUpper()) {
                     _engine.SubmitChoice(choice);
                     DisplayPage();
                     return;
                 }
-            }*/
+            }
         }
 
         private void Load_OnClick(object sender, RoutedEventArgs e) {

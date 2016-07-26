@@ -19,6 +19,8 @@ namespace Threads.Interpreter {
         /// </summary>
         private StorySerializer _story;
 
+        public Page CurrentPage { get; private set; }
+
         /// <summary>
         /// The validated form of the story file.
         /// </summary>
@@ -43,7 +45,7 @@ namespace Threads.Interpreter {
         /// </summary>
         public void Restart() {
             if(_story == null) throw new StoryNotLoadedException();
-            //_currentPage = _story.Pages.First(e => e.Name == _story.Configuration.FirstPage);
+            CurrentPage = Story.Configuration.FirstPage;
         }
 
         /// <summary>
@@ -51,9 +53,9 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="choice">The choice object that the player selected.</param>
         /// <returns>The page that the choice leads to.</returns>
-        /*public PageType SubmitChoice(PageTypeChoice choice) {
-            _currentPage = _story.Pages.First(e => e.Name == choice.Target);
-            return _currentPage;
-        }*/
+        public Page SubmitChoice(Choice choice) {
+            CurrentPage = choice.Target;
+            return CurrentPage;
+        }
     }
 }
