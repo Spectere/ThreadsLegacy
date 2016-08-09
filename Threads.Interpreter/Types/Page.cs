@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Threads.Interpreter.PageObject;
 using Threads.Marker;
 
 namespace Threads.Interpreter.Types {
@@ -7,11 +8,6 @@ namespace Threads.Interpreter.Types {
     /// </summary>
     public class Page {
         /// <summary>
-        /// The formatted text on this page.
-        /// </summary>
-        public TextSequence FormattedText { get; set; }
-
-        /// <summary>
         /// The name of this page.
         /// </summary>
         public string Name { get; set; }
@@ -19,11 +15,16 @@ namespace Threads.Interpreter.Types {
         /// <summary>
         /// The plain text on this page.
         /// </summary>
-        public string Text => FormattedText.ToString();
+        public List<IPageObject> Objects { get; set; }
 
         /// <summary>
         /// The available choices on this page.
         /// </summary>
         public List<Choice> Choices { get; set; }
+
+        public Page() {
+            Objects = new List<IPageObject>();
+            Choices = new List<Choice>();
+        }
     }
 }

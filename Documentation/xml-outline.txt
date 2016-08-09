@@ -1,4 +1,4 @@
-Story File - format 0
+Story File - format 0b
 
 Story (Format)
 	Information [1]
@@ -10,5 +10,5 @@ Story (Format)
 		FirstPage - [1] First page of the story.
 	Pages [1]
 		Page [1-?] (Name)
-			Text - [1] The text on the given page.
+			Text - [1-?] The text on the given page.
 			Choice - [0-?] (Target, Shortcut)

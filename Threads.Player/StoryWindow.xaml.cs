@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
+using Documents = System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Threads.Interpreter;
@@ -9,6 +9,7 @@ using Threads.Interpreter.Exceptions;
 using Threads.Interpreter.Types;
 using Threads.Marker;
 using Threads.Marker.Commands;
+using Threads.Interpreter.PageObject;
 
 namespace Threads.Player {
     /// <summary>
@@ -35,26 +36,27 @@ namespace Threads.Player {
             stack.Children.Clear();
 
             // Display room text.
-            var text = new TextBlock {
-                FontFamily = new FontFamily("Cambria"),
-                FontSize = 24.0,
-                Margin = new Thickness(40.0),
-                TextWrapping = TextWrapping.WrapWithOverflow
-            };
-            FormatTextBlock(page.FormattedText, ref text);
-            stack.Children.Add(text);
+            foreach(var obj in page.Objects) {
+                var text = new TextBlock {
+                    FontFamily = new FontFamily("Cambria"),
+                    FontSize = 24.0,
+                    Margin = new Thickness(40.0),
+                    TextWrapping = TextWrapping.WrapWithOverflow
+                };
+                FormatTextBlock(((Paragraph)obj).FormattedText, ref text);
+                stack.Children.Add(text);
+            }
 
             // Display choices.
             foreach(var choice in page.Choices) {
                 var button = new Button {
-                    //Content = string.Format($"{choice.Shortcut}) {choice.Text}"),
                     FontFamily = new FontFamily("Cambria"),
                     FontSize = 18.0,
                     Margin = new Thickness(40.0, 0.0, 40.0, 7.5),
                     Tag = choice
                 };
                 var buttonText = new TextBlock();
-                buttonText.Inlines.Add(new Run($"{choice.Shortcut}) ") { FontWeight = FontWeights.Bold });
+                buttonText.Inlines.Add(new Documents.Run($"{choice.Shortcut}) ") { FontWeight = FontWeights.Bold });
                 FormatTextBlock(choice.FormattedText, ref buttonText);
                 button.Content = buttonText;
                 button.Click += Choice_Click;
@@ -79,7 +81,7 @@ namespace Threads.Player {
                         break;
                     case Command.Text:
                         var textCmd = (TextCommand) seq;
-                        var run = new Run(textCmd.Text);
+                        var run = new Documents.Run(textCmd.Text);
                         if(isBold) run.FontWeight = FontWeights.Bold;
                         if(isItalic) run.FontStyle = FontStyles.Italic;
                         textBlock.Inlines.Add(run);

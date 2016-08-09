@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Threads.Interpreter.Exceptions;
+using Threads.Interpreter.PageObject;
 using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter {
@@ -65,9 +66,12 @@ namespace Threads.Interpreter {
             foreach(var page in pageList) {
                 var newPage = new Page {
                     Name = page.Name,
-                    FormattedText = Marker.Parser.Parse(page.Text),
                     Choices = new List<Choice>()
                 };
+                foreach(var text in page.Text) {
+                    var para = new Paragraph { FormattedText = Marker.Parser.Parse(text) };
+                    newPage.Objects.Add(para);
+                }
                 output.Add(newPage);
             }
 

@@ -34,7 +34,7 @@
 
   <xs:complexType name="PageType">
     <xs:sequence>
-      <xs:element name="Text" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Text" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
       <xs:element name="Choice" minOccurs="0" maxOccurs="unbounded">
         <xs:complexType>
           <xs:simpleContent>

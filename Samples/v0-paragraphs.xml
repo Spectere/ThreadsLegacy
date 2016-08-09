@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Story Format="0">
+  <Information>
+    <Name>Paragraph Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>TestPage1</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="TestPage1">
+      <Text>*Paragraphs!*</Text>
+      <Text>They're supported! _Yay!_</Text>
+      <Text>While this didn't cause a significant change to the XML schema, this required a bit of internal shuffling.</Text>
+      <Choice Target="TestPage2" Shortcut="O">It did?</Choice>
+    </Page>
+    <Page Name="TestPage2">
+      <Text>Yep, but that's okay. This thing is, like, way better now as a result.</Text>
+      <Text>Instead of each page only containing one block of text, it can contain multiple objects. That should make some fancy features much easier to implement in the future.</Text>
+    </Page>
+  </Pages>
+</Story>
