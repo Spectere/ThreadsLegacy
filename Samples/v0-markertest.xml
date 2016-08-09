@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Story Format="0">
+  <Information>
+    <Name>Marker Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>TestPage1</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="TestPage1">
+      <Text>Now _this_ is what I'm talking about! It's not much, but at least *Threads* has some very basic font styling.</Text>
+      <Choice Target="TestPage2" Shortcut="N">Oh _really_?</Choice>
+    </Page>
+    <Page Name="TestPage2">
+      <Text>*Yes, _really_*. Fortunately, there's some support for _*escaping*_, too, so you can use \* and \_ _in *normal* paragraphs_.</Text>
+      <Choice Target="TestPage3" Shortcut="N">*Well*, uh, that..._still isn't very impressive_... -\_-</Choice>
+    </Page>
+    <Page Name="TestPage3">
+      <Text>*:(*</Text>
+    </Page>
+  </Pages>
+</Story>

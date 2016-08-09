@@ -65,7 +65,7 @@ namespace Threads.Interpreter {
             foreach(var page in pageList) {
                 var newPage = new Page {
                     Name = page.Name,
-                    Text = page.Text,
+                    FormattedText = Marker.Parser.Parse(page.Text),
                     Choices = new List<Choice>()
                 };
                 output.Add(newPage);
@@ -82,7 +82,7 @@ namespace Threads.Interpreter {
                     }
 
                     page.Choices.Add(new Choice {
-                        Text = choice.Value,
+                        FormattedText = Marker.Parser.Parse(choice.Value),
                         Shortcut = Convert.ToChar(choice.Shortcut.Substring(0, 1)),
                         Target = output.First(e => e.Name == choice.Target)
                     });

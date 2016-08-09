@@ -1,11 +1,14 @@
 ﻿using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using Threads.Interpreter;
 using Threads.Interpreter.Exceptions;
 using Threads.Interpreter.Types;
+using Threads.Marker;
+using Threads.Marker.Commands;
 
 namespace Threads.Player {
     /// <summary>
@@ -28,6 +31,7 @@ namespace Threads.Player {
 
         private void DisplayPage() {
             var page = _engine.CurrentPage;
+            bool isBold = false, isItalic = false;
 
             stack.Children.Clear();
 
@@ -36,22 +40,52 @@ namespace Threads.Player {
                 FontFamily = new FontFamily("Cambria"),
                 FontSize = 24.0,
                 Margin = new Thickness(40.0),
-                Text = page.Text,
                 TextWrapping = TextWrapping.WrapWithOverflow
             };
+            FormatTextBlock(page.FormattedText, ref text);
             stack.Children.Add(text);
 
             // Display choices.
             foreach(var choice in page.Choices) {
                 var button = new Button {
-                    Content = string.Format($"{choice.Shortcut}) {choice.Text}"),
+                    //Content = string.Format($"{choice.Shortcut}) {choice.Text}"),
                     FontFamily = new FontFamily("Cambria"),
                     FontSize = 18.0,
                     Margin = new Thickness(40.0, 0.0, 40.0, 7.5),
                     Tag = choice
                 };
+                var buttonText = new TextBlock();
+                buttonText.Inlines.Add(new Run($"{choice.Shortcut}) ") { FontWeight = FontWeights.Bold });
+                FormatTextBlock(choice.FormattedText, ref buttonText);
+                button.Content = buttonText;
                 button.Click += Choice_Click;
                 stack.Children.Add(button);
+            }
+        }
+
+        private void FormatTextBlock(TextSequence sequence, ref TextBlock textBlock) {
+            bool isBold = false, isItalic = false;
+            foreach(var seq in sequence.Instructions) {
+                switch(seq.Command) {
+                    case Command.TextStyle:
+                        var styleCmd = (StyleCommand) seq;
+                        switch(styleCmd.TextStyle) {
+                            case TextStyle.Bold:
+                                isBold = !isBold;
+                                break;
+                            case TextStyle.Italic:
+                                isItalic = !isItalic;
+                                break;
+                        }
+                        break;
+                    case Command.Text:
+                        var textCmd = (TextCommand) seq;
+                        var run = new Run(textCmd.Text);
+                        if(isBold) run.FontWeight = FontWeights.Bold;
+                        if(isItalic) run.FontStyle = FontStyles.Italic;
+                        textBlock.Inlines.Add(run);
+                        break;
+                }
             }
         }
 

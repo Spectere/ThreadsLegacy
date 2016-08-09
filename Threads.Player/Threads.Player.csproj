@@ -100,6 +100,10 @@
       <Project>{212c4cab-42db-47a9-84c3-8f264ae4c3d5}</Project>
       <Name>Threads.Interpreter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Threads.Marker\Threads.Marker.csproj">
+      <Project>{b76403c6-7856-439b-87f6-a315296ccc57}</Project>
+      <Name>Threads.Marker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
