@@ -18,18 +18,18 @@
   </xs:element>
 
   <xs:complexType name="InformationType">
-    <xs:sequence>
+    <xs:all>
       <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" />
       <xs:element name="Author" type="xs:string" minOccurs="0" maxOccurs="1" />
       <xs:element name="Version" type="xs:string" minOccurs="0" maxOccurs="1" />
       <xs:element name="Website" type="xs:string" minOccurs="0" maxOccurs="1" />
-    </xs:sequence>
+    </xs:all>
   </xs:complexType>
 
   <xs:complexType name="ConfigurationType">
-    <xs:sequence>
+    <xs:all>
       <xs:element name="FirstPage" type="xs:string" minOccurs="1" maxOccurs="1" />
-    </xs:sequence>
+    </xs:all>
   </xs:complexType>
 
   <xs:complexType name="PageType">
