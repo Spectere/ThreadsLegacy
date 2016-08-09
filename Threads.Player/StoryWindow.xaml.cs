@@ -31,7 +31,6 @@ namespace Threads.Player {
 
         private void DisplayPage() {
             var page = _engine.CurrentPage;
-            bool isBold = false, isItalic = false;
 
             stack.Children.Clear();
 
