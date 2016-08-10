@@ -24,7 +24,6 @@ namespace Threads.Interpreter.PageObject {
         /// Initializes a new instance of this <see cref="PageObject"/>.
         /// </summary>
         protected PageObject() {
-            FormattedText = new TextSequence();
             Style = new PageObjectStyle();
         }
     }
