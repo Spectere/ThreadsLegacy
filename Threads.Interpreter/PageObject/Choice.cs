@@ -8,13 +8,6 @@ namespace Threads.Interpreter.PageObject {
     public class Choice : PageObject {
         public override PageObjectType Type => PageObjectType.Choice;
 
-        public override string Text => FormattedText.ToString();
-
-        /// <summary>
-        /// The formatted text sequence for this <see cref="Choice" />.
-        /// </summary>
-        public TextSequence FormattedText { get; set; }
-
         /// <summary>
         /// The target page that this choice leads to.
         /// </summary>
