@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Threads.Interpreter.PageObject;
-using Threads.Marker;
 
 namespace Threads.Interpreter.Types {
     /// <summary>
@@ -17,6 +16,9 @@ namespace Threads.Interpreter.Types {
         /// </summary>
         public List<IPageObject> Objects { get; set; }
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="Page" /> class.
+        /// </summary>
         public Page() {
             Objects = new List<IPageObject>();
         }

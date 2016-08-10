@@ -2,7 +2,13 @@
 using Threads.Marker;
 
 namespace Threads.Interpreter.PageObject {
+    /// <summary>
+    /// A class implementing <see cref="IPageObject" />. This class must be inherited.
+    /// </summary>
     public abstract class PageObject : IPageObject {
+        /// <summary>
+        /// The type of <see cref="PageObject" /> that this instance represents.
+        /// </summary>
         public virtual PageObjectType Type { get { throw new InvalidPageObjectException("unknown"); } }
 
         /// <summary>

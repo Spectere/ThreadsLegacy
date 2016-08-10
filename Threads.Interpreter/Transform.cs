@@ -13,7 +13,7 @@ namespace Threads.Interpreter {
         /// Transforms a deserialized XML into a validated set of story objects.
         /// </summary>
         /// <param name="storyData">A set of deserialized story data.</param>
-        /// <returns>A <see cref="Types.Story"/> object containing the validated story data.</returns>
+        /// <returns>A <see cref="Story"/> object containing the validated story data.</returns>
         internal static Story TransformStory(Schema.Story storyData) {
             var story = new Story {
                 Information = TransformInformation(storyData.Information),
@@ -25,11 +25,11 @@ namespace Threads.Interpreter {
         }
 
         /// <summary>
-        /// 
+        /// Transforms the configuration section of a deserialized XML into a validated story configuration.
         /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="pages"></param>
-        /// <returns></returns>
+        /// <param name="configuration">A set of deserialized configuration data.</param>
+        /// <param name="pages">The set of pages used by the loaded story.</param>
+        /// <returns>A <see cref="Configuration"/> object containing the validated configuration data.</returns>
         private static Configuration TransformConfiguration(ConfigurationType configuration, IEnumerable<Page> pages) {
             var pageList = pages.ToList();
 
@@ -39,7 +39,7 @@ namespace Threads.Interpreter {
             }
 
             return new Configuration { FirstPage = pageList.First(e => e.Name == configuration.FirstPage) };
- ;       }
+        }
 
         /// <summary>
         /// Transforms a deserialized information block into a story object.

@@ -1,5 +1,4 @@
 ﻿using Threads.Interpreter.Types;
-using Threads.Marker;
 
 namespace Threads.Interpreter.PageObject {
     /// <summary>
@@ -23,6 +22,9 @@ namespace Threads.Interpreter.PageObject {
         /// </summary>
         public char Shortcut { get; set; }
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="Choice" /> <see cref="PageObject" />.
+        /// </summary>
         public Choice() {
             // Set default style.
             Style.MarginTop = 0.0;

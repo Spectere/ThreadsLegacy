@@ -15,7 +15,7 @@ namespace Threads.Player {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class StoryWindow : Window {
+    public partial class StoryWindow {
         private readonly Engine _engine;
 
         public StoryWindow() {
@@ -128,9 +128,10 @@ namespace Threads.Player {
         }
 
         private void Load_OnClick(object sender, RoutedEventArgs e) {
-            var fileDialog = new OpenFileDialog();
-            fileDialog.Filter = "Threads Story (*.XML)|*.xml|All Files (*.*)|*.*";
-            fileDialog.Multiselect = false;
+            var fileDialog = new OpenFileDialog {
+                Filter = "Threads Story (*.XML)|*.xml|All Files (*.*)|*.*",
+                Multiselect = false
+            };
 
             var result = fileDialog.ShowDialog() ?? false;
             if(!result) return;
@@ -151,10 +152,9 @@ namespace Threads.Player {
         }
 
         private void StoryWindow_OnMouseMove(object sender, MouseEventArgs e) {
-            if(e.GetPosition(stack).Y < 64)
-                menu.Visibility = Visibility.Visible;
-            else
-                menu.Visibility = Visibility.Collapsed;
+            menu.Visibility = e.GetPosition(stack).Y < 64
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
     }
 }

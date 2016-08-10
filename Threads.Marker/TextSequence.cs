@@ -12,6 +12,9 @@ namespace Threads.Marker {
         /// </summary>
         public List<IInstruction> Instructions { get; set; }
 
+        /// <summary>
+        /// Initializes an instance of the <see cref="TextSequence" /> object.
+        /// </summary>
         public TextSequence() {
             Instructions = new List<IInstruction>();
         }

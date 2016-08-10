@@ -2,7 +2,15 @@
 using Threads.Marker.Commands;
 
 namespace Threads.Marker {
+    /// <summary>
+    /// The Marker text markup parser.
+    /// </summary>
     public static class Parser {
+        /// <summary>
+        /// Parses text that has been marked up using Marker.
+        /// </summary>
+        /// <param name="text">The marked up string of text.</param>
+        /// <returns>A <see cref="TextSequence" /> based on the marked up text.</returns>
         public static TextSequence Parse(string text) {
             var ts = new TextSequence();
             var sb = new StringBuilder();

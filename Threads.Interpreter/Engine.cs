@@ -20,6 +20,9 @@ namespace Threads.Interpreter {
         /// </summary>
         private StorySerializer _story;
 
+        /// <summary>
+        /// The currently active page in the story.
+        /// </summary>
         public Page CurrentPage { get; private set; }
 
         /// <summary>

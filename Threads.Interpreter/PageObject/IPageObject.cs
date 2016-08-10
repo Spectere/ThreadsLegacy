@@ -1,10 +1,9 @@
-﻿using Threads.Interpreter.Types;
-using Threads.Marker;
+﻿using Threads.Marker;
 
 namespace Threads.Interpreter.PageObject {
     public interface IPageObject {
         /// <summary>
-        /// The type of page object.
+        /// The type of <see cref="IPageObject" /> that this instance represents.
         /// </summary>
         PageObjectType Type { get; }
 

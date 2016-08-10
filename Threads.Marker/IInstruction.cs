@@ -1,10 +1,10 @@
 ﻿namespace Threads.Marker {
     /// <summary>
-    /// An interface for an implementation instruction.
+    /// An interface describing a <see cref="TextSequence" /> command.
     /// </summary>
     public interface IInstruction {
         /// <summary>
-        /// The instruction to perform.
+        /// The type of instruction to perform.
         /// </summary>
         Command Command { get; }
     }

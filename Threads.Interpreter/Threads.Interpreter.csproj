@@ -56,7 +56,6 @@
     <Compile Include="PageObject\IPageObject.cs" />
     <Compile Include="PageObject\PageObjectType.cs" />
     <Compile Include="Types\Page.cs" />
-    <Compile Include="Types\PageLayout.cs" />
     <Compile Include="Types\Story.cs" />
   </ItemGroup>
   <ItemGroup>
