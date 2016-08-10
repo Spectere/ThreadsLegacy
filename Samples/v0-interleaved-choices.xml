@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Story Format="0">
+  <Information>
+    <Name>Basic Example</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Intro</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="Intro">
+      <Text>You find yourself in a large room with yellow walls. You have a couple of options. You could:</Text>
+      <Choice Target="WalkAround" Shortcut="1">Walk around aimlessly.</Choice>
+      <Text>Alternatively, you could:</Text>
+      <Choice Target="SitAround" Shortcut="2">Sit around boredly.</Choice>
+      <Text>And, finally, you could:</Text>
+      <Choice Target="Quit" Shortcut="3">Quit the game angrily.</Choice>
+      <Text>The choice is yours.</Text>
+    </Page>
+
+    <Page Name="WalkAround">
+      <Text>There's nothing here.</Text>
+      <Choice Target="Intro" Shortcut="1">What to do next...</Choice>
+    </Page>
+
+    <Page Name="SitAround">
+      <Text>You sit for a while.</Text>
+      <Choice Target="Intro" Shortcut="1">What to do next...</Choice>
+    </Page>
+
+    <Page Name="Quit">
+      <Text>A sensible decision!</Text>
+      <Text>*You win!*</Text>
+    </Page>
+  </Pages>
+</Story>

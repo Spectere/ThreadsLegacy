@@ -2,6 +2,7 @@
 using System.IO;
 using System.Xml.Serialization;
 using Threads.Interpreter.Exceptions;
+using Threads.Interpreter.PageObject;
 using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter {

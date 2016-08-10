@@ -25,6 +25,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{068DA925-034A-4D7C-B344-083CC846F7D9}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\v0-basic.xml = Samples\v0-basic.xml
+		Samples\v0-interleaved-choices.xml = Samples\v0-interleaved-choices.xml
 		Samples\v0-markertest.xml = Samples\v0-markertest.xml
 		Samples\v0-paragraphs.xml = Samples\v0-paragraphs.xml
 	EndProjectSection

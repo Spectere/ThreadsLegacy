@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using System.Linq;
+using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 using Documents = System.Windows.Documents;
@@ -40,41 +41,40 @@ namespace Threads.Player {
                 Margin = new Thickness(40.0, 40.0, 40.0, 20.0)
             };
 
-            var choiceStack = new StackPanel() {
-                Margin = new Thickness(40.0, 0.0, 40.0, 0.0)
-            };
-
             // Display room text.
             foreach(var obj in page.Objects) {
-                var text = new TextBlock {
-                    FontFamily = new FontFamily("Cambria"),
-                    FontSize = 24.0,
-                    Margin = new Thickness(0.0, 0.0, 0.0, 20.0),
-                    TextWrapping = TextWrapping.WrapWithOverflow
-                };
-                FormatTextBlock(((Paragraph)obj).FormattedText, ref text);
-                objStack.Children.Add(text);
-            }
+                switch(obj.Type) {
+                    case PageObjectType.Paragraph:
+                        var text = new TextBlock {
+                            FontFamily = new FontFamily("Cambria"),
+                            FontSize = 24.0,
+                            Margin = new Thickness(0.0, 0.0, 0.0, 20.0),
+                            TextWrapping = TextWrapping.WrapWithOverflow
+                        };
+                        FormatTextBlock(((Paragraph)obj).FormattedText, ref text);
+                        objStack.Children.Add(text);
+                        break;
+                    case PageObjectType.Choice:
+                        var choice = (Choice)obj;
+                        var button = new Button {
+                            FontFamily = new FontFamily("Cambria"),
+                            FontSize = 18.0,
+                            Margin = new Thickness(0.0, 0.0, 0.0, 7.5),
+                            Tag = choice
+                        };
+                        var buttonText = new TextBlock();
+                        buttonText.Inlines.Add(new Documents.Run($"{choice.Shortcut}) ") { FontWeight = FontWeights.Bold });
+                        FormatTextBlock(choice.FormattedText, ref buttonText);
+                        button.Content = buttonText;
+                        button.Click += Choice_Click;
+                        objStack.Children.Add(button);
+                        break;
+                }
 
-            // Display choices.
-            foreach(var choice in page.Choices) {
-                var button = new Button {
-                    FontFamily = new FontFamily("Cambria"),
-                    FontSize = 18.0,
-                    Margin = new Thickness(0.0, 0.0, 0.0, 7.5),
-                    Tag = choice
-                };
-                var buttonText = new TextBlock();
-                buttonText.Inlines.Add(new Documents.Run($"{choice.Shortcut}) ") { FontWeight = FontWeights.Bold });
-                FormatTextBlock(choice.FormattedText, ref buttonText);
-                button.Content = buttonText;
-                button.Click += Choice_Click;
-                choiceStack.Children.Add(button);
             }
 
             // Add container stacks to the main stack.
             stack.Children.Add(objStack);
-            stack.Children.Add(choiceStack);
         }
 
         private void FormatTextBlock(TextSequence sequence, ref TextBlock textBlock) {
@@ -119,7 +119,8 @@ namespace Threads.Player {
             if((inKey.StartsWith("D") && inKey.Length == 2) || inKey.StartsWith("NUMPAD"))
                 inKey = inKey.Substring(inKey.Length - 1, 1);
 
-            foreach(var choice in _engine.CurrentPage.Choices) {
+            foreach(var choiceObject in _engine.CurrentPage.Objects.Where(o => o.Type == PageObjectType.Choice)) {
+                var choice = (Choice)choiceObject;
                 if(inKey == choice.Shortcut.ToString().ToUpper()) {
                     _engine.SubmitChoice(choice);
                     DisplayPage();

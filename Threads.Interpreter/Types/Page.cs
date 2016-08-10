@@ -17,14 +17,8 @@ namespace Threads.Interpreter.Types {
         /// </summary>
         public List<IPageObject> Objects { get; set; }
 
-        /// <summary>
-        /// The available choices on this page.
-        /// </summary>
-        public List<Choice> Choices { get; set; }
-
         public Page() {
             Objects = new List<IPageObject>();
-            Choices = new List<Choice>();
         }
     }
 }
