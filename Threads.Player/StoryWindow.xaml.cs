@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Threads.Interpreter;
 using Threads.Interpreter.Exceptions;
-using Threads.Interpreter.Types;
 using Threads.Marker;
 using Threads.Marker.Commands;
 using Threads.Interpreter.PageObject;
@@ -48,7 +47,7 @@ namespace Threads.Player {
                         var text = new TextBlock {
                             FontFamily = new FontFamily("Cambria"),
                             FontSize = 24.0,
-                            Margin = new Thickness(0.0, 0.0, 0.0, 20.0),
+                            Margin = new Thickness(0.0, obj.Style.MarginTop, 0.0, obj.Style.MarginBottom),
                             TextWrapping = TextWrapping.WrapWithOverflow
                         };
                         FormatTextBlock(((Paragraph)obj).FormattedText, ref text);
@@ -59,7 +58,7 @@ namespace Threads.Player {
                         var button = new Button {
                             FontFamily = new FontFamily("Cambria"),
                             FontSize = 18.0,
-                            Margin = new Thickness(0.0, 0.0, 0.0, 7.5),
+                            Margin = new Thickness(0.0, obj.Style.MarginTop, 0.0, obj.Style.MarginBottom),
                             Tag = choice
                         };
                         var buttonText = new TextBlock();
@@ -70,7 +69,6 @@ namespace Threads.Player {
                         objStack.Children.Add(button);
                         break;
                 }
-
             }
 
             // Add container stacks to the main stack.

@@ -5,10 +5,10 @@ namespace Threads.Interpreter.PageObject {
     /// <summary>
     /// A page object representing a choice in the story.
     /// </summary>
-    public class Choice : IPageObject {
-        public PageObjectType Type => PageObjectType.Choice;
+    public class Choice : PageObject {
+        public override PageObjectType Type => PageObjectType.Choice;
 
-        public string Text => FormattedText.ToString();
+        public override string Text => FormattedText.ToString();
 
         /// <summary>
         /// The formatted text sequence for this <see cref="Choice" />.
@@ -29,5 +29,11 @@ namespace Threads.Interpreter.PageObject {
         /// The shortcut key that activates this choice.
         /// </summary>
         public char Shortcut { get; set; }
+
+        public Choice() {
+            // Set default style.
+            Style.MarginTop = 0.0;
+            Style.MarginBottom = 7.5;
+        }
     }
 }

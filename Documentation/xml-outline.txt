@@ -1,4 +1,4 @@
-Story File - format 0b
+Story File - format 1
 
 Story (Format)
 	Information [1]
@@ -12,3 +12,6 @@ Story (Format)
 		Page [1-?] (Name)
 			Text - [1-?] The text on the given page.
 			Choice - [0-?] (Target, Shortcut)
+
+PageObject Attributes
+	MarginTop/MarginBottom - Top/bottom margins.

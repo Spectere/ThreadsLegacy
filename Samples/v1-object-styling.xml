@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Story Format="1">
+  <Information>
+    <Name>Basic Example</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Page1</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="Page1">
+      <Text>Standard.</Text>
+      <Text MarginTop="80.0" MarginBottom="80.0">Large margins!</Text>
+      <Text>Standard.</Text>
+      <Choice Target="Page2" Shortcut="1">Standard.</Choice>
+      <Choice Target="Page2" Shortcut="2" MarginTop="60.0" MarginBottom="60.0">Large margins!</Choice>
+      <Choice Target="Page2" Shortcut="3">Standard.</Choice>
+    </Page>
+
+    <Page Name="Page2">
+      <Text>Time for some scrolling...</Text>
+      <Text MarginTop="2000.0">...'ello you!</Text>
+    </Page>
+  </Pages>
+</Story>

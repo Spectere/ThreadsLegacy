@@ -11,5 +11,10 @@ namespace Threads.Interpreter.PageObject {
         /// A textual description of the object.
         /// </summary>
         string Text { get; }
+
+        /// <summary>
+        /// The style that should be applied to this page object.
+        /// </summary>
+        PageObjectStyle Style { get; set; }
     }
 }

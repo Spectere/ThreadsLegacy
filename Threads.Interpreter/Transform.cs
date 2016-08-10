@@ -60,9 +60,10 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="pageObject">The XML object to transform.</param>
         /// <returns>A page object based on the XML object data.</returns>
-        private static IPageObject TransformPageObject(object pageObject) {
+        private static IPageObject TransformPageObject(Schema.PageObject pageObject) {
             IPageObject newObject;
 
+            // Determine the specific type of PageObject and add it to the list.
             if(pageObject.GetType() == typeof(PageTypeChoice)) {
                 var choice = (PageTypeChoice) pageObject;
                 newObject = new Choice {
@@ -70,13 +71,15 @@ namespace Threads.Interpreter {
                     Shortcut = Convert.ToChar(choice.Shortcut.Substring(0, 1)),
                     TargetName = choice.Target
                 };
-            } else if(pageObject is string) {
-                newObject = new Paragraph {
-                    FormattedText = Marker.Parser.Parse((string) pageObject)
-                };
             } else {
-                throw new InvalidPageObjectException(pageObject.GetType().ToString());
+                // If all else fails, it's probably a paragraph.
+                newObject = new Paragraph {
+                    FormattedText = Marker.Parser.Parse(pageObject.Value)
+                };
             }
+
+            // Apply style.
+            newObject.Style = TransformStyle(pageObject, newObject.Style);
 
             return newObject;
         }
@@ -111,6 +114,21 @@ namespace Threads.Interpreter {
             }
 
             return output;
+        }
+
+        /// <summary>
+        /// Apples the style of an XML <see cref="Schema.PageObject" /> on top of a default style.
+        /// </summary>
+        /// <param name="pageObject">The <see cref="Schema.PageObject" /> to pull the style values from.</param>
+        /// <param name="defaultStyle">The <see cref="PageObjectStyle" /> to apply the updated style to.</param>
+        /// <returns>A <see cref="PageObjectStyle" /> containing the merged style data.</returns>
+        private static PageObjectStyle TransformStyle(Schema.PageObject pageObject, PageObjectStyle defaultStyle) {
+            var newStyle = defaultStyle;
+
+            if(pageObject.MarginBottomSpecified) newStyle.MarginBottom = pageObject.MarginBottom;
+            if(pageObject.MarginTopSpecified) newStyle.MarginTop = pageObject.MarginTop;
+
+            return newStyle;
         }
     }
 }
