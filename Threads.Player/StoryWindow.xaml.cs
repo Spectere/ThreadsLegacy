@@ -35,16 +35,25 @@ namespace Threads.Player {
 
             stack.Children.Clear();
 
+            // Create a stack for the page objects and choices.
+            var objStack = new StackPanel {
+                Margin = new Thickness(40.0, 40.0, 40.0, 20.0)
+            };
+
+            var choiceStack = new StackPanel() {
+                Margin = new Thickness(40.0, 0.0, 40.0, 0.0)
+            };
+
             // Display room text.
             foreach(var obj in page.Objects) {
                 var text = new TextBlock {
                     FontFamily = new FontFamily("Cambria"),
                     FontSize = 24.0,
-                    Margin = new Thickness(40.0),
+                    Margin = new Thickness(0.0, 0.0, 0.0, 20.0),
                     TextWrapping = TextWrapping.WrapWithOverflow
                 };
                 FormatTextBlock(((Paragraph)obj).FormattedText, ref text);
-                stack.Children.Add(text);
+                objStack.Children.Add(text);
             }
 
             // Display choices.
@@ -52,7 +61,7 @@ namespace Threads.Player {
                 var button = new Button {
                     FontFamily = new FontFamily("Cambria"),
                     FontSize = 18.0,
-                    Margin = new Thickness(40.0, 0.0, 40.0, 7.5),
+                    Margin = new Thickness(0.0, 0.0, 0.0, 7.5),
                     Tag = choice
                 };
                 var buttonText = new TextBlock();
@@ -60,8 +69,12 @@ namespace Threads.Player {
                 FormatTextBlock(choice.FormattedText, ref buttonText);
                 button.Content = buttonText;
                 button.Click += Choice_Click;
-                stack.Children.Add(button);
+                choiceStack.Children.Add(button);
             }
+
+            // Add container stacks to the main stack.
+            stack.Children.Add(objStack);
+            stack.Children.Add(choiceStack);
         }
 
         private void FormatTextBlock(TextSequence sequence, ref TextBlock textBlock) {
