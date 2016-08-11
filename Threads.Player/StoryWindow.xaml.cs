@@ -171,6 +171,7 @@ namespace Threads.Player {
             Directory.SetCurrentDirectory(Path.GetDirectoryName(fileDialog.FileName));
             _engine.Load(fileDialog.FileName);
             DisplayPage();
+            Title = $"Threads - [{_engine.Story.Information.Name}]";
         }
 
         private void Restart_OnClick(object sender, RoutedEventArgs e) {
