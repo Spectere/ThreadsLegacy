@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Story Format="1">
+  <Information>
+    <Name>Image Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Choice</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="Choice">
+      <Text>Do you want to see a *creepy derp face*?</Text>
+      <Choice Target="OhYes" Shortcut="Y">Oh yes!</Choice>
+      <Choice Target="ChoiceLoop" Shortcut="N">Uhhhh...no?</Choice>
+    </Page>
+
+    <Page Name="ChoiceLoop">
+      <Text>Are you sure?</Text>
+      <Choice Target="ChoiceLoop" Shortcut="Y">Yes.</Choice>
+      <Choice Target="OhYes" Shortcut="N">Nah.</Choice>
+    </Page>
+
+    <Page Name="OhYes">
+      <Text>_*Whelp, here it is:*_</Text>
+      <Image Source="creepy-derp-face.png">Creepy Face!</Image>
+      <Text>Did you like it? _Did you?_ I hope so! It took me almost *two minutes* to draw that.</Text>
+      <Text>Next, here's what an invalid image looks like (some formatted alt text should pop up instead):</Text>
+      <Image Source="purposely-invalid-image-file.png">This image is *borked*.</Image>
+      <Text>And finally, here's a huge image grabbed from an absolute path (might not look right if you're not running Windows 10):</Text>
+      <Image Source="C:\Windows\Web\Wallpaper\Theme1\img1.jpg">Looks like it isn't on your computer. Sorry! :(</Image>
+      <Text>Did everything work? I hope so!</Text>
+    </Page>
+  </Pages>
+</Story>

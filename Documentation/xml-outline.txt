@@ -10,8 +10,9 @@ Story (Format)
 		FirstPage - [1] First page of the story.
 	Pages [1]
 		Page [1-?] (Name)
-			Text - [1-?] The text on the given page.
+			Text - [0-?] The text on the given page.
 			Choice - [0-?] (Target, Shortcut)
+			Image - [0-?] (Source)
 
 PageObject Attributes
 	MarginTop/MarginBottom - Top/bottom margins.

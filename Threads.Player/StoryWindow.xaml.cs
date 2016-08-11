@@ -1,15 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using Microsoft.Win32;
 using System.Windows;
 using System.Windows.Controls;
 using Documents = System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Threads.Interpreter;
 using Threads.Interpreter.Exceptions;
 using Threads.Marker;
 using Threads.Marker.Commands;
 using Threads.Interpreter.PageObject;
+using PageObjectImage = Threads.Interpreter.PageObject.Image;
 
 namespace Threads.Player {
     /// <summary>
@@ -50,7 +54,7 @@ namespace Threads.Player {
                             Margin = new Thickness(0.0, obj.Style.MarginTop, 0.0, obj.Style.MarginBottom),
                             TextWrapping = TextWrapping.WrapWithOverflow
                         };
-                        FormatTextBlock(((Paragraph)obj).FormattedText, ref text);
+                        FormatTextBlock(obj.FormattedText, ref text);
                         objStack.Children.Add(text);
                         break;
                     case PageObjectType.Choice:
@@ -67,6 +71,39 @@ namespace Threads.Player {
                         button.Content = buttonText;
                         button.Click += Choice_Click;
                         objStack.Children.Add(button);
+                        break;
+                    case PageObjectType.Image:
+                        var imageObj = (PageObjectImage)obj;
+
+                        if(File.Exists(imageObj.Source)) {
+                            var source = new Uri(imageObj.Source, UriKind.RelativeOrAbsolute);
+                            var container = new Viewbox {
+                                Margin = new Thickness(0.0, obj.Style.MarginTop, 0.0, obj.Style.MarginBottom),
+                                Stretch = Stretch.Uniform,
+                                StretchDirection = StretchDirection.DownOnly
+                            };
+                            var image = new System.Windows.Controls.Image {
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Margin = new Thickness(0.0, obj.Style.MarginTop, 0.0, obj.Style.MarginBottom),
+                                Source = new BitmapImage(source)
+                            };
+
+                            image.Width = image.Source.Width;
+                            image.Height = image.Source.Height;
+
+                            container.Child = image;
+                            objStack.Children.Add(container);
+                        } else {
+                            var brokenImageText = new TextBlock {
+                                FontFamily = new FontFamily("Cambria"),
+                                FontSize = 20.0,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Margin = new Thickness(0.0, obj.Style.MarginTop, 0.0, obj.Style.MarginBottom),
+                                TextWrapping = TextWrapping.WrapWithOverflow
+                            };
+                            FormatTextBlock(obj.FormattedText, ref brokenImageText);
+                            objStack.Children.Add(brokenImageText);
+                        }
                         break;
                 }
             }
@@ -136,6 +173,9 @@ namespace Threads.Player {
             var result = fileDialog.ShowDialog() ?? false;
             if(!result) return;
 
+            // Set the directory before loading the story so that relative paths will line up nicely.
+            // ReSharper disable once AssignNullToNotNullAttribute
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(fileDialog.FileName));
             _engine.Load(fileDialog.FileName);
             DisplayPage();
         }

@@ -5,6 +5,7 @@
     public enum PageObjectType {
         Unknown,
         Paragraph,
-        Choice
+        Choice,
+        Image
     }
 }

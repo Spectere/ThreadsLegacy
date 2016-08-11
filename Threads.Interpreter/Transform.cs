@@ -64,12 +64,18 @@ namespace Threads.Interpreter {
             IPageObject newObject;
 
             // Determine the specific type of PageObject and add it to the list.
-            if(pageObject.GetType() == typeof(PageTypeChoice)) {
-                var choice = (PageTypeChoice) pageObject;
+            if(pageObject.GetType() == typeof(ChoiceObject)) {
+                var choice = (ChoiceObject)pageObject;
                 newObject = new Choice {
                     FormattedText = Marker.Parser.Parse(choice.Value),
                     Shortcut = Convert.ToChar(choice.Shortcut.Substring(0, 1)),
                     TargetName = choice.Target
+                };
+            } else if(pageObject.GetType() == typeof(ImageObject)) {
+                var image = (ImageObject)pageObject;
+                newObject = new Image {
+                    FormattedText = Marker.Parser.Parse(image.Value),
+                    Source = image.Source
                 };
             } else {
                 // If all else fails, it's probably a paragraph.
@@ -117,9 +123,9 @@ namespace Threads.Interpreter {
         }
 
         /// <summary>
-        /// Apples the style of an XML <see cref="Schema.PageObject" /> on top of a default style.
+        /// Apples the style of an XML <see cref="PageObject" /> on top of a default style.
         /// </summary>
-        /// <param name="pageObject">The <see cref="Schema.PageObject" /> to pull the style values from.</param>
+        /// <param name="pageObject">The <see cref="PageObject" /> to pull the style values from.</param>
         /// <param name="defaultStyle">The <see cref="PageObjectStyle" /> to apply the updated style to.</param>
         /// <returns>A <see cref="PageObjectStyle" /> containing the merged style data.</returns>
         private static PageObjectStyle TransformStyle(Schema.PageObject pageObject, PageObjectStyle defaultStyle) {

@@ -43,6 +43,7 @@
     <Compile Include="Exceptions\InvalidPageObjectException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="PageObject\Choice.cs" />
+    <Compile Include="PageObject\Image.cs" />
     <Compile Include="PageObject\PageObject.cs" />
     <Compile Include="PageObject\PageObjectStyle.cs" />
     <Compile Include="PageObject\Paragraph.cs" />

@@ -34,26 +34,38 @@
 
   <xs:complexType name="PageType">
     <xs:choice maxOccurs="unbounded">
-      <xs:element name="Text" type="PageObject" minOccurs="1" maxOccurs="unbounded" />
-      <xs:element name="Choice" minOccurs="0" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:simpleContent>
-            <xs:extension base="PageObject">
-              <xs:attribute name="Target" type="xs:string" use="required" />
-              <xs:attribute name="Shortcut" type="xs:string" use="required" />
-            </xs:extension>
-          </xs:simpleContent>
-        </xs:complexType>
-      </xs:element>
+      <xs:element name="Text" type="PageObject" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Choice" type="ChoiceObject" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Image" type="ImageObject" minOccurs="0" maxOccurs="unbounded" />
     </xs:choice>
     <xs:attribute name="Name" type="xs:string" use="required" />
   </xs:complexType>
 
+  <!-- 
+    Page Objects
+    -->
   <xs:complexType name="PageObject">
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="MarginTop" type="xs:double" use="optional" />
         <xs:attribute name="MarginBottom" type="xs:double" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="ChoiceObject">
+    <xs:simpleContent>
+      <xs:extension base="PageObject">
+        <xs:attribute name="Target" type="xs:string" use="required" />
+        <xs:attribute name="Shortcut" type="xs:string" use="required" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="ImageObject">
+    <xs:simpleContent>
+      <xs:extension base="PageObject">
+        <xs:attribute name="Source" type="xs:string" use="required" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
