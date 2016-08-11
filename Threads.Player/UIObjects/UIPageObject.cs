@@ -38,7 +38,7 @@ namespace Threads.Player.UIObjects {
         /// Applies a <see cref="PageObjectStyle" /> to this object instance.
         /// </summary>
         public PageObjectStyle PageObjectStyle {
-            set { Margin = new Thickness(0.0, value.MarginTop, 0.0, value.MarginBottom); }
+            set { Margin = new Thickness(value.MarginLeft, value.MarginTop, value.MarginRight, value.MarginBottom); }
         }
 
         /// <summary>

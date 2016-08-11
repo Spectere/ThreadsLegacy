@@ -29,6 +29,8 @@
   <xs:complexType name="ConfigurationType">
     <xs:all>
       <xs:element name="FirstPage" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="StoryMarginLeft" type="xs:double" minOccurs="0" maxOccurs="1" />
+      <xs:element name="StoryMarginRight" type="xs:double" minOccurs="0" maxOccurs="1" />
     </xs:all>
   </xs:complexType>
 
@@ -47,8 +49,10 @@
   <xs:complexType name="PageObject">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="MarginTop" type="xs:double" use="optional" />
         <xs:attribute name="MarginBottom" type="xs:double" use="optional" />
+        <xs:attribute name="MarginLeft" type="xs:double" use="optional" />
+        <xs:attribute name="MarginRight" type="xs:double" use="optional" />
+        <xs:attribute name="MarginTop" type="xs:double" use="optional" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

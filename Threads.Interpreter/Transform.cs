@@ -33,12 +33,17 @@ namespace Threads.Interpreter {
         private static Configuration TransformConfiguration(ConfigurationType configuration, IEnumerable<Page> pages) {
             var pageList = pages.ToList();
 
-            // Throw an exception if the page doesn't exist.
-            if(pageList.Count(e => e.Name == configuration.FirstPage) == 0) {
-                throw new PageNotFoundException(configuration.FirstPage);
-            }
+            var newConfig = new Configuration {
+                FirstPage = pageList.First(e => e.Name == configuration.FirstPage),
+                StoryMarginLeft = configuration.StoryMarginLeftSpecified ? configuration.StoryMarginLeft : 40.0,
+                StoryMarginRight = configuration.StoryMarginRightSpecified ? configuration.StoryMarginRight : 40.0
+            };
 
-            return new Configuration { FirstPage = pageList.First(e => e.Name == configuration.FirstPage) };
+            // Check to see if the first page is valid.
+            if(newConfig.FirstPage == null)
+                throw new PageNotFoundException(configuration.FirstPage);
+
+            return newConfig;
         }
 
         /// <summary>
@@ -132,6 +137,8 @@ namespace Threads.Interpreter {
             var newStyle = defaultStyle;
 
             if(pageObject.MarginBottomSpecified) newStyle.MarginBottom = pageObject.MarginBottom;
+            if(pageObject.MarginLeftSpecified) newStyle.MarginLeft = pageObject.MarginLeft;
+            if(pageObject.MarginRightSpecified) newStyle.MarginRight = pageObject.MarginRight;
             if(pageObject.MarginTopSpecified) newStyle.MarginTop = pageObject.MarginTop;
 
             return newStyle;

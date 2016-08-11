@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{068D
 		Samples\v0-markertest.xml = Samples\v0-markertest.xml
 		Samples\v0-paragraphs.xml = Samples\v0-paragraphs.xml
 		Samples\v1-image.xml = Samples\v1-image.xml
+		Samples\v1-margin-test.xml = Samples\v1-margin-test.xml
 		Samples\v1-object-styling.xml = Samples\v1-object-styling.xml
 	EndProjectSection
 EndProject

@@ -12,12 +12,13 @@ namespace Threads.Player.UIObjects {
 
         public UIImage(PageObject.Image imageObject) : base(imageObject) {
             if(File.Exists(imageObject.Source)) {
+                // Image exists; display that.
                 var source = new Uri(imageObject.Source, UriKind.RelativeOrAbsolute);
                 var container = new Viewbox {
                     Stretch = Stretch.Uniform,
                     StretchDirection = StretchDirection.DownOnly
                 };
-                var image = new System.Windows.Controls.Image {
+                var image = new Image {
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Source = new BitmapImage(source)
                 };
@@ -28,6 +29,7 @@ namespace Threads.Player.UIObjects {
                 container.Child = image;
                 Content = container;
             } else {
+                // Image doesn't exist; display text instead.
                 TextBlock.FontSize = 20.0;
                 TextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 

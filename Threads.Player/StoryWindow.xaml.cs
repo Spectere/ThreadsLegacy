@@ -30,10 +30,11 @@ namespace Threads.Player {
         }
 
         private void DisplayPage() {
+            var globalConfig = _engine.Story.Configuration;
             var page = _engine.CurrentPage;
 
             Stack.Children.Clear();
-            Stack.Margin = new Thickness(40.0, 40.0, 40.0, 20.0);
+            Stack.Margin = new Thickness(globalConfig.StoryMarginLeft, 40.0, globalConfig.StoryMarginRight, 20.0);
 
             // Display room text.
             foreach(var obj in page.Objects) {
