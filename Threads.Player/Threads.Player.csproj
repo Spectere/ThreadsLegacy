@@ -63,6 +63,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Formatting.cs" />
+    <Compile Include="UIObjects\UIChoice.cs" />
+    <Compile Include="UIObjects\UIImage.cs" />
+    <Compile Include="UIObjects\UIPageObject.cs" />
+    <Compile Include="UIObjects\UIParagraph.cs" />
     <Compile Include="StoryWindow.xaml.cs">
       <DependentUpon>StoryWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
