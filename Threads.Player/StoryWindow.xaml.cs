@@ -38,11 +38,7 @@ namespace Threads.Player {
             var page = _engine.CurrentPage;
 
             Stack.Children.Clear();
-
-            // Create a stack for the page objects and choices.
-            var objStack = new StackPanel {
-                Margin = new Thickness(40.0, 40.0, 40.0, 20.0)
-            };
+            Stack.Margin = new Thickness(40.0, 40.0, 40.0, 20.0);
 
             // Display room text.
             foreach(var obj in page.Objects) {
@@ -55,7 +51,7 @@ namespace Threads.Player {
                             TextWrapping = TextWrapping.WrapWithOverflow
                         };
                         FormatTextBlock(obj.FormattedText, ref text);
-                        objStack.Children.Add(text);
+                        Stack.Children.Add(text);
                         break;
                     case PageObjectType.Choice:
                         var choice = (Choice)obj;
@@ -70,7 +66,7 @@ namespace Threads.Player {
                         FormatTextBlock(choice.FormattedText, ref buttonText);
                         button.Content = buttonText;
                         button.Click += Choice_Click;
-                        objStack.Children.Add(button);
+                        Stack.Children.Add(button);
                         break;
                     case PageObjectType.Image:
                         var imageObj = (PageObjectImage)obj;
@@ -92,7 +88,7 @@ namespace Threads.Player {
                             image.Height = image.Source.Height;
 
                             container.Child = image;
-                            objStack.Children.Add(container);
+                            Stack.Children.Add(container);
                         } else {
                             var brokenImageText = new TextBlock {
                                 FontFamily = new FontFamily("Cambria"),
@@ -102,14 +98,11 @@ namespace Threads.Player {
                                 TextWrapping = TextWrapping.WrapWithOverflow
                             };
                             FormatTextBlock(obj.FormattedText, ref brokenImageText);
-                            objStack.Children.Add(brokenImageText);
+                            Stack.Children.Add(brokenImageText);
                         }
                         break;
                 }
             }
-
-            // Add container stacks to the main stack.
-            Stack.Children.Add(objStack);
         }
 
         private void FormatTextBlock(TextSequence sequence, ref TextBlock textBlock) {
