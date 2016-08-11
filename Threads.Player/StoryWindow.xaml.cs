@@ -33,7 +33,7 @@ namespace Threads.Player {
         private void DisplayPage() {
             var page = _engine.CurrentPage;
 
-            stack.Children.Clear();
+            Stack.Children.Clear();
 
             // Create a stack for the page objects and choices.
             var objStack = new StackPanel {
@@ -72,7 +72,7 @@ namespace Threads.Player {
             }
 
             // Add container stacks to the main stack.
-            stack.Children.Add(objStack);
+            Stack.Children.Add(objStack);
         }
 
         private void FormatTextBlock(TextSequence sequence, ref TextBlock textBlock) {
@@ -152,7 +152,7 @@ namespace Threads.Player {
         }
 
         private void StoryWindow_OnMouseMove(object sender, MouseEventArgs e) {
-            menu.Visibility = e.GetPosition(stack).Y < 64
+            Menu.Visibility = e.GetPosition(this).Y < 64
                 ? Visibility.Visible
                 : Visibility.Collapsed;
         }

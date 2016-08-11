@@ -24,9 +24,9 @@
     </Window.Resources>
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="stack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <StackPanel Name="Stack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </ScrollViewer>
-        <Menu x:Name="menu" Height="Auto" VerticalAlignment="Top" Visibility="Hidden">
+        <Menu x:Name="Menu" Height="Auto" VerticalAlignment="Top" Visibility="Hidden">
             <MenuItem Click="Load_OnClick" Style="{StaticResource MenuItemStyle}" Header="Load"/>
             <MenuItem Click="Restart_OnClick" Style="{StaticResource MenuItemStyle}" Header="Restart"/>
         </Menu>
