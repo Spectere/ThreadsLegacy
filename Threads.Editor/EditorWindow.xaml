@@ -22,5 +22,7 @@
             <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" />
             <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" />
         </Menu>
+        
+        <local:PageList DockPanel.Dock="Left" Width="200" />
     </DockPanel>
 </Window>
