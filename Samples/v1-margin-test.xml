@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Story Format="1">
+  <Information>
+    <Name>Margin Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Page1</FirstPage>
+    <StoryMarginLeft>10.0</StoryMarginLeft>
+    <StoryMarginRight>10.0</StoryMarginRight>
+  </Configuration>
+  <Pages>
+    <Page Name="Page1">
+      <Text>This is an example of a story file with customized story margins (namely, _10.0_ on each side instead of the default _40.0_). In addition to that, we will also explore some PageObject margins while we're at it! This is going to be fun.</Text>
+      <Text MarginLeft="80.0">This text should be shunted to the right a bit. The right edge should remain where you'd expect.</Text>
+      <Text MarginRight="80.0">The left edge of this text should be where you'd expect, but the right edge is a bit more toward the left.</Text>
+      <Text MarginLeft="80.0" MarginRight="80.0">This text should be squashed from both the left and right sides. Yowzer!</Text>
+      <Text MarginTop="20.0">Normally, paragraphs have no top margin and a bottom margin of _20.0_. This paragraph has a top margin of _20.0_ with the default bottom margin, so it should be a bit further away from the above paragraph than you'd expect.</Text>
+      <Text MarginBottom="0.0">This paragraph's bottom margin has been forced to _0.0_. It should be nestled right against the text below.</Text>
+      <Text>Hi! I'm just here to prove the above paragraph's point.</Text>
+    </Page>
+  </Pages>
+</Story>
