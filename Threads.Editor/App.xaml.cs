@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace Threads.Editor {
+﻿namespace Threads.Editor {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
