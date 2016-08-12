@@ -6,6 +6,21 @@
         xmlns:local="clr-namespace:Threads.Editor"
         mc:Ignorable="d"
         Title="Threads Editor" Height="540" Width="840">
-    <Grid>
-    </Grid>
+    <Window.Resources>
+        <Style x:Key="MenuItemStyle" TargetType="MenuItem">
+            <Setter Property="Background" Value="Silver"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="4.0"/>
+        </Style>
+    </Window.Resources>
+    
+    <DockPanel LastChildFill="False">
+        <Menu DockPanel.Dock="Top" Height="Auto">
+            <MenuItem Click="New_OnClick" Style="{StaticResource MenuItemStyle}" Header="New" />
+            <MenuItem Click="Open_OnClick" Style="{StaticResource MenuItemStyle}" Header="Open" />
+            <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" />
+            <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" />
+        </Menu>
+    </DockPanel>
 </Window>
