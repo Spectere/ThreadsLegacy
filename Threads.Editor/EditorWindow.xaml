@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Threads.Editor"
         mc:Ignorable="d"
-        Title="Threads Editor" Height="540" Width="840">
+        Title="Threads Editor" Height="540" Width="820"
+        MinWidth="820" MinHeight="480">
     <Window.Resources>
         <Style x:Key="MenuItemStyle" TargetType="MenuItem">
             <Setter Property="Background" Value="Silver"/>
@@ -15,14 +16,27 @@
         </Style>
     </Window.Resources>
     
-    <DockPanel LastChildFill="False">
-        <Menu DockPanel.Dock="Top" Height="Auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        
+        <Menu Grid.Row="0" Grid.ColumnSpan="3" Height="Auto">
             <MenuItem Click="New_OnClick" Style="{StaticResource MenuItemStyle}" Header="New" />
             <MenuItem Click="Open_OnClick" Style="{StaticResource MenuItemStyle}" Header="Open" />
             <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" />
             <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" />
         </Menu>
         
-        <local:PageList DockPanel.Dock="Left" Width="200" />
-    </DockPanel>
+        <local:PageList Grid.Row="1" Grid.Column="0" />
+        <local:ObjectList Grid.Row="1" Grid.Column="1" />
+        <local:ObjectEditor Grid.Row="1" Grid.Column="2" />
+    </Grid>
 </Window>
