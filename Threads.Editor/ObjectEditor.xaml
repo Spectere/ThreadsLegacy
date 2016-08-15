@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Threads.Editor"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             MinWidth="200">
+             d:DesignHeight="300" d:DesignWidth="320"
+             MinWidth="320">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Silver"/>
@@ -17,6 +17,11 @@
         <Style x:Key="AddDelButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
             <Setter Property="Width" Value="20" />
         </Style>
+
+        <Style x:Key="HeaderStyle" TargetType="Control">
+            <Setter Property="BorderBrush" Value="Silver" />
+            <Setter Property="BorderThickness" Value="0 0 0 2" />
+        </Style>
     </UserControl.Resources>
     
     <Grid>
@@ -24,7 +29,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        
-        <Label Grid.Row="0" Content="Object Editor" />
+
+        <Label Grid.Row="0" Content="Object Editor" Style="{StaticResource HeaderStyle}" />
     </Grid>
 </UserControl>

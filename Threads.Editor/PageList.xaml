@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Threads.Editor"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
-             MinWidth="200">
+             d:DesignHeight="300" d:DesignWidth="120"
+             MinWidth="120">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Silver"/>
@@ -17,6 +17,16 @@
         <Style x:Key="AddDelButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
             <Setter Property="Width" Value="20" />
         </Style>
+
+        <Style x:Key="HeaderStyle" TargetType="Control">
+            <Setter Property="BorderBrush" Value="Silver" />
+            <Setter Property="BorderThickness" Value="0 0 0 2" />
+        </Style>
+
+        <Style x:Key="PageListStyle" TargetType="ListBox">
+            <Setter Property="BorderBrush" Value="Silver" />
+            <Setter Property="BorderThickness" Value="0 0 0 1" />
+        </Style>
     </UserControl.Resources>
     
     <Grid>
@@ -26,9 +36,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <Label Grid.Row="0" Content="Pages" />
+        <Label Grid.Row="0" Content="Pages" Style="{StaticResource HeaderStyle}" />
         
-        <ListBox Grid.Row="1" Name="Pages" />
+        <ListBox Grid.Row="1" Name="Pages" Style="{StaticResource PageListStyle}" />
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" Background="WhiteSmoke">
             <Button Style="{StaticResource AddDelButtonStyle}" Content="+" Click="AddButton_Click" />

@@ -5,14 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Threads.Editor"
         mc:Ignorable="d"
-        Title="Threads Editor" Height="540" Width="820"
-        MinWidth="820" MinHeight="480">
+        Title="Threads Editor" Height="540" Width="960"
+        MinWidth="960" MinHeight="480">
     <Window.Resources>
         <Style x:Key="MenuItemStyle" TargetType="MenuItem">
             <Setter Property="Background" Value="Silver"/>
             <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Margin" Value="4.0"/>
+        </Style>
+
+        <Style x:Key="EditorStyle" TargetType="UserControl">
+            <Setter Property="BorderBrush" Value="Silver" />
+            <Setter Property="BorderThickness" Value="1 2 1 1" />
         </Style>
     </Window.Resources>
     
@@ -25,7 +30,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         
         <Menu Grid.Row="0" Grid.ColumnSpan="3" Height="Auto">
@@ -35,8 +40,8 @@
             <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" />
         </Menu>
         
-        <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" />
-        <local:ObjectList Grid.Row="1" Grid.Column="1" x:Name="ObjectList" />
-        <local:ObjectEditor Grid.Row="1" Grid.Column="2" x:Name="ObjectEditor" />
+        <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" />
+        <local:ObjectList Grid.Row="1" Grid.Column="1" x:Name="ObjectList" Style="{StaticResource EditorStyle}" />
+        <local:ObjectEditor Grid.Row="1" Grid.Column="2" x:Name="ObjectEditor" Style="{StaticResource EditorStyle}" />
     </Grid>
 </Window>
