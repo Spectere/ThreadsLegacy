@@ -28,11 +28,11 @@
         
         <Label Grid.Row="0" Content="Pages" />
         
-        <ListBox Grid.Row="1" />
+        <ListBox Grid.Row="1" Name="Pages" />
         
         <StackPanel Grid.Row="2" Orientation="Horizontal" Background="WhiteSmoke">
-            <Button Style="{StaticResource AddDelButtonStyle}" Content="+" />
-            <Button Style="{StaticResource AddDelButtonStyle}" Content="-" />
+            <Button Style="{StaticResource AddDelButtonStyle}" Content="+" Click="AddButton_Click" />
+            <Button Style="{StaticResource AddDelButtonStyle}" Content="-" Click="DelButton_Click" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -36,8 +36,8 @@
         <ListBox Grid.Column="1" Grid.Row="1" />
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Background="WhiteSmoke">
-            <Button Style="{StaticResource AddDelButtonStyle}" Content="+" />
-            <Button Style="{StaticResource AddDelButtonStyle}" Content="-" />
+            <Button Style="{StaticResource AddDelButtonStyle}" Content="+" Click="AddButton_OnClick" />
+            <Button Style="{StaticResource AddDelButtonStyle}" Content="-" Click="DelButton_OnClick" />
         </StackPanel>
     </Grid>
 </UserControl>
