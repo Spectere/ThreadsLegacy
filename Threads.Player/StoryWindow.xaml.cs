@@ -34,6 +34,7 @@ namespace Threads.Player {
             var page = _engine.CurrentPage;
 
             Stack.Children.Clear();
+            StoryScroll.ScrollToTop();
             Stack.Margin = new Thickness(globalConfig.StoryMarginLeft, 40.0, globalConfig.StoryMarginRight, 20.0);
 
             // Display room text.

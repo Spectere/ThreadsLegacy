@@ -23,7 +23,7 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Name="StoryScroll" VerticalScrollBarVisibility="Auto">
             <StackPanel Name="Stack" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </ScrollViewer>
         <Menu x:Name="Menu" Height="Auto" VerticalAlignment="Top" Visibility="Hidden">
