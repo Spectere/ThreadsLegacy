@@ -128,9 +128,9 @@ namespace Threads.Interpreter {
         }
 
         /// <summary>
-        /// Apples the style of an XML <see cref="PageObject" /> on top of a default style.
+        /// Apples the style of an XML <see cref="Schema.PageObject" /> on top of a default style.
         /// </summary>
-        /// <param name="pageObject">The <see cref="PageObject" /> to pull the style values from.</param>
+        /// <param name="pageObject">The <see cref="Schema.PageObject" /> to pull the style values from.</param>
         /// <param name="defaultStyle">The <see cref="PageObjectStyle" /> to apply the updated style to.</param>
         /// <returns>A <see cref="PageObjectStyle" /> containing the merged style data.</returns>
         private static PageObjectStyle TransformStyle(Schema.PageObject pageObject, PageObjectStyle defaultStyle) {

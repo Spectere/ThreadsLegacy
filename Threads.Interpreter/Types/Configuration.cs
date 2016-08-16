@@ -9,12 +9,12 @@
         public Page FirstPage { get; set; }
 
         /// <summary>
-        /// The global left margin of this story. All <see cref="PageObject" />s will be moved over by this amount.
+        /// The global left margin of this story. All <see cref="Objects.Page.PageObject" />s will be moved over by this amount.
         /// </summary>
         public double StoryMarginLeft { get; set; }
 
         /// <summary>
-        /// The global right margin of this story. All <see cref="PageObject" />s will be moved over by this amount.
+        /// The global right margin of this story. All <see cref="Objects.Page.PageObject" />s will be moved over by this amount.
         /// </summary>
         public double StoryMarginRight { get; set; }
     }

@@ -2,7 +2,7 @@
     /// <summary>
     /// A page object representing a paragraph of text.
     /// </summary>
-    public class Paragraph : Page.PageObject {
+    public class Paragraph : PageObject {
         /// <summary>
         /// Creates a new instance of the <see cref="Paragraph" /> <see cref="PageObject" />.
         /// </summary>
