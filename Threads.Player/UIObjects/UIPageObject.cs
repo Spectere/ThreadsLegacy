@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Threads.Interpreter.PageObject;
+using Threads.Interpreter.Objects.Page;
 using Threads.Marker;
 
 namespace Threads.Player.UIObjects {

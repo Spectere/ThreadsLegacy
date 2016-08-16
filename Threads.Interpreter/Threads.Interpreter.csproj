@@ -42,11 +42,11 @@
   <ItemGroup>
     <Compile Include="Exceptions\InvalidPageObjectException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
-    <Compile Include="PageObject\Choice.cs" />
-    <Compile Include="PageObject\Image.cs" />
-    <Compile Include="PageObject\PageObject.cs" />
-    <Compile Include="PageObject\PageObjectStyle.cs" />
-    <Compile Include="PageObject\Paragraph.cs" />
+    <Compile Include="Objects\Page\Choice.cs" />
+    <Compile Include="Objects\Page\Image.cs" />
+    <Compile Include="Objects\Page\PageObject.cs" />
+    <Compile Include="Objects\Page\PageObjectStyle.cs" />
+    <Compile Include="Objects\Page\Paragraph.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Types\Configuration.cs" />
     <Compile Include="Types\Information.cs" />
@@ -54,8 +54,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schema\Story.cs" />
     <Compile Include="Exceptions\StoryNotLoadedException.cs" />
-    <Compile Include="PageObject\IPageObject.cs" />
-    <Compile Include="PageObject\PageObjectType.cs" />
+    <Compile Include="Objects\Page\IPageObject.cs" />
+    <Compile Include="Objects\Page\PageObjectType.cs" />
     <Compile Include="Types\Page.cs" />
     <Compile Include="Types\Story.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Threads.Interpreter.PageObject;
+using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Interpreter.Types {
     /// <summary>

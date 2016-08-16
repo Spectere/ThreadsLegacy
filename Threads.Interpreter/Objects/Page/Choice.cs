@@ -1,16 +1,13 @@
-﻿using Threads.Interpreter.Types;
-
-namespace Threads.Interpreter.PageObject {
+﻿namespace Threads.Interpreter.Objects.Page {
     /// <summary>
     /// A page object representing a choice in the story.
     /// </summary>
     public class Choice : PageObject {
         public override PageObjectType Type => PageObjectType.Choice;
-
         /// <summary>
         /// The target page that this choice leads to.
         /// </summary>
-        public Page Target { get; set; }
+        public Types.Page Target { get; set; }
 
         /// <summary>
         /// The name of the target page that this choice leads to.

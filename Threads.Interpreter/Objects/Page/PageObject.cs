@@ -1,7 +1,7 @@
 ﻿using Threads.Interpreter.Exceptions;
 using Threads.Marker;
 
-namespace Threads.Interpreter.PageObject {
+namespace Threads.Interpreter.Objects.Page {
     /// <summary>
     /// A class implementing <see cref="IPageObject" />. This class must be inherited.
     /// </summary>

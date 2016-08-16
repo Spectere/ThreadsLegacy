@@ -1,4 +1,4 @@
-﻿namespace Threads.Interpreter.PageObject {
+﻿namespace Threads.Interpreter.Objects.Page {
     /// <summary>
     /// Styling that should be applied to a given page object.
     /// </summary>

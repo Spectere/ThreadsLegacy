@@ -6,9 +6,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Threads.Interpreter;
 using Threads.Interpreter.Exceptions;
-using Threads.Interpreter.PageObject;
+using Threads.Interpreter.Objects.Page;
 using Threads.Player.UIObjects;
-using PageObjectImage = Threads.Interpreter.PageObject.Image;
+using PageObjectImage = Threads.Interpreter.Objects.Page.Image;
 
 namespace Threads.Player {
     /// <summary>

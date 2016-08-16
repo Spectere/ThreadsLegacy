@@ -1,8 +1,8 @@
-﻿namespace Threads.Interpreter.PageObject {
+﻿namespace Threads.Interpreter.Objects.Page {
     /// <summary>
     /// A page object representing a paragraph of text.
     /// </summary>
-    public class Paragraph : PageObject {
+    public class Paragraph : Page.PageObject {
         public override PageObjectType Type => PageObjectType.Paragraph;
 
         /// <summary>

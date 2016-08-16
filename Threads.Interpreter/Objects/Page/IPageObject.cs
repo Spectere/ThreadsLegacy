@@ -1,6 +1,6 @@
 ﻿using Threads.Marker;
 
-namespace Threads.Interpreter.PageObject {
+namespace Threads.Interpreter.Objects.Page {
     public interface IPageObject {
         /// <summary>
         /// The type of <see cref="IPageObject" /> that this instance represents.

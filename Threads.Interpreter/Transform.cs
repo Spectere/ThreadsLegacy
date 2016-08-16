@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Threads.Interpreter.Exceptions;
-using Threads.Interpreter.PageObject;
+using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Schema;
 using Threads.Interpreter.Types;
 using Story = Threads.Interpreter.Types.Story;

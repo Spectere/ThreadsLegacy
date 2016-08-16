@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
-using Threads.Interpreter.PageObject;
+using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Player.UIObjects {
     internal class UIChoice : UIPageObject {

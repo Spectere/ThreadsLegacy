@@ -1,4 +1,4 @@
-﻿using Threads.Interpreter.PageObject;
+﻿using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Player.UIObjects {
     internal class UIParagraph : UIPageObject {
