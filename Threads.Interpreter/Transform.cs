@@ -118,7 +118,7 @@ namespace Threads.Interpreter {
 
             // Make sure that choices are tied to valid pages.
             foreach(var page in output) {
-                foreach(var choiceObject in page.Objects.Where(e => e.Type == PageObjectType.Choice)) {
+                foreach(var choiceObject in page.Objects.Where(e => e.GetType() == typeof(Choice))) {
                     var choice = (Choice)choiceObject;
                     choice.Target = output.First(c => c.Name == choice.TargetName);
                 }

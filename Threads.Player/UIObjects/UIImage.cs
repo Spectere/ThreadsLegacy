@@ -4,15 +4,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Threads.Interpreter.Objects.Page;
-using ThreadsImage = Threads.Interpreter.Objects.Page.Image;
+using PageObjectImage = Threads.Interpreter.Objects.Page.Image;
 using WpfImage = System.Windows.Controls.Image;
 
 namespace Threads.Player.UIObjects {
     internal class UIImage : UIPageObject {
-        public override PageObjectType HandledType => PageObjectType.Image;
+        public override Type HandledType => typeof(PageObjectImage);
 
-        public UIImage(ThreadsImage imageObject) : base(imageObject) {
+        public UIImage(PageObjectImage imageObject) : base(imageObject) {
             if(File.Exists(imageObject.Source)) {
                 // Image exists; display that.
                 var source = new Uri(imageObject.Source, UriKind.RelativeOrAbsolute);

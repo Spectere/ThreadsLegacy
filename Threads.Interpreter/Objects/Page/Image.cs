@@ -1,7 +1,5 @@
 ﻿namespace Threads.Interpreter.Objects.Page {
     public class Image : PageObject {
-        public override PageObjectType Type => PageObjectType.Image;
-
         /// <summary>
         /// The filename of the image that should be loaded.
         /// </summary>

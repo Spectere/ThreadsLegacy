@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
@@ -6,7 +7,7 @@ using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Player.UIObjects {
     internal class UIChoice : UIPageObject {
-        public override PageObjectType HandledType => PageObjectType.Choice;
+        public override Type HandledType => typeof(Choice);
 
         public delegate void OnChoiceClick(object sender, RoutedEventArgs e);
         public event OnChoiceClick ChoiceClick;

@@ -3,7 +3,6 @@
     /// A page object representing a choice in the story.
     /// </summary>
     public class Choice : PageObject {
-        public override PageObjectType Type => PageObjectType.Choice;
         /// <summary>
         /// The target page that this choice leads to.
         /// </summary>

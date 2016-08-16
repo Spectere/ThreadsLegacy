@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Threads.Interpreter.Objects.Page;
@@ -19,7 +20,7 @@ namespace Threads.Player.UIObjects {
         /// <summary>
         /// The type of <see cref="PageObject" /> that this control handles.
         /// </summary>
-        public virtual PageObjectType HandledType => PageObjectType.Unknown;
+        public virtual Type HandledType => null;
 
         /// <summary>
         /// A <see cref="TextSequence" /> that should be associated with this page object.

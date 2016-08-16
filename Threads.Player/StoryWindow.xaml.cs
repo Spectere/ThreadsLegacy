@@ -39,18 +39,14 @@ namespace Threads.Player {
 
             // Display room text.
             foreach(var obj in page.Objects) {
-                switch(obj.Type) {
-                    case PageObjectType.Paragraph:
-                        Stack.Children.Add(new UIParagraph(obj));
-                        break;
-                    case PageObjectType.Choice:
-                        var button = new UIChoice((Choice)obj);
-                        button.ChoiceClick += Choice_Click;
-                        Stack.Children.Add(button);
-                        break;
-                    case PageObjectType.Image:
-                        Stack.Children.Add(new UIImage((PageObjectImage)obj));
-                        break;
+                if(obj.GetType() == typeof(Paragraph)) {
+                    Stack.Children.Add(new UIParagraph(obj));
+                } else if(obj.GetType() == typeof(Choice)) {
+                    var button = new UIChoice((Choice)obj);
+                    button.ChoiceClick += Choice_Click;
+                    Stack.Children.Add(button);
+                } else if(obj.GetType() == typeof(PageObjectImage)) {
+                    Stack.Children.Add(new UIImage((PageObjectImage)obj));
                 }
             }
         }
@@ -71,7 +67,7 @@ namespace Threads.Player {
             if((inKey.StartsWith("D") && inKey.Length == 2) || inKey.StartsWith("NUMPAD"))
                 inKey = inKey.Substring(inKey.Length - 1, 1);
 
-            foreach(var choiceObject in _engine.CurrentPage.Objects.Where(o => o.Type == PageObjectType.Choice)) {
+            foreach(var choiceObject in _engine.CurrentPage.Objects.Where(o => o.GetType() == typeof(Choice))) {
                 var choice = (Choice)choiceObject;
                 if(inKey == choice.Shortcut.ToString().ToUpper()) {
                     _engine.SubmitChoice(choice);

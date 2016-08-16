@@ -3,11 +3,6 @@
 namespace Threads.Interpreter.Objects.Page {
     public interface IPageObject {
         /// <summary>
-        /// The type of <see cref="IPageObject" /> that this instance represents.
-        /// </summary>
-        PageObjectType Type { get; }
-
-        /// <summary>
         /// The formatted text sequence for this <see cref="IPageObject" />.
         /// </summary>
         TextSequence FormattedText { get; set; }

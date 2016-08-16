@@ -55,7 +55,6 @@
     <Compile Include="Schema\Story.cs" />
     <Compile Include="Exceptions\StoryNotLoadedException.cs" />
     <Compile Include="Objects\Page\IPageObject.cs" />
-    <Compile Include="Objects\Page\PageObjectType.cs" />
     <Compile Include="Types\Page.cs" />
     <Compile Include="Types\Story.cs" />
   </ItemGroup>
