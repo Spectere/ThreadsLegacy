@@ -84,6 +84,7 @@
     <Compile Include="ObjectEditor.xaml.cs">
       <DependentUpon>ObjectEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Objects\EditorObject.cs" />
     <Compile Include="PageList.xaml.cs">
       <DependentUpon>PageList.xaml</DependentUpon>
     </Compile>
@@ -125,6 +126,9 @@
       <Project>{b76403c6-7856-439b-87f6-a315296ccc57}</Project>
       <Name>Threads.Marker</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Objects\Page\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
