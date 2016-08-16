@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\InvalidPageObjectException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />
