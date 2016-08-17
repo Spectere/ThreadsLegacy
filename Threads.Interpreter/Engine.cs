@@ -13,7 +13,7 @@ namespace Threads.Interpreter {
         /// <summary>
         /// The story file version that this interpreter is designed to read.
         /// </summary>
-        public const int EngineVersion = 0;
+        public const int EngineVersion = 1;
 
         /// <summary>
         /// A raw view of the data included in the loaded story file.
@@ -29,6 +29,13 @@ namespace Threads.Interpreter {
         /// The validated form of the story file.
         /// </summary>
         public Story Story { get; private set; }
+
+        /// <summary>
+        /// Initializes a new engine. This creates a new <see cref="Story" />.
+        /// </summary>
+        public Engine() {
+            Story = new Story();
+        }
 
         /// <summary>
         /// Loads a story file into the interpreter and initializes the engine

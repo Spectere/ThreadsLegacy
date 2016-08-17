@@ -38,6 +38,8 @@
             <MenuItem Click="Open_OnClick" Style="{StaticResource MenuItemStyle}" Header="Open" />
             <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" />
             <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" />
+            <Separator />
+            <MenuItem Click="StoryInfo_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Info" />
         </Menu>
         
         <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" />

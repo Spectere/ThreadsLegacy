@@ -17,5 +17,13 @@
         /// The global right margin of this story. All <see cref="Objects.Page.PageObject" />s will be moved over by this amount.
         /// </summary>
         public double StoryMarginRight { get; set; }
+
+        /// <summary>
+        /// Creates a new <see cref="Configuration" /> object.
+        /// </summary>
+        public Configuration() {
+            StoryMarginLeft = 40.0;
+            StoryMarginRight = 40.0;
+        }
     }
 }

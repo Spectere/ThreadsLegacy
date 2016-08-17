@@ -24,5 +24,15 @@ namespace Threads.Interpreter.Types {
         /// The pages contained in the story.
         /// </summary>
         public IEnumerable<Page> Pages { get; set; }
+
+        /// <summary>
+        /// Creates a new <see cref="Story" />.
+        /// </summary>
+        public Story() {
+            Format = Engine.EngineVersion;
+            Information = new Information();
+            Configuration = new Configuration();
+            Pages = new List<Page>();
+        }
     }
 }

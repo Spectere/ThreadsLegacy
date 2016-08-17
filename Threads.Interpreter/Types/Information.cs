@@ -22,5 +22,15 @@
         /// The story author's web site.
         /// </summary>
         public string Website { get; set; }
+
+        /// <summary>
+        /// Creates a new <see cref="Information" /> block.
+        /// </summary>
+        public Information() {
+            Name = "My Story";
+            Author = "You!";
+            Version = "1.0";
+            Website = "http://mysite.local/";
+        }
     }
 }
