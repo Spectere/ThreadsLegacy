@@ -61,7 +61,7 @@
     <xs:simpleContent>
       <xs:extension base="PageObject">
         <xs:attribute name="Target" type="xs:string" use="required" />
-        <xs:attribute name="Shortcut" type="xs:string" use="required" />
+        <xs:attribute name="Shortcut" type="xs:string" use="optional" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

@@ -20,7 +20,8 @@ namespace Threads.Player.UIObjects {
                 Tag = choiceObject
             };
             var buttonText = new TextBlock();
-            buttonText.Inlines.Add(new Run($"{choiceObject.Shortcut}) ") { FontWeight = FontWeights.Bold });
+            if(choiceObject.Shortcut != null)
+                buttonText.Inlines.Add(new Run($"{choiceObject.Shortcut}) ") { FontWeight = FontWeights.Bold });
             buttonText.Inlines.Add(TextBlock);
             button.Content = buttonText;
             button.Click += Button_Click;

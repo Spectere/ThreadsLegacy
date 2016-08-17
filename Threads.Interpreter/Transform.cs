@@ -74,7 +74,7 @@ namespace Threads.Interpreter {
                 var choice = (ChoiceObject)pageObject;
                 newObject = new Choice {
                     FormattedText = Marker.Parser.Parse(choice.Value),
-                    Shortcut = Convert.ToChar(choice.Shortcut.Substring(0, 1)),
+                    Shortcut = choice.Shortcut == null ? (char?)null : Convert.ToChar(choice.Shortcut.Substring(0, 1)),
                     TargetName = choice.Target
                 };
             } else if(pageObject.GetType() == typeof(ImageObject)) {

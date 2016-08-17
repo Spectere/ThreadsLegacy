@@ -21,7 +21,7 @@
         /// <summary>
         /// The shortcut key that activates this choice.
         /// </summary>
-        public char Shortcut { get; set; }
+        public char? Shortcut { get; set; }
 
         internal override Schema.PageObject ExportObject() {
             return new Schema.ChoiceObject {
