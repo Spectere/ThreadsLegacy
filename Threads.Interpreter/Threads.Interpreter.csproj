@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\PageNotFoundException.cs" />
+    <Compile Include="Export.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />
     <Compile Include="Objects\Page\PageObject.cs" />

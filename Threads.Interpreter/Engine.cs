@@ -1,4 +1,5 @@
-﻿using StorySerializer = Threads.Interpreter.Schema.Story;
+﻿using System;
+using StorySerializer = Threads.Interpreter.Schema.Story;
 using System.IO;
 using System.Xml.Serialization;
 using Threads.Interpreter.Exceptions;
@@ -65,6 +66,15 @@ namespace Threads.Interpreter {
         public void Restart() {
             if(_story == null) throw new StoryNotLoadedException();
             CurrentPage = Story.Configuration.FirstPage;
+        }
+
+        /// <summary>
+        /// Saves the active story into a given file.
+        /// </summary>
+        /// <param name="filename">The path to save the story to.</param>
+        public void Save(string filename) {
+            /* TODO: Implement me! */
+            throw new NotImplementedException(filename);
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ namespace Threads.Editor {
     /// </summary>
     public partial class EditorWindow {
         private Engine _engine = new Engine();
+        private string _filename;
 
         public EditorWindow() {
             InitializeComponent();
@@ -19,6 +20,7 @@ namespace Threads.Editor {
         private void New_OnClick(object sender, RoutedEventArgs e) {
             _engine = new Engine();
             Title = "Threads Editor - [UNTITLED.xml]";
+            _filename = null;
         }
 
         private void Open_OnClick(object sender, RoutedEventArgs e) {
@@ -30,19 +32,41 @@ namespace Threads.Editor {
             var result = fileDialog.ShowDialog() ?? false;
             if(!result) return;
 
+            _filename = fileDialog.FileName;
+
             // ReSharper disable once AssignNullToNotNullAttribute
-            Directory.SetCurrentDirectory(Path.GetDirectoryName(fileDialog.FileName));
-            _engine = new Engine(fileDialog.FileName);
-            var fileBaseName = fileDialog.FileName.Split('\\').Last();
-            Title = $"Threads Editor - [{fileBaseName}]";
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(_filename));
+            _engine = new Engine(_filename);
+
+            Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e) {
-            throw new System.NotImplementedException();
+            if(_filename == null)
+                SaveAs();
+
+            _engine.Save(_filename);
+        }
+
+        private void SaveAs() {
+            var fileDialog = new SaveFileDialog {
+                Filter = "Threads Story (*.XML)|*.xml|All Files (*.*)|*.*"
+            };
+
+            var result = fileDialog.ShowDialog() ?? false;
+            if(!result) return;
+
+            _filename = fileDialog.FileName;
+
+            // ReSharper disable once AssignNullToNotNullAttribute
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(_filename));
+            _engine.Save(_filename);
+
+            Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
         }
 
         private void SaveAs_OnClick(object sender, RoutedEventArgs e) {
-            throw new System.NotImplementedException();
+            SaveAs();
         }
 
         private void StoryInfo_OnClick(object sender, RoutedEventArgs e) {
