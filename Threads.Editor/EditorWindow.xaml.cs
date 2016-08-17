@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Linq;
+using System.Windows;
+using Microsoft.Win32;
 using Threads.Interpreter;
 using Threads.Interpreter.Types;
 
@@ -14,11 +17,24 @@ namespace Threads.Editor {
         }
 
         private void New_OnClick(object sender, RoutedEventArgs e) {
-            throw new System.NotImplementedException();
+            _engine = new Engine();
+            Title = "Threads Editor - [UNTITLED.xml]";
         }
 
         private void Open_OnClick(object sender, RoutedEventArgs e) {
-            throw new System.NotImplementedException();
+            var fileDialog = new OpenFileDialog {
+                Filter = "Threads Story (*.XML)|*.xml|All Files (*.*)|*.*",
+                Multiselect = false
+            };
+
+            var result = fileDialog.ShowDialog() ?? false;
+            if(!result) return;
+
+            // ReSharper disable once AssignNullToNotNullAttribute
+            Directory.SetCurrentDirectory(Path.GetDirectoryName(fileDialog.FileName));
+            _engine = new Engine(fileDialog.FileName);
+            var fileBaseName = fileDialog.FileName.Split('\\').Last();
+            Title = $"Threads Editor - [{fileBaseName}]";
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e) {
