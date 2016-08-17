@@ -32,5 +32,18 @@
             Version = "1.0";
             Website = "http://mysite.local/";
         }
+
+        /// <summary>
+        /// Exports this <see cref="Information" /> instance into an XML object.
+        /// </summary>
+        /// <returns>An XML <see cref="Schema.InformationType" /> object.</returns>
+        internal Schema.InformationType Export() {
+            return new Schema.InformationType {
+                Name = Name,
+                Author = Author,
+                Version = Version,
+                Website = Website
+            };
+        }
     }
 }

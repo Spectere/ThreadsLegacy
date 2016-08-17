@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Threads.Interpreter.Types {
     /// <summary>
@@ -33,6 +34,19 @@ namespace Threads.Interpreter.Types {
             Information = new Information();
             Configuration = new Configuration();
             Pages = new List<Page>();
+        }
+
+        /// <summary>
+        /// Exports this <see cref="Story" /> instance into an XML object.
+        /// </summary>
+        /// <returns>An XML <see cref="Schema.Story" /> object.</returns>
+        internal Schema.Story Export() {
+            return new Schema.Story {
+                Configuration = Configuration.Export(),
+                Format = Format.ToString(),
+                Information = Information.Export(),
+                Pages = Pages.Select(page => page.Export()).ToArray()
+            };
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Interpreter.Types {
@@ -12,15 +13,26 @@ namespace Threads.Interpreter.Types {
         public string Name { get; set; }
 
         /// <summary>
-        /// The plain text on this page.
+        /// The <see cref="PageObject" />s associated with this page.
         /// </summary>
-        public List<IPageObject> Objects { get; set; }
+        public List<PageObject> Objects { get; set; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="Page" /> class.
         /// </summary>
         public Page() {
-            Objects = new List<IPageObject>();
+            Objects = new List<PageObject>();
+        }
+
+        /// <summary>
+        /// Exports this <see cref="Page" /> instance into an XML object.
+        /// </summary>
+        /// <returns>An XML <see cref="Schema.PageType" /> object.</returns>
+        internal Schema.PageType Export() {
+            return new Schema.PageType {
+                Name = Name,
+                Items = Objects.Select(e => e.Export()).ToArray()
+            };
         }
     }
 }

@@ -10,12 +10,18 @@ namespace Threads.Marker {
         /// <summary>
         /// A set of instructions that the implementation should follow, if possible.
         /// </summary>
-        public List<IInstruction> Instructions { get; set; }
+        public List<IInstruction> Instructions { get; }
+
+        /// <summary>
+        /// The unparsed Marker string.
+        /// </summary>
+        public string OriginalText { get; }
 
         /// <summary>
         /// Initializes an instance of the <see cref="TextSequence" /> object.
         /// </summary>
-        public TextSequence() {
+        public TextSequence(string originalText) {
+            OriginalText = originalText;
             Instructions = new List<IInstruction>();
         }
 

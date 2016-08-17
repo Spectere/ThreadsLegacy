@@ -12,7 +12,7 @@ namespace Threads.Marker {
         /// <param name="text">The marked up string of text.</param>
         /// <returns>A <see cref="TextSequence" /> based on the marked up text.</returns>
         public static TextSequence Parse(string text) {
-            var ts = new TextSequence();
+            var ts = new TextSequence(text);
             var sb = new StringBuilder();
 
             var skip = false;

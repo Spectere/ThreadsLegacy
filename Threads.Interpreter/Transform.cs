@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Threads.Interpreter.Exceptions;
 using Threads.Interpreter.Objects.Page;
+using StoryPageObject = Threads.Interpreter.Objects.Page.PageObject;
 using Threads.Interpreter.Schema;
 using Threads.Interpreter.Types;
 using Story = Threads.Interpreter.Types.Story;
@@ -65,8 +66,8 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="pageObject">The XML object to transform.</param>
         /// <returns>A page object based on the XML object data.</returns>
-        private static IPageObject TransformPageObject(Schema.PageObject pageObject) {
-            IPageObject newObject;
+        private static StoryPageObject TransformPageObject(Schema.PageObject pageObject) {
+            StoryPageObject newObject;
 
             // Determine the specific type of PageObject and add it to the list.
             if(pageObject.GetType() == typeof(ChoiceObject)) {
