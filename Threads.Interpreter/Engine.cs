@@ -38,6 +38,14 @@ namespace Threads.Interpreter {
         }
 
         /// <summary>
+        /// Initializes a new engine. This creates a new <see cref="Story" /> object based on a saved file.
+        /// </summary>
+        /// <param name="filename">The path to the story file.</param>
+        public Engine(string filename) {
+            Load(filename);
+        }
+
+        /// <summary>
         /// Loads a story file into the interpreter and initializes the engine
         /// </summary>
         /// <param name="filename">The path to the story file.</param>

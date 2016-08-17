@@ -15,12 +15,10 @@ namespace Threads.Player {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class StoryWindow {
-        private readonly Engine _engine;
+        private Engine _engine;
 
         public StoryWindow() {
             InitializeComponent();
-
-            _engine = new Engine();
         }
 
         private void Choice_Click(object sender, RoutedEventArgs e) {
@@ -89,7 +87,7 @@ namespace Threads.Player {
             // Set the directory before loading the story so that relative paths will line up nicely.
             // ReSharper disable once AssignNullToNotNullAttribute
             Directory.SetCurrentDirectory(Path.GetDirectoryName(fileDialog.FileName));
-            _engine.Load(fileDialog.FileName);
+            _engine = new Engine(fileDialog.FileName);
             DisplayPage();
             Title = $"Threads - [{_engine.Story.Information.Name}]";
         }
