@@ -39,7 +39,7 @@
         <Label Grid.Row="0" Content="Pages" Style="{StaticResource HeaderStyle}" />
 
         <ListBox Grid.Row="1" Name="Pages" ItemsSource="{Binding ElementName=_this, Path=StoryPages}" Style="{StaticResource PageListStyle}"
-                 SelectionMode="Single">
+                 SelectionMode="Single" SelectionChanged="Pages_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Tag="{Binding}" />

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Threads.Editor"
         mc:Ignorable="d"
-        Title="Threads Editor" Height="540" Width="960"
+        Title="Threads Editor - [Untitled.xml]" Height="540" Width="960"
         MinWidth="960" MinHeight="480">
     <Window.Resources>
         <Style x:Key="MenuItemStyle" TargetType="MenuItem">

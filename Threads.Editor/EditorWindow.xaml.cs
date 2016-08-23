@@ -19,7 +19,7 @@ namespace Threads.Editor {
 
         private void New_OnClick(object sender, RoutedEventArgs e) {
             _engine = new Engine();
-            Title = "Threads Editor - [UNTITLED.xml]";
+            Title = "Threads Editor - [Untitled.xml]";
             _filename = null;
         }
 
