@@ -18,20 +18,12 @@ namespace Threads.Editor {
             set { SetValue(PageObjectsProperty, value); }
         }
 
+        /// <summary>
+        /// The currently selected <see cref="PageObject" />.
+        /// </summary>
         public PageObject SelectedObject => Objects.SelectedItems.Count > 0 ? (PageObject)Objects.SelectedItems[0] : null;
-
-        public delegate void OnUpdate(object sender, RoutedEventArgs e);
+        
         public delegate void OnSelectionChanged(object sender, PageObject e);
-
-        /// <summary>
-        /// Fired when an item is added to the Object list.
-        /// </summary>
-        public event OnUpdate Add;
-
-        /// <summary>
-        /// Fired when an item is deleted from the Object list.
-        /// </summary>
-        public event OnUpdate Delete;
 
         /// <summary>
         /// Fired when a <see cref="PageObject" /> is selected in the Object list.
