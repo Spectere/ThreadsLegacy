@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Controls;
+using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Editor.Objects {
     /// <summary>
@@ -25,6 +26,11 @@ namespace Threads.Editor.Objects {
         /// The <see cref="Type" /> of story object that this <see cref="EditorObject" /> handles.
         /// </summary>
         public abstract Type HandledType { get; }
+
+        /// <summary>
+        /// The instance of the <see cref="PageObject" /> that this <see cref="EditorObject" /> instance is modifying.
+        /// </summary>
+        public PageObject ObjectData { get; set; }
 
         /// <summary>
         /// Displays the object editor in a <see cref="ContentControl" />.
