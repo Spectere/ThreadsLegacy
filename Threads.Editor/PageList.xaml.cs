@@ -25,6 +25,7 @@ namespace Threads.Editor {
         public Page SelectedPage => Pages.SelectedItems.Count > 0 ? (Page)Pages.SelectedItems[0] : null;
 
         public delegate void OnUpdate(object sender, RoutedEventArgs e);
+        public delegate void OnSelectionChanged(object sender, Page e);
 
         /// <summary>
         /// Fired when an item is added to the Page list.
@@ -36,6 +37,11 @@ namespace Threads.Editor {
         /// </summary>
         public event OnUpdate Delete;
 
+        /// <summary>
+        /// Fired when the selected page is changed.
+        /// </summary>
+        public event OnSelectionChanged SelectionChanged;
+
         public PageList() {
             InitializeComponent();
         }
@@ -46,6 +52,10 @@ namespace Threads.Editor {
 
         private void DelButton_Click(object sender, RoutedEventArgs e) {
             Delete?.Invoke(sender, e);
+        }
+
+        private void Pages_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+            SelectionChanged?.Invoke(sender, SelectedPage);
         }
     }
 }
