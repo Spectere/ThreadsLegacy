@@ -39,7 +39,7 @@ namespace Threads.Editor {
 
             Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
 
-            UpdateControls();
+            UpdatePageList();
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e) {
@@ -89,8 +89,17 @@ namespace Threads.Editor {
             };
         }
 
-        private void UpdateControls() {
+        private void UpdatePageList() {
             PageList.StoryPages = _engine.Story.Pages;
+        }
+
+        private void UpdateObjectList() {
+            if(PageList.SelectedPage == null) return;
+            ObjectList.PageObjects = PageList.SelectedPage.Objects;
+        }
+
+        private void PageList_OnSelectionChanged(object sender, Page e) {
+            UpdateObjectList();
         }
     }
 }

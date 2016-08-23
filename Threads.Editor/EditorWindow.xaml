@@ -42,7 +42,7 @@
             <MenuItem Click="StoryInfo_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Info" />
         </Menu>
         
-        <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" />
+        <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" SelectionChanged="PageList_OnSelectionChanged" />
         <local:ObjectList Grid.Row="1" Grid.Column="1" x:Name="ObjectList" Style="{StaticResource EditorStyle}" />
         <local:ObjectEditor Grid.Row="1" Grid.Column="2" x:Name="ObjectEditor" Style="{StaticResource EditorStyle}" />
     </Grid>

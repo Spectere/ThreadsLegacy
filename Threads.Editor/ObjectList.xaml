@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="360"
-             MinWidth="360">
+             MinWidth="360" x:Name="ObjectListControl">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Silver"/>
@@ -13,8 +13,8 @@
             <Setter Property="Margin" Value="4.0 4.0 1.0 4.0"/>
         </Style>
 
-        <Style x:Key="AddDelButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
-            <Setter Property="Width" Value="20" />
+        <Style x:Key="MoveButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonStyle}">
+            <Setter Property="Width" Value="50" />
         </Style>
 
         <Style x:Key="HeaderStyle" TargetType="Control">
@@ -53,11 +53,19 @@
             </StackPanel>
         </Border>
 
-        <ListBox Grid.Column="1" Grid.Row="1" Name="Objects" Style="{StaticResource ObjectListStyle}" />
+        <ListBox Grid.Column="1" Grid.Row="1" Name="Objects" Style="{StaticResource ObjectListStyle}"
+                 ItemsSource="{Binding ElementName=ObjectListControl, Path=PageObjects}"
+                 SelectionMode="Single" SelectionChanged="Objects_OnSelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Tag="{Binding}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Background="WhiteSmoke">
-            <Button Style="{StaticResource AddDelButtonStyle}" Content="+" Click="AddButton_OnClick" />
-            <Button Style="{StaticResource AddDelButtonStyle}" Content="-" Click="DelButton_OnClick" />
+            <Button Style="{StaticResource MoveButtonStyle}" Content="Up" Click="UpButton_OnClick" />
+            <Button Style="{StaticResource MoveButtonStyle}" Content="Down" Click="DownButton_OnClick" />
         </StackPanel>
     </Grid>
 </UserControl>
