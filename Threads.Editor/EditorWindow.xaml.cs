@@ -39,6 +39,8 @@ namespace Threads.Editor {
             _engine = new Engine(_filename);
 
             Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
+
+            UpdateControls();
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e) {
@@ -86,6 +88,10 @@ namespace Threads.Editor {
                 Version = infoWindow.Version,
                 Website = infoWindow.Website
             };
+        }
+
+        private void UpdateControls() {
+            PageList.StoryPages = _engine.Story.Pages;
         }
     }
 }
