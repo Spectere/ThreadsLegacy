@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="120"
              MinWidth="120"
-             x:Name="_this">
+             x:Name="PageListControl">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Silver"/>
@@ -38,7 +38,7 @@
         
         <Label Grid.Row="0" Content="Pages" Style="{StaticResource HeaderStyle}" />
 
-        <ListBox Grid.Row="1" Name="Pages" ItemsSource="{Binding ElementName=_this, Path=StoryPages}" Style="{StaticResource PageListStyle}"
+        <ListBox Grid.Row="1" Name="Pages" ItemsSource="{Binding ElementName=PageListControl, Path=StoryPages}" Style="{StaticResource PageListStyle}"
                  SelectionMode="Single" SelectionChanged="Pages_OnSelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
