@@ -20,5 +20,9 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Content="Object Editor" Style="{StaticResource HeaderStyle}" />
+
+        <ScrollViewer Grid.Row="1" Name="ObjectEditorScroll" VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="ObjectProperties"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </ScrollViewer>
     </Grid>
 </UserControl>

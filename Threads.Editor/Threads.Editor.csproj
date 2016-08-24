@@ -51,6 +51,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Objects\EditorObjectFactory.cs" />
+    <Compile Include="Objects\Page\PageObject.cs" />
+    <Compile Include="Objects\Page\Paragraph.cs" />
     <Compile Include="StoryInfo.xaml.cs">
       <DependentUpon>StoryInfo.xaml</DependentUpon>
     </Compile>
@@ -130,9 +133,7 @@
       <Name>Threads.Marker</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Objects\Page\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

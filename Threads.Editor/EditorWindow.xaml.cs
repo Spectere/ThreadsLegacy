@@ -1,7 +1,9 @@
 ﻿using System.IO;
 using System.Windows;
 using Microsoft.Win32;
+using Threads.Editor.Objects;
 using Threads.Interpreter;
+using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
 
 namespace Threads.Editor {
@@ -93,6 +95,10 @@ namespace Threads.Editor {
             PageList.StoryPages = _engine.Story.Pages;
         }
 
+        private void UpdateObjectEditor() {
+            ObjectEditor.CurrentEditor = ObjectList.SelectedObject != null ? EditorObjectFactory.Get(ObjectList.SelectedObject) : null;
+        }
+
         private void UpdateObjectList() {
             if(PageList.SelectedPage == null) return;
             ObjectList.PageObjects = PageList.SelectedPage.Objects;
@@ -100,6 +106,10 @@ namespace Threads.Editor {
 
         private void PageList_OnSelectionChanged(object sender, Page e) {
             UpdateObjectList();
+        }
+
+        private void ObjectList_OnSelectionChanged(object sender, PageObject e) {
+            UpdateObjectEditor();
         }
     }
 }
