@@ -43,6 +43,7 @@ namespace Threads.Editor.Objects {
 
             Grid.SetColumn(control, 0);
             Grid.SetRow(control, thisRow);
+            Grid.SetColumnSpan(control, 2);
 
             DesignerPanel.Children.Add(control);
         }
