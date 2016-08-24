@@ -31,7 +31,16 @@ namespace Threads.Editor {
         public event OnSelectionChanged SelectionChanged;
 
         public ObjectList() {
+            PageObjects = new List<PageObject>();
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Clears all objects from the list and updates the view accordingly.
+        /// </summary>
+        public void ClearObjectList() {
+            PageObjects = new List<PageObject>();
+            Objects.Items.Refresh();
         }
 
         private void Objects_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {

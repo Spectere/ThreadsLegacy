@@ -13,11 +13,11 @@ namespace Threads.Editor {
         internal EditorObject CurrentEditor {
             get { return _thisEditor; }
             set {
-                _thisEditor = value;
-                if(_thisEditor == null) return;
-
                 ObjectProperties.Children.Clear();
-                _thisEditor.DisplayControls(ObjectProperties);
+
+                _thisEditor = value;
+                _thisEditor?.DisplayControls(ObjectProperties);
+                ObjectEditorScroll.ScrollToTop();
             }
         }
 

@@ -22,6 +22,10 @@ namespace Threads.Editor {
             _engine = new Engine();
             Title = "Threads Editor - [Untitled.xml]";
             _filename = null;
+
+            UpdatePageList();
+            UpdateObjectList();
+            UpdateObjectEditor();
         }
 
         private void Open_OnClick(object sender, RoutedEventArgs e) {
@@ -42,6 +46,8 @@ namespace Threads.Editor {
             Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
 
             UpdatePageList();
+            UpdateObjectList();
+            UpdateObjectEditor();
         }
 
         private void Save_OnClick(object sender, RoutedEventArgs e) {
@@ -100,7 +106,10 @@ namespace Threads.Editor {
         }
 
         private void UpdateObjectList() {
-            if(PageList.SelectedPage == null) return;
+            if(PageList.SelectedPage == null) {
+                ObjectList.ClearObjectList();
+                return;
+            }
             ObjectList.PageObjects = PageList.SelectedPage.Objects;
         }
 
