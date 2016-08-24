@@ -5,6 +5,7 @@ using Threads.Editor.Objects;
 using Threads.Interpreter;
 using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
+using Page = Threads.Interpreter.Types.Page;
 
 namespace Threads.Editor {
     /// <summary>

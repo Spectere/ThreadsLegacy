@@ -89,8 +89,10 @@ namespace Threads.Editor.Objects {
         private void CommonSetup() {
             DesignerPanel.Children.Clear();
 
-            DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
-            DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition());
+            if(DesignerPanel.ColumnDefinitions.Count < 2) {
+                DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+                DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition());
+            }
         }
 
         protected TextBox CreateBoundTextBox(object dataContext, string path) {
