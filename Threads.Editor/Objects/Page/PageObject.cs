@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Threads.Editor.Objects.Page {
     internal abstract class PageObject : EditorObject {
@@ -6,7 +8,12 @@ namespace Threads.Editor.Objects.Page {
             // Common properties.
             AppendRow(
                 new Label { Content = "Text" },
-                new Label { Content = "Blah!" }
+                new TextBox { Text = ObjectData.FormattedText.OriginalText,
+                    Height = 120,
+                    TextWrapping = TextWrapping.WrapWithOverflow,
+                    HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+                }
             );
 
             // Additional properties for this specific control.
@@ -14,31 +21,21 @@ namespace Threads.Editor.Objects.Page {
 
             // Standard PageObject style editor.
             AppendRow(new Separator());
-
-            AppendRow(
-                new Label { Content = "Top Margin" },
-                new Label { Content = "Blah!" }
-            );
-
-            AppendRow(
-                new Label { Content = "Bottom Margin" },
-                new Label { Content = "Blah!" }
-            );
-
-            AppendRow(
-                new Label { Content = "Left Margin" },
-                new Label { Content = "Blah!" }
-            );
-
-            AppendRow(
-                new Label { Content = "Right Margin" },
-                new Label { Content = "Blah!" }
-            );
+            AppendRow(new Label { Content = "Top Margin" },
+                CreateBoundTextBox(ObjectData.Style, "MarginTop"));
+            AppendRow(new Label { Content = "Bottom Margin" },
+                CreateBoundTextBox(ObjectData.Style, "MarginBottom"));
+            AppendRow(new Label { Content = "Left Margin" },
+                CreateBoundTextBox(ObjectData.Style, "MarginLeft"));
+            AppendRow(new Label { Content = "Right Margin" },
+                CreateBoundTextBox(ObjectData.Style, "MarginRight"));
         }
 
         /// <summary>
         /// Builds the user interface for the <see cref="PageObject" /> editor.
         /// </summary>
         protected virtual void BuildPageObjectEditor() {}
+
+        protected PageObject(Interpreter.Objects.Page.PageObject objectData) : base(objectData) {}
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Editor.Objects {
@@ -8,10 +9,12 @@ namespace Threads.Editor.Objects {
     /// The base class that all editor objects are derived from. Editor objects implement the UI and logic necessary to modify story objects.
     /// </summary>
     internal abstract class EditorObject : UserControl {
+        public static DependencyProperty PageObjectProperty = DependencyProperty.Register("PageObject", typeof(PageObject), typeof(EditorObject));
+
         /// <summary>
         /// The designer view that this <see cref="EditorObject" /> should display on a WPF form.
         /// </summary>
-        protected Grid DesignerPanel { get; } = new Grid();
+        protected Grid DesignerPanel { get; } = new Grid { Margin = new Thickness(5.0) };
 
         /// <summary>
         /// The friendly name of the object.
@@ -31,7 +34,18 @@ namespace Threads.Editor.Objects {
         /// <summary>
         /// The instance of the <see cref="PageObject" /> that this <see cref="EditorObject" /> instance is modifying.
         /// </summary>
-        public PageObject ObjectData { get; set; }
+        public PageObject ObjectData {
+            get { return (PageObject)GetValue(PageObjectProperty); }
+            set { SetValue(PageObjectProperty, value); }
+        }
+
+        /// <summary>
+        /// Configures the <see cref="PageObject" /> that should be modified.
+        /// </summary>
+        /// <param name="objectData">The <see cref="PageObject" /> that this <see cref="EditorObject" /> should modify.</param>
+        protected EditorObject(PageObject objectData) {
+            ObjectData = objectData;
+        }
 
         /// <summary>
         /// Adds a row to the <see cref="DesignerPanel" />.
@@ -75,8 +89,14 @@ namespace Threads.Editor.Objects {
         private void CommonSetup() {
             DesignerPanel.Children.Clear();
 
+            DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
             DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition());
-            DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition());
+        }
+
+        protected TextBox CreateBoundTextBox(object dataContext, string path) {
+            var textBox = new TextBox { DataContext = dataContext };
+            textBox.SetBinding(TextBox.TextProperty, new Binding(path));
+            return textBox;
         }
 
         /// <summary>

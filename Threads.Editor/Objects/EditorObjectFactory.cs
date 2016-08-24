@@ -5,7 +5,7 @@ namespace Threads.Editor.Objects {
     internal static class EditorObjectFactory {
         public static EditorObject Get(EngineObjects.Page.PageObject pageObject) {
             if(pageObject.GetType() == typeof(EngineObjects.Page.Paragraph)) {
-                return new Paragraph();
+                return new Paragraph(pageObject);
             }
 
             return null;
