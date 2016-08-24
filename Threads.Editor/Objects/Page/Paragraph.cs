@@ -2,8 +2,8 @@
 
 namespace Threads.Editor.Objects.Page {
     internal class Paragraph : PageObject {
-        public override string ObjectName => "Paragraph";
-        public override string Description => "A basic Threads paragraph object.";
+        public new static string ObjectName => "Paragraph";
+        public new static string Description => "A basic paragraph object.";
         public override Type HandledType => typeof(Interpreter.Objects.Page.Paragraph);
     }
 }

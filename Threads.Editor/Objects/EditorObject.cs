@@ -16,12 +16,12 @@ namespace Threads.Editor.Objects {
         /// <summary>
         /// The friendly name of the object.
         /// </summary>
-        public abstract string ObjectName { get; }
+        public static string ObjectName => "EditorObject";
 
         /// <summary>
         /// A description of the object's functionality.
         /// </summary>
-        public abstract string Description { get; }
+        public static string Description => "EditorObject";
 
         /// <summary>
         /// The <see cref="Type" /> of story object that this <see cref="EditorObject" /> handles.
