@@ -43,7 +43,7 @@ namespace Threads.Interpreter.Objects.Page {
             var xmlObject = ExportObject();
 
             // Export the text in this object.
-            xmlObject.Value = FormattedText.OriginalText;
+            xmlObject.Value = FormattedText.MarkupText;
 
             // Only export style if it doesn't match the default.
             xmlObject.MarginBottomSpecified = Style.MarginBottom != DefaultStyle.MarginBottom;

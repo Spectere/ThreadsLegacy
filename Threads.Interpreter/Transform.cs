@@ -6,6 +6,7 @@ using Threads.Interpreter.Objects.Page;
 using StoryPageObject = Threads.Interpreter.Objects.Page.PageObject;
 using Threads.Interpreter.Schema;
 using Threads.Interpreter.Types;
+using Threads.Marker;
 using Story = Threads.Interpreter.Types.Story;
 
 namespace Threads.Interpreter {
@@ -73,20 +74,20 @@ namespace Threads.Interpreter {
             if(pageObject.GetType() == typeof(ChoiceObject)) {
                 var choice = (ChoiceObject)pageObject;
                 newObject = new Choice {
-                    FormattedText = Marker.Parser.Parse(choice.Value),
+                    FormattedText = new TextSequence(choice.Value),
                     Shortcut = choice.Shortcut == null ? (char?)null : Convert.ToChar(choice.Shortcut.Substring(0, 1)),
                     TargetName = choice.Target
                 };
             } else if(pageObject.GetType() == typeof(ImageObject)) {
                 var image = (ImageObject)pageObject;
                 newObject = new Image {
-                    FormattedText = Marker.Parser.Parse(image.Value),
+                    FormattedText = new TextSequence(image.Value),
                     Source = image.Source
                 };
             } else {
                 // If all else fails, it's probably a paragraph.
                 newObject = new Paragraph {
-                    FormattedText = Marker.Parser.Parse(pageObject.Value)
+                    FormattedText = new TextSequence(pageObject.Value)
                 };
             }
 

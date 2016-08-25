@@ -7,22 +7,29 @@ namespace Threads.Marker {
     /// A sequence of text and styles.
     /// </summary>
     public class TextSequence {
+        private string _markupText;
+
         /// <summary>
         /// A set of instructions that the implementation should follow, if possible.
         /// </summary>
-        public List<IInstruction> Instructions { get; }
+        public List<IInstruction> Instructions { get; private set; }
 
         /// <summary>
         /// The unparsed Marker string.
         /// </summary>
-        public string OriginalText { get; }
+        public string MarkupText {
+            get { return _markupText; }
+            set {
+                _markupText = value;
+                Instructions = Parser.Parse(_markupText);
+            }
+        }
 
         /// <summary>
         /// Initializes an instance of the <see cref="TextSequence" /> object.
         /// </summary>
-        public TextSequence(string originalText) {
-            OriginalText = originalText;
-            Instructions = new List<IInstruction>();
+        public TextSequence(string formattedText) {
+            MarkupText = formattedText;
         }
 
         /// <summary>

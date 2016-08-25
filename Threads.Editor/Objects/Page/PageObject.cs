@@ -7,7 +7,7 @@ namespace Threads.Editor.Objects.Page {
             // Common properties.
             AppendRow(
                 new Label { Content = "Text" },
-                new TextBox { Text = ObjectData.FormattedText.OriginalText,
+                new TextBox { Text = ObjectData.FormattedText.MarkupText,
                     Height = 120,
                     TextWrapping = TextWrapping.WrapWithOverflow,
                     HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,

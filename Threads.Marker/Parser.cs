@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using Threads.Marker.Commands;
 
 namespace Threads.Marker {
@@ -11,8 +12,8 @@ namespace Threads.Marker {
         /// </summary>
         /// <param name="text">The marked up string of text.</param>
         /// <returns>A <see cref="TextSequence" /> based on the marked up text.</returns>
-        public static TextSequence Parse(string text) {
-            var ts = new TextSequence(text);
+        public static List<IInstruction> Parse(string text) {
+            var instructions = new List<IInstruction>();
             var sb = new StringBuilder();
 
             var skip = false;
@@ -31,10 +32,10 @@ namespace Threads.Marker {
                         continue;
                     case Command.TextStyle:
                         if(sb.Length > 0) {
-                            ts.Instructions.Add(new TextCommand { Text = sb.ToString() });
+                            instructions.Add(new TextCommand { Text = sb.ToString() });
                             sb = new StringBuilder();
                         }
-                        ts.Instructions.Add(command);
+                        instructions.Add(command);
                         break;
                     default:
                         sb.Append(ch);
@@ -44,9 +45,9 @@ namespace Threads.Marker {
 
             // If there is anything in our StringBuilder, flush it.
             if(sb.Length > 0)
-                ts.Instructions.Add(new TextCommand { Text = sb.ToString() });
+                instructions.Add(new TextCommand { Text = sb.ToString() });
             
-            return ts;
+            return instructions;
         }
     }
 }

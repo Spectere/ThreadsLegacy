@@ -13,7 +13,7 @@
         internal override Schema.PageObject ExportObject() {
             return new Schema.ImageObject {
                 Source = Source,
-                Value = FormattedText.OriginalText
+                Value = FormattedText.MarkupText
             };
         }
     }
