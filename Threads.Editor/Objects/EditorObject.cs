@@ -97,7 +97,7 @@ namespace Threads.Editor.Objects {
 
         protected TextBox CreateBoundTextBox(object dataContext, string path) {
             var textBox = new TextBox { DataContext = dataContext };
-            textBox.SetBinding(TextBox.TextProperty, new Binding(path));
+            textBox.SetBinding(TextBox.TextProperty, new Binding(path) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             return textBox;
         }
 
