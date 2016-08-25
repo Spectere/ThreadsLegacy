@@ -95,10 +95,27 @@ namespace Threads.Editor.Objects {
             }
         }
 
+        /// <summary>
+        /// Creates a <see cref="TextBox" /> that binds to a <see cref="DependencyObject" />.
+        /// </summary>
+        /// <param name="dataContext">A <see cref="DependencyObject" /> to bind to.</param>
+        /// <param name="path">The property to bind to.</param>
+        /// <returns>A <see cref="TextBox" /> with the requested bindings.</returns>
         protected TextBox CreateBoundTextBox(object dataContext, string path) {
             var textBox = new TextBox { DataContext = dataContext };
             textBox.SetBinding(TextBox.TextProperty, new Binding(path) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
             return textBox;
+        }
+
+        /// <summary>
+        /// Modifies an existing <see cref="TextBox" /> and binds it to a <see cref="DependencyObject" />.
+        /// </summary>
+        /// <param name="dataContext">A <see cref="DependencyObject" /> to bind the <see cref="TextBox" /> to.</param>
+        /// <param name="path">The property to bind to.</param>
+        /// <param name="textBox">The <see cref="TextBox" /> to bind the property to.</param>
+        protected void CreateBoundTextBox(object dataContext, string path, ref TextBox textBox) {
+            textBox.DataContext = dataContext;
+            textBox.SetBinding(TextBox.TextProperty, new Binding(path) { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
         }
 
         /// <summary>

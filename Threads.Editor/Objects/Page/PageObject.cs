@@ -5,15 +5,15 @@ namespace Threads.Editor.Objects.Page {
     internal abstract class PageObject : EditorObject {
         protected sealed override void BuildEditor() {
             // Common properties.
-            AppendRow(
-                new Label { Content = "Text" },
-                new TextBox { Text = ObjectData.FormattedText.MarkupText,
-                    Height = 120,
-                    TextWrapping = TextWrapping.WrapWithOverflow,
-                    HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
-                }
-            );
+            var textEditor = new TextBox {
+                Text = ObjectData.FormattedText.MarkupText,
+                Height = 120,
+                TextWrapping = TextWrapping.WrapWithOverflow,
+                HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+            CreateBoundTextBox(ObjectData.FormattedText, "MarkupText", ref textEditor);
+            AppendRow(new Label { Content = "Text" }, textEditor);
 
             // Additional properties for this specific control.
             BuildPageObjectEditor();
