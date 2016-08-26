@@ -103,7 +103,13 @@ namespace Threads.Editor {
         }
 
         private void UpdateObjectEditor() {
-            ObjectEditor.CurrentEditor = ObjectList.SelectedObject != null ? EditorObjectFactory.Get(ObjectList.SelectedObject) : null;
+            if(ObjectList.SelectedObject == null) {
+                ObjectEditor.CurrentEditor = null;
+                return;
+            }
+
+            ObjectEditor.CurrentEditor = EditorObjectFactory.Get(ObjectList.SelectedObject);
+            ObjectEditor.CurrentEditor.StoryData = _engine.Story;
         }
 
         private void UpdateObjectList() {

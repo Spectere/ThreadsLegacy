@@ -3,12 +3,23 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Threads.Interpreter.Objects.Page;
+using Threads.Interpreter.Types;
 
 namespace Threads.Editor.Objects {
     /// <summary>
     /// The base class that all editor objects are derived from. Editor objects implement the UI and logic necessary to modify story objects.
     /// </summary>
     internal abstract class EditorObject : UserControl {
+        /// <summary>
+        /// A <see cref="DependencyProperty" /> that contains the loaded <see cref="Story" /> object.
+        /// This is used for objects that need information about the story as a whole.
+        /// </summary>
+        public static DependencyProperty StoryProperty = DependencyProperty.Register("GameState", typeof(Story), typeof(EditorObject));
+
+        /// <summary>
+        /// A <see cref="DependencyProperty" /> that contains the current <see cref="PageObject" /> information.
+        /// This is used for objects that only need to access data relating to the selected object.
+        /// </summary>
         public static DependencyProperty PageObjectProperty = DependencyProperty.Register("PageObject", typeof(PageObject), typeof(EditorObject));
 
         /// <summary>
@@ -37,6 +48,14 @@ namespace Threads.Editor.Objects {
         public PageObject ObjectData {
             get { return (PageObject)GetValue(PageObjectProperty); }
             set { SetValue(PageObjectProperty, value); }
+        }
+
+        /// <summary>
+        /// The instance of the <see cref="Story" /> that this <see cref="EditorObject" /> is part of.
+        /// </summary>
+        public Story StoryData {
+            get { return (Story)GetValue(StoryProperty); }
+            set { SetValue(StoryProperty, value); }
         }
 
         /// <summary>
