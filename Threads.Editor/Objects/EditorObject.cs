@@ -62,8 +62,10 @@ namespace Threads.Editor.Objects {
         /// Configures the <see cref="PageObject" /> that should be modified.
         /// </summary>
         /// <param name="objectData">The <see cref="PageObject" /> that this <see cref="EditorObject" /> should modify.</param>
-        protected EditorObject(PageObject objectData) {
+        /// <param name="storyData">The <see cref="Story" /> that this <see cref="EditorObject" /> can access.</param>
+        protected EditorObject(PageObject objectData, Story storyData) {
             ObjectData = objectData;
+            StoryData = storyData;
         }
 
         /// <summary>

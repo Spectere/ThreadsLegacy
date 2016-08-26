@@ -5,6 +5,6 @@ namespace Threads.Editor.Objects.Page {
         public new static string ObjectName => "Paragraph";
         public new static string Description => "A basic paragraph object.";
         public override Type HandledType => typeof(Interpreter.Objects.Page.Paragraph);
-        public Paragraph(Interpreter.Objects.Page.PageObject objectData) : base(objectData) {}
+        public Paragraph(Interpreter.Objects.Page.PageObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) {}
     }
 }

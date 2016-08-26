@@ -35,6 +35,6 @@ namespace Threads.Editor.Objects.Page {
         /// </summary>
         protected virtual void BuildPageObjectEditor() {}
 
-        protected PageObject(Interpreter.Objects.Page.PageObject objectData) : base(objectData) {}
+        protected PageObject(Interpreter.Objects.Page.PageObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) {}
     }
 }

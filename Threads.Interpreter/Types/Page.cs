@@ -34,5 +34,13 @@ namespace Threads.Interpreter.Types {
                 Items = Objects.Select(e => e.Export()).ToArray()
             };
         }
+
+        /// <summary>
+        /// Returns the name of this <see cref="Page" />.
+        /// </summary>
+        /// <returns>The name of this <see cref="Page" />.</returns>
+        public override string ToString() {
+            return Name;
+        }
     }
 }

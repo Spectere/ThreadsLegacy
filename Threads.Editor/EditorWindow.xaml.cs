@@ -108,8 +108,7 @@ namespace Threads.Editor {
                 return;
             }
 
-            ObjectEditor.CurrentEditor = EditorObjectFactory.Get(ObjectList.SelectedObject);
-            ObjectEditor.CurrentEditor.StoryData = _engine.Story;
+            ObjectEditor.CurrentEditor = EditorObjectFactory.Get(ObjectList.SelectedObject, _engine.Story);
         }
 
         private void UpdateObjectList() {
