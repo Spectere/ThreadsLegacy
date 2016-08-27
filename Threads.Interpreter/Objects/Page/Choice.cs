@@ -25,7 +25,7 @@
 
         internal override Schema.PageObject ExportObject() {
             return new Schema.ChoiceObject {
-                Target = TargetName,
+                Target = Target.Name,
                 Shortcut = Shortcut.ToString()
             };
         }

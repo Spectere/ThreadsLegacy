@@ -14,7 +14,15 @@ namespace Threads.Editor.Objects.Page {
                 ItemsSource = StoryData.Pages,
                 SelectedItem = ((StoryObject.Page.Choice)ObjectData).Target
             };
+            roomList.SelectionChanged += RoomList_SelectionChanged;
             AppendRow(new Label { Content = "Destination" }, roomList);
+        }
+
+        private void RoomList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if(e.AddedItems.Count < 1) return;
+            StoryObject.Page.Choice thisObject = (StoryObject.Page.Choice)ObjectData;
+            thisObject.Target = (Interpreter.Types.Page)e.AddedItems[0];
+            thisObject.TargetName = thisObject.Target.Name;
         }
     }
 }
