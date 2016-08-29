@@ -20,9 +20,8 @@ namespace Threads.Editor.Objects.Page {
 
         private void RoomList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if(e.AddedItems.Count < 1) return;
-            StoryObject.Page.Choice thisObject = (StoryObject.Page.Choice)ObjectData;
+            var thisObject = (StoryObject.Page.Choice)ObjectData;
             thisObject.Target = (Interpreter.Types.Page)e.AddedItems[0];
-            thisObject.TargetName = thisObject.Target.Name;
         }
     }
 }
