@@ -24,7 +24,7 @@ namespace Threads.Interpreter.Types {
         /// <summary>
         /// The pages contained in the story.
         /// </summary>
-        public IEnumerable<Page> Pages { get; set; }
+        public ICollection<Page> Pages { get; set; }
 
         /// <summary>
         /// Creates a new <see cref="Story" />.

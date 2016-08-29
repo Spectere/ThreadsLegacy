@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Page = Threads.Interpreter.Types.Page;
 
 namespace Threads.Editor {
@@ -15,7 +16,10 @@ namespace Threads.Editor {
         /// </summary>
         public IEnumerable<Page> StoryPages {
             get { return (IEnumerable<Page>)GetValue(StoryPagesProperty); }
-            set { SetValue(StoryPagesProperty, value); }
+            set {
+                SetValue(StoryPagesProperty, value);
+                Pages.Items.Refresh();
+            }
         }
 
         /// <summary>
@@ -27,12 +31,12 @@ namespace Threads.Editor {
         public delegate void OnSelectionChanged(object sender, Page e);
 
         /// <summary>
-        /// Fired when an item is added to the Page list.
+        /// Fired when the Add button is pressed.
         /// </summary>
         public event OnUpdate Add;
 
         /// <summary>
-        /// Fired when an item is deleted from the Page list.
+        /// Fired when the Delete button is pressed.
         /// </summary>
         public event OnUpdate Delete;
 
@@ -55,6 +59,17 @@ namespace Threads.Editor {
 
         private void Pages_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
             SelectionChanged?.Invoke(sender, SelectedPage);
+        }
+
+        private void Pages_OnKeyUp(object sender, KeyEventArgs e) {
+            switch(e.Key) {
+                case Key.Delete:
+                    Delete?.Invoke(sender, e);
+                    break;
+                case Key.Insert:
+                    Add?.Invoke(sender, e);
+                    break;
+            }
         }
     }
 }

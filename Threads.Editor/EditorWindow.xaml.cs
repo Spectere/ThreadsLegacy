@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
 using Threads.Editor.Objects;
@@ -17,6 +18,43 @@ namespace Threads.Editor {
 
         public EditorWindow() {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Removes a story page.
+        /// </summary>
+        /// <param name="pageToRemove">The instance of the page to remove.</param>
+        private void DeletePage(Page pageToRemove) {
+            // TODO: Prompt before anything actually happens.
+            if(pageToRemove == null) return;
+
+            // Find a suitable replacement page (usually the first page, unless that's the one getting deleted).
+            var replacementPage = _engine.Story.Pages.FirstOrDefault(page => page != pageToRemove);
+            var nukeChoices = replacementPage == null;
+
+            // Evaluate all PageObjects and remove Choice references to the deleted page.
+            foreach(var page in _engine.Story.Pages) {
+                foreach(var pageObject in page.Objects.Where(o => o.GetType() == typeof(Choice))) {
+                    var obj = (Choice)pageObject;
+                    if(obj.Target != pageToRemove) continue;
+
+                    // Uh oh, we have a match. If we have a replacement page, use that. Otherwise, delete the choice.
+                    if(!nukeChoices)
+                        obj.Target = replacementPage;
+                    else
+                        page.Objects.Remove(obj);
+                }
+            }
+
+            // Replace the default first page if necessary.
+            if(_engine.Story.Configuration.FirstPage == pageToRemove)
+                _engine.Story.Configuration.FirstPage = replacementPage;
+
+            // Remove the selected page from the page list.
+            _engine.Story.Pages.Remove(pageToRemove);
+
+            // Refresh the list.
+            UpdatePageList();
         }
 
         private void New_OnClick(object sender, RoutedEventArgs e) {
@@ -117,6 +155,14 @@ namespace Threads.Editor {
                 return;
             }
             ObjectList.PageObjects = PageList.SelectedPage.Objects;
+        }
+
+        private void PageList_OnAdd(object sender, RoutedEventArgs e) {
+            throw new System.NotImplementedException();
+        }
+
+        private void PageList_OnDelete(object sender, RoutedEventArgs e) {
+            DeletePage(PageList.SelectedPage);
         }
 
         private void PageList_OnSelectionChanged(object sender, Page e) {

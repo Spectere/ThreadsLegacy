@@ -102,7 +102,7 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="pages">A set of deserialized page data.</param>
         /// <returns>A collection of <see cref="Page"/> objects containing the story information.</returns>
-        private static IEnumerable<Page> TransformPages(IEnumerable<PageType> pages) {
+        private static ICollection<Page> TransformPages(IEnumerable<PageType> pages) {
             var output = new List<Page>();
             var pageList = pages.ToList();
 

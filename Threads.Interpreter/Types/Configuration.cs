@@ -38,7 +38,7 @@ namespace Threads.Interpreter.Types {
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
         internal Schema.ConfigurationType Export() {
             return new Schema.ConfigurationType {
-                FirstPage = FirstPage.Name,
+                FirstPage = FirstPage?.Name,
                 StoryMarginLeftSpecified = StoryMarginLeft != DefaultStoryMarginLeft,
                 StoryMarginLeft = StoryMarginLeft,
                 StoryMarginRightSpecified = StoryMarginRight != DefaultStoryMarginRight,

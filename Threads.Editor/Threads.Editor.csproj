@@ -51,6 +51,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NameEntry.xaml.cs">
+      <DependentUpon>NameEntry.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Objects\EditorObjectFactory.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />
@@ -71,6 +74,10 @@
       <DependentUpon>EditorWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NameEntry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ObjectEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
