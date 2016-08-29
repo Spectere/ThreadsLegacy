@@ -39,6 +39,7 @@ namespace Threads.Editor {
                     if(obj.Target != pageToRemove) continue;
 
                     // Uh oh, we have a match. If we have a replacement page, use that. Otherwise, delete the choice.
+                    // TODO: (No, seriously, prompt before deleting stuff. That's just common courtesy.)
                     if(!nukeChoices)
                         obj.Target = replacementPage;
                     else
