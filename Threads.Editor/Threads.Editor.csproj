@@ -56,6 +56,7 @@
       <DependentUpon>NameEntry.xaml</DependentUpon>
     </Compile>
     <Compile Include="Objects\EditorObjectFactory.cs" />
+    <Compile Include="Objects\EditorObjectList.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />
     <Compile Include="Objects\Page\PageObject.cs" />
