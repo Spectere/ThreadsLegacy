@@ -1,6 +1,9 @@
 ﻿using System;
 
 namespace Threads.Editor.Exceptions {
+    /// <summary>
+    /// Represents the error that occurs if the user attempts to add a duplicate <see cref="Interpreter.Types.Page"/> to the <see cref="Interpreter.Types.Story" />.
+    /// </summary>
     public class PageAlreadyExistsException : Exception {
         /// <summary>
         /// Initializes a new instance of the <see cref="PageAlreadyExistsException" /> class with a specified page name.
