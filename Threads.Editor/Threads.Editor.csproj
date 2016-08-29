@@ -51,6 +51,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\PageAlreadyExistsException.cs" />
     <Compile Include="NameEntry.xaml.cs">
       <DependentUpon>NameEntry.xaml</DependentUpon>
     </Compile>

@@ -5,7 +5,7 @@ namespace Threads.Editor {
     /// Interaction logic for NameEntry.xaml
     /// </summary>
     public partial class NameEntry {
-        public static DependencyProperty EnteredNameProperty = DependencyProperty.Register("Name", typeof(string), typeof(NameEntry));
+        public static DependencyProperty EnteredNameProperty = DependencyProperty.Register("EnteredName", typeof(string), typeof(NameEntry));
 
         /// <summary>
         /// Gets or sets the name in the input box.

@@ -28,7 +28,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=NameTextBox}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50" />
             <ColumnDefinition />
@@ -41,7 +41,8 @@
 
         <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}">Name</Label>
         <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding ElementName=NameEntryForm, Path=EnteredName}" />
+                 Text="{Binding ElementName=NameEntryForm, Path=EnteredName}"
+                 Name="NameTextBox" />
         
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="OK" Style="{StaticResource ButtonStyle}" IsDefault="True"

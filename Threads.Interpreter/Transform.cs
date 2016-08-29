@@ -112,9 +112,12 @@ namespace Threads.Interpreter {
                     Name = page.Name
                 };
 
-                foreach(var obj in page.Items) {
-                    newPage.Objects.Add(TransformPageObject(obj));
+                if(page.Items != null) {
+                    foreach(var obj in page.Items) {
+                        newPage.Objects.Add(TransformPageObject(obj));
+                    }
                 }
+
                 output.Add(newPage);
             }
 

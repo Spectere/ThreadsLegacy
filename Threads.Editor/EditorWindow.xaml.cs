@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
+using Threads.Editor.Exceptions;
 using Threads.Editor.Objects;
 using Threads.Interpreter;
 using Threads.Interpreter.Objects.Page;
@@ -21,9 +23,24 @@ namespace Threads.Editor {
         }
 
         /// <summary>
-        /// Removes a story page.
+        /// Adds a new <see cref="Page" /> to the <see cref="Story" />.
         /// </summary>
-        /// <param name="pageToRemove">The instance of the page to remove.</param>
+        /// <param name="pageName">The name of the new <see cref="Page" />.</param>
+        private void AddPage(string pageName) {
+            if(_engine.Story.Pages.Count(p => p.Name == pageName) > 0)
+                throw new PageAlreadyExistsException(pageName);
+
+            _engine.Story.Pages.Add(new Page {
+                Name = pageName
+            });
+
+            UpdatePageList();
+        }
+
+        /// <summary>
+        /// Removes a <see cref="Page" /> from the <see cref="Story" />.
+        /// </summary>
+        /// <param name="pageToRemove">The instance of the <see cref="Page" /> to remove.</param>
         private void DeletePage(Page pageToRemove) {
             // TODO: Prompt before anything actually happens.
             if(pageToRemove == null) return;
@@ -159,7 +176,12 @@ namespace Threads.Editor {
         }
 
         private void PageList_OnAdd(object sender, RoutedEventArgs e) {
-            throw new System.NotImplementedException();
+            var nameEntry = new NameEntry();
+            var result = nameEntry.ShowDialog();
+
+            if(!result.HasValue || !result.Value) return;
+
+            AddPage(nameEntry.EnteredName);
         }
 
         private void PageList_OnDelete(object sender, RoutedEventArgs e) {
