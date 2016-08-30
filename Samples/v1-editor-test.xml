@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="1">
+  <Information>
+    <Name>Editor Test Story</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>TestStart</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="TestPage1">
+      <Text>You are in a red room. You see a door. You are compelled to...</Text>
+      <Choice Target="TestPage2" Shortcut="">...enter it.</Choice>
+    </Page>
+    <Page Name="TestStart">
+      <Text>Welcome to the best adventure *EVER*. Do you wish to continue?</Text>
+      <Choice Target="TestPage1" Shortcut="Y">Yes!</Choice>
+      <Choice Target="NO" Shortcut="N">No...</Choice>
+    </Page>
+    <Page Name="TestPage2">
+      <Text>You are in a blue room. You see a door. You are compelled to...</Text>
+      <Choice Target="TestPage1" Shortcut="">...enter it.</Choice>
+    </Page>
+    <Page Name="NO">
+      <Text>I suppose we're finished, then!</Text>
+    </Page>
+  </Pages>
+</Story>

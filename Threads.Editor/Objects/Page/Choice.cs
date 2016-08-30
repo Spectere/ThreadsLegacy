@@ -16,6 +16,8 @@ namespace Threads.Editor.Objects.Page {
             };
             roomList.SelectionChanged += RoomList_SelectionChanged;
             AppendRow(new Label { Content = "Destination" }, roomList);
+            AppendRow(new Label { Content = "Shortcut Key" },
+                CreateBoundTextBox(ObjectData, "Shortcut"));
         }
 
         private void RoomList_SelectionChanged(object sender, SelectionChangedEventArgs e) {

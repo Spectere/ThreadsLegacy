@@ -61,6 +61,9 @@
     <Compile Include="Objects\Page\Image.cs" />
     <Compile Include="Objects\Page\PageObject.cs" />
     <Compile Include="Objects\Page\Paragraph.cs" />
+    <Compile Include="StoryConfiguration.xaml.cs">
+      <DependentUpon>StoryConfiguration.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StoryInfo.xaml.cs">
       <DependentUpon>StoryInfo.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ObjectList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StoryConfiguration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

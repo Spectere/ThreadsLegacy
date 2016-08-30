@@ -134,6 +134,24 @@ namespace Threads.Editor {
             SaveAs();
         }
 
+        private void StoryConfig_OnClick(object sender, RoutedEventArgs e) {
+            var configWindow = new StoryConfiguration {
+                PageList = _engine.Story.Pages,
+                StartingPage = _engine.Story.Configuration.FirstPage,
+                MarginLeft = _engine.Story.Configuration.StoryMarginLeft,
+                MarginRight = _engine.Story.Configuration.StoryMarginRight
+            };
+
+            var result = configWindow.ShowDialog();
+            if(result == null || !result.Value) return;
+
+            _engine.Story.Configuration = new Configuration {
+                FirstPage = configWindow.StartingPage,
+                StoryMarginLeft = configWindow.MarginLeft,
+                StoryMarginRight = configWindow.MarginRight
+            };
+        }
+
         private void StoryInfo_OnClick(object sender, RoutedEventArgs e) {
             var infoWindow = new StoryInfo {
                 StoryTitle = _engine.Story.Information.Name,
