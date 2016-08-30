@@ -65,6 +65,13 @@ namespace Threads.Editor {
         /// Populates the list of available <see cref="EditorObject" />s.
         /// </summary>
         private void PopulateObjectToolbox() {
+            PopulatePageObjects();
+        }
+
+        /// <summary>
+        /// Populates the object toolbox with all of the available <see cref="PageObject" />s.
+        /// </summary>
+        private void PopulatePageObjects() {
             var pageObjectList = EditorObjectList.GetPageObjects();
             foreach(var obj in pageObjectList) {
                 var newButton = new Button {
