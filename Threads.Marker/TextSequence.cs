@@ -28,6 +28,12 @@ namespace Threads.Marker {
         /// <summary>
         /// Initializes an instance of the <see cref="TextSequence" /> object.
         /// </summary>
+        public TextSequence() : this("") {}
+
+        /// <summary>
+        /// Initializes an instance of the <see cref="TextSequence" /> object.
+        /// </summary>
+        /// <param name="formattedText">The text that should be used to prepopulate this <see cref="TextSequence" /> object.</param>
         public TextSequence(string formattedText) {
             MarkupText = formattedText;
         }

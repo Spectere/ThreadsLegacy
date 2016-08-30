@@ -31,7 +31,9 @@
             <Setter Property="BorderBrush" Value="Silver" />
             <Setter Property="BorderThickness" Value="0 0 1 0" />
         </Style>
-        
+
+        <!-- Used in code behind -->
+        <!-- ReSharper disable once Xaml.RedundantResource -->
         <Style x:Key="ToolboxButtonStyle" TargetType="Button">
             <Setter Property="Margin" Value="8 8 8 0" />
         </Style>

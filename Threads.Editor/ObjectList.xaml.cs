@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using Threads.Editor.Objects;
 using Threads.Interpreter.Objects.Page;
+using Threads.Marker;
 
 namespace Threads.Editor {
     /// <summary>
@@ -17,15 +18,24 @@ namespace Threads.Editor {
         /// </summary>
         public List<PageObject> PageObjects {
             get { return (List<PageObject>)GetValue(PageObjectsProperty); }
-            set { SetValue(PageObjectsProperty, value); }
+            set {
+                SetValue(PageObjectsProperty, value);
+                Objects?.Items.Refresh();
+            }
         }
 
         /// <summary>
         /// The currently selected <see cref="PageObject" />.
         /// </summary>
         public PageObject SelectedObject => Objects.SelectedItems.Count > 0 ? (PageObject)Objects.SelectedItems[0] : null;
-        
+
+        public delegate void OnNewObject(object sender, PageObject e);
         public delegate void OnSelectionChanged(object sender, PageObject e);
+
+        /// <summary>
+        /// Fired when a <see cref="PageObject" /> is created by the Object list.
+        /// </summary>
+        public event OnNewObject NewObject;
 
         /// <summary>
         /// Fired when a <see cref="PageObject" /> is selected in the Object list.
@@ -56,11 +66,22 @@ namespace Threads.Editor {
                     Name = obj.ObjectName,
                     Content = obj.ObjectName,
                     ToolTip = obj.Description,
-                    Style = FindResource("ToolboxButtonStyle") as Style
+                    Style = FindResource("ToolboxButtonStyle") as Style,
+                    Tag = obj.HandledType
                 };
+
+                newButton.Click += AddObject_Click;
 
                 ObjectToolbox.Children.Add(newButton);
             }
+        }
+
+        private void AddObject_Click(object sender, RoutedEventArgs e) {
+            var thisButton = (Button)sender;
+            var objectType = (Type)thisButton.Tag;
+            var newObject = (PageObject)Activator.CreateInstance(objectType);
+            newObject.FormattedText = new TextSequence();
+            NewObject?.Invoke(this, newObject);
         }
 
         private void Objects_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {

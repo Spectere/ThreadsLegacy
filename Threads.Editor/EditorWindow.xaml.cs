@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
@@ -194,6 +193,12 @@ namespace Threads.Editor {
 
         private void ObjectList_OnSelectionChanged(object sender, PageObject e) {
             UpdateObjectEditor();
+        }
+
+        private void ObjectList_OnNewObject(object sender, PageObject e) {
+            if(PageList.SelectedPage == null) return;
+            PageList.SelectedPage.Objects.Add(e);
+            UpdateObjectList();
         }
     }
 }
