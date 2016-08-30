@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Threads.Marker;
 
 namespace Threads.Interpreter.Objects.Page {
@@ -65,5 +66,9 @@ namespace Threads.Interpreter.Objects.Page {
         /// </summary>
         /// <returns>An XML <see cref="Schema.PageObject" /> object.</returns>
         internal abstract Schema.PageObject ExportObject();
+
+        public override string ToString() {
+            return GetType().ToString().Split('.').Last();
+        }
     }
 }
