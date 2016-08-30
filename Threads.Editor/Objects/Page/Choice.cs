@@ -6,7 +6,7 @@ namespace Threads.Editor.Objects.Page {
     internal class Choice : PageObject {
         public override string ObjectName => "Choice";
         public override string Description => "An object that allows the player to choose their next page.";
-        public override Type HandledType => typeof(StoryObject.Page.Paragraph);
+        public override Type HandledType => typeof(StoryObject.Page.Choice);
         public Choice(StoryObject.Page.PageObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) { }
 
         protected override void BuildPageObjectEditor() {
