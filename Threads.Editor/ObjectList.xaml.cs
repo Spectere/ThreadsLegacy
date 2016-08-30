@@ -55,7 +55,8 @@ namespace Threads.Editor {
                 var newButton = new Button {
                     Name = obj.ObjectName,
                     Content = obj.ObjectName,
-                    ToolTip = obj.Description
+                    ToolTip = obj.Description,
+                    Style = FindResource("ToolboxButtonStyle") as Style
                 };
 
                 ObjectToolbox.Children.Add(newButton);

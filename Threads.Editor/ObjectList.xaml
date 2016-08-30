@@ -31,6 +31,10 @@
             <Setter Property="BorderBrush" Value="Silver" />
             <Setter Property="BorderThickness" Value="0 0 1 0" />
         </Style>
+        
+        <Style x:Key="ToolboxButtonStyle" TargetType="Button">
+            <Setter Property="Margin" Value="8 8 8 0" />
+        </Style>
     </UserControl.Resources>
     
     <Grid>
@@ -41,8 +45,8 @@
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
         <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Page Objects" Style="{StaticResource HeaderStyle}" />
