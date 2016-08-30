@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using Threads.Editor.Objects;
 using Threads.Interpreter.Objects.Page;
 using Threads.Marker;
