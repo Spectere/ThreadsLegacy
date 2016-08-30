@@ -16,9 +16,9 @@ namespace Threads.Editor.Objects {
         internal static ICollection<PageObject> GetPageObjects() {
             var objects = Assembly.GetExecutingAssembly().GetTypes()
                                   .Where(t => t.Namespace == "Threads.Editor.Objects.Page"
-                                              && t.IsAbstract == false && t.IsAssignableFrom(typeof(PageObject)));
+                                              && t.IsAbstract == false && t.BaseType == typeof(PageObject));
 
-            return objects.Select(t => (PageObject)Activator.CreateInstance(t)).ToList();
+            return objects.Select(t => (PageObject)Activator.CreateInstance(t, (PageObject)null, null)).ToList();
         }
     }
 }

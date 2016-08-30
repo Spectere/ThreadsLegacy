@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
+using Threads.Editor.Objects;
 using Threads.Interpreter.Objects.Page;
 
 namespace Threads.Editor {
@@ -33,6 +35,7 @@ namespace Threads.Editor {
         public ObjectList() {
             PageObjects = new List<PageObject>();
             InitializeComponent();
+            PopulateObjectToolbox();
         }
 
         /// <summary>
@@ -41,6 +44,22 @@ namespace Threads.Editor {
         public void ClearObjectList() {
             PageObjects = new List<PageObject>();
             Objects.Items.Refresh();
+        }
+
+        /// <summary>
+        /// Populates the list of available <see cref="EditorObject" />s.
+        /// </summary>
+        private void PopulateObjectToolbox() {
+            var pageObjectList = EditorObjectList.GetPageObjects();
+            foreach(var obj in pageObjectList) {
+                var newButton = new Button {
+                    Name = obj.ObjectName,
+                    Content = obj.ObjectName,
+                    ToolTip = obj.Description
+                };
+
+                ObjectToolbox.Children.Add(newButton);
+            }
         }
 
         private void Objects_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
