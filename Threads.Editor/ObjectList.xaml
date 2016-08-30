@@ -61,7 +61,7 @@
 
         <ListBox Grid.Column="1" Grid.Row="1" Name="Objects" Style="{StaticResource ObjectListStyle}"
                  ItemsSource="{Binding ElementName=ObjectListControl, Path=PageObjects}"
-                 SelectionMode="Single" SelectionChanged="Objects_OnSelectionChanged">
+                 SelectionMode="Single" SelectionChanged="Objects_OnSelectionChanged" KeyUp="DeleteButton_OnClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding}" Tag="{Binding}" />
@@ -69,9 +69,19 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" Background="WhiteSmoke">
-            <Button Style="{StaticResource MoveButtonStyle}" Content="Up" Click="UpButton_OnClick" />
-            <Button Style="{StaticResource MoveButtonStyle}" Content="Down" Click="DownButton_OnClick" />
-        </StackPanel>
+        <Grid Grid.Column="1" Grid.Row="2" Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                <Button Style="{StaticResource MoveButtonStyle}" Content="Up" Click="UpButton_OnClick" />
+                <Button Style="{StaticResource MoveButtonStyle}" Content="Down" Click="DownButton_OnClick" />
+            </StackPanel>
+
+            <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource MoveButtonStyle}" Content="Delete"
+                    Click="DeleteButton_OnClick" HorizontalAlignment="Right" />
+        </Grid>
     </Grid>
 </UserControl>

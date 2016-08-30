@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using Threads.Editor.Objects;
 using Threads.Interpreter.Objects.Page;
 using Threads.Marker;
@@ -29,18 +30,22 @@ namespace Threads.Editor {
         /// </summary>
         public PageObject SelectedObject => Objects.SelectedItems.Count > 0 ? (PageObject)Objects.SelectedItems[0] : null;
 
-        public delegate void OnNewObject(object sender, PageObject e);
-        public delegate void OnSelectionChanged(object sender, PageObject e);
+        public delegate void OnObjectChanged(object sender, PageObject e);
 
         /// <summary>
         /// Fired when a <see cref="PageObject" /> is created by the Object list.
         /// </summary>
-        public event OnNewObject NewObject;
+        public event OnObjectChanged AddObject;
+
+        /// <summary>
+        /// Fired when a <see cref="PageObject" /> is deleted from the Object list.
+        /// </summary>
+        public event OnObjectChanged DeleteObject;
 
         /// <summary>
         /// Fired when a <see cref="PageObject" /> is selected in the Object list.
         /// </summary>
-        public event OnSelectionChanged SelectionChanged;
+        public event OnObjectChanged SelectionChanged;
 
         public ObjectList() {
             PageObjects = new List<PageObject>();
@@ -81,7 +86,7 @@ namespace Threads.Editor {
             var objectType = (Type)thisButton.Tag;
             var newObject = (PageObject)Activator.CreateInstance(objectType);
             newObject.FormattedText = new TextSequence();
-            NewObject?.Invoke(this, newObject);
+            AddObject?.Invoke(this, newObject);
         }
 
         private void Objects_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -105,6 +110,11 @@ namespace Threads.Editor {
             PageObjects.RemoveAt(oldIndex);
             PageObjects.Insert(newIndex, item);
             Objects.Items.Refresh();
+        }
+
+        private void DeleteButton_OnClick(object sender, RoutedEventArgs e) {
+            if(Objects.SelectedItem == null) return;
+            DeleteObject?.Invoke(this, (PageObject)Objects.SelectedItem);
         }
     }
 }

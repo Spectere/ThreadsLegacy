@@ -195,9 +195,15 @@ namespace Threads.Editor {
             UpdateObjectEditor();
         }
 
-        private void ObjectList_OnNewObject(object sender, PageObject e) {
+        private void ObjectList_OnAddObject(object sender, PageObject e) {
             if(PageList.SelectedPage == null) return;
             PageList.SelectedPage.Objects.Add(e);
+            UpdateObjectList();
+        }
+
+        private void ObjectList_OnDeleteObject(object sender, PageObject e) {
+            if(e == null) return;
+            PageList.SelectedPage.Objects.Remove(e);
             UpdateObjectList();
         }
     }
