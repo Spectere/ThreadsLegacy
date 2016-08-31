@@ -39,7 +39,7 @@
         <Label Grid.Row="0" Content="Pages" Style="{StaticResource HeaderStyle}" />
 
         <ListBox Grid.Row="1" Name="Pages" ItemsSource="{Binding ElementName=PageListControl, Path=StoryPages}" Style="{StaticResource PageListStyle}"
-                 SelectionMode="Single" SelectionChanged="Pages_OnSelectionChanged" KeyUp="Pages_OnKeyUp">
+                 SelectionMode="Single" SelectionChanged="Pages_OnSelectionChanged" KeyUp="Pages_OnKeyUp" MouseDoubleClick="Pages_OnMouseDoubleClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name}" Tag="{Binding}" />

@@ -195,7 +195,7 @@ namespace Threads.Editor {
         }
 
         private void PageList_OnAdd(object sender, RoutedEventArgs e) {
-            var nameEntry = new NameEntry();
+            var nameEntry = new NameEntry { Owner = this };
             var result = nameEntry.ShowDialog();
 
             if(!result.HasValue || !result.Value) return;
@@ -225,6 +225,19 @@ namespace Threads.Editor {
             if(e == null) return;
             PageList.SelectedPage.Objects.Remove(e);
             UpdateObjectList();
+        }
+
+        private void PageList_OnPageDoubleClicked(object sender, Page e) {
+            var nameEntry = new NameEntry {
+                EnteredName = e.Name,
+                Owner = this
+            };
+
+            var result = nameEntry.ShowDialog();
+            if(!result.HasValue || !result.Value) return;
+
+            e.Name = nameEntry.EnteredName;
+            UpdatePageList();
         }
     }
 }

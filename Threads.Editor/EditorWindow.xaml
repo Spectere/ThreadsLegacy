@@ -43,7 +43,7 @@
             <MenuItem Click="StoryConfig_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Config" />
         </Menu>
         
-        <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" SelectionChanged="PageList_OnSelectionChanged" Add="PageList_OnAdd" Delete="PageList_OnDelete" />
+        <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" SelectionChanged="PageList_OnSelectionChanged" Add="PageList_OnAdd" Delete="PageList_OnDelete" PageDoubleClicked="PageList_OnPageDoubleClicked" />
         <local:ObjectList Grid.Row="1" Grid.Column="1" x:Name="ObjectList" Style="{StaticResource EditorStyle}" SelectionChanged="ObjectList_OnSelectionChanged" AddObject="ObjectList_OnAddObject" DeleteObject="ObjectList_OnDeleteObject" />
         <local:ObjectEditor Grid.Row="1" Grid.Column="2" x:Name="ObjectEditor" Style="{StaticResource EditorStyle}" />
     </Grid>
