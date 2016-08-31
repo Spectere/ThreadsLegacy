@@ -139,7 +139,8 @@ namespace Threads.Editor {
                 PageList = _engine.Story.Pages,
                 StartingPage = _engine.Story.Configuration.FirstPage,
                 MarginLeft = _engine.Story.Configuration.StoryMarginLeft,
-                MarginRight = _engine.Story.Configuration.StoryMarginRight
+                MarginRight = _engine.Story.Configuration.StoryMarginRight,
+                Owner = this
             };
 
             var result = configWindow.ShowDialog();
@@ -157,7 +158,8 @@ namespace Threads.Editor {
                 StoryTitle = _engine.Story.Information.Name,
                 Author = _engine.Story.Information.Author,
                 Version = _engine.Story.Information.Version,
-                Website = _engine.Story.Information.Website
+                Website = _engine.Story.Information.Website,
+                Owner = this
             };
 
             var result = infoWindow.ShowDialog();

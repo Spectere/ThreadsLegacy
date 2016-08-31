@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Name="StoryInfoForm"
+        mc:Ignorable="d" Name="StoryInfoForm" WindowStartupLocation="CenterOwner"
         Title="Story Information" Height="170" Width="300" ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
