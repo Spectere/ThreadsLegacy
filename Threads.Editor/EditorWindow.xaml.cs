@@ -33,6 +33,10 @@ namespace Threads.Editor {
                 Name = pageName
             });
 
+            // If no page was configured in the story configuration, set it now.
+            if(_engine.Story.Configuration.FirstPage == null)
+                _engine.Story.Configuration.FirstPage = _engine.Story.Pages.First();
+
             UpdatePageList();
         }
 

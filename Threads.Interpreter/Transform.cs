@@ -36,7 +36,7 @@ namespace Threads.Interpreter {
             var pageList = pages.ToList();
 
             var newConfig = new Configuration {
-                FirstPage = pageList.First(e => e.Name == configuration.FirstPage),
+                FirstPage = configuration.FirstPage == null ? pageList.First() : pageList.First(e => e.Name == configuration.FirstPage),
                 StoryMarginLeft = configuration.StoryMarginLeftSpecified ? configuration.StoryMarginLeft : 40.0,
                 StoryMarginRight = configuration.StoryMarginRightSpecified ? configuration.StoryMarginRight : 40.0
             };
