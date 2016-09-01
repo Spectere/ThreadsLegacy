@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	ProjectSection(SolutionItems) = preProject
 		Documentation\LICENSE.txt = Documentation\LICENSE.txt
 		Documentation\marker-outline.txt = Documentation\marker-outline.txt
+		README.md = README.md
 		Documentation\xml-outline.txt = Documentation\xml-outline.txt
 	EndProjectSection
 EndProject
