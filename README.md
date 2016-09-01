@@ -24,4 +24,4 @@ And finally, if you use *Threads* to write any stories, please send them my way!
 
 ## License
 
-*Threads*, and all of the applications included in its repository, are released as free software released under the [MIT license](Documentation/LICENSE.txt).
+*Threads*, and all of the applications included in its repository, are released as free software released under the [MIT license](./LICENSE).
