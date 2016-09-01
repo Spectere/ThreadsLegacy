@@ -17,11 +17,26 @@ namespace Threads.Interpreter {
         /// <param name="storyData">A set of deserialized story data.</param>
         /// <returns>A <see cref="Story"/> object containing the validated story data.</returns>
         internal static Story TransformStory(Schema.Story storyData) {
-            var story = new Story {
-                Information = TransformInformation(storyData.Information),
-                Pages = TransformPages(storyData.Pages)
-            };
-            story.Configuration = TransformConfiguration(storyData.Configuration, story.Pages);
+            var story = new Story();
+
+            // If our story element is null, uh...abort?
+            if(storyData == null)
+                throw new NullStoryException();
+
+            // We can survive without an information block.
+            if(storyData.Information != null)
+                story.Information = TransformInformation(storyData.Information);
+
+            // Bail if we don't have any pages.
+            if(storyData.Pages == null)
+                throw new NullPagesException();
+            story.Pages = TransformPages(storyData.Pages);
+            if(story.Pages.Count == 0)
+                throw new NoPagesFoundException();
+
+            // Finally, we can make do without a configuration section.
+            if(storyData.Configuration != null)
+                story.Configuration = TransformConfiguration(storyData.Configuration, story.Pages);
 
             return story;
         }

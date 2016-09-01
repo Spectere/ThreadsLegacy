@@ -36,6 +36,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NullPagesException.cs" />
+    <Compile Include="Exceptions\NullStoryException.cs" />
+    <Compile Include="Exceptions\NoPagesFoundException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />

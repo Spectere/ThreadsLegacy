@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.Win32;
 using System.Windows;
@@ -84,12 +85,31 @@ namespace Threads.Player {
             var result = fileDialog.ShowDialog() ?? false;
             if(!result) return;
 
-            // Set the directory before loading the story so that relative paths will line up nicely.
-            // ReSharper disable once AssignNullToNotNullAttribute
-            Directory.SetCurrentDirectory(Path.GetDirectoryName(fileDialog.FileName));
-            _engine = new Engine(fileDialog.FileName);
+            if(!LoadStory(fileDialog.FileName)) return;
+
             DisplayPage();
-            Title = $"Threads - [{_engine.Story.Information.Name}]";
+            UpdateTitleBar();
+        }
+
+        /// <summary>
+        /// Loads a <see cref="Interpreter.Types.Story" /> file into memory.
+        /// </summary>
+        /// <param name="filename">The path pointing to the <see cref="Interpreter.Types.Story" /> that should be loaded.</param>
+        private bool LoadStory(string filename) {
+            // Set the directory before loading the story so that relative paths will line up nicely.
+            var storyPath = Path.GetDirectoryName(filename);
+            if(storyPath == null) return false;
+
+            try {
+                _engine = new Engine(filename);
+            } catch(Exception ex) when (ex is NullPagesException || ex is NoPagesFoundException) {
+                MessageBox.Show("No pages could be found in the loaded story! Aborting.");
+                return false;
+            }
+
+            // Only change the path if we return successfully, otherwise the currently loaded story could be affected.
+            Directory.SetCurrentDirectory(storyPath);
+            return true;
         }
 
         private void Restart_OnClick(object sender, RoutedEventArgs e) {
@@ -107,6 +127,14 @@ namespace Threads.Player {
             Menu.Visibility = e.GetPosition(this).Y < 64
                 ? Visibility.Visible
                 : Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Updates the game window's title bar.
+        /// </summary>
+        private void UpdateTitleBar() {
+            var gameName = _engine.Story.Information.Name;
+            Title = string.IsNullOrWhiteSpace(gameName) ? "Threads - [Untitled Story]" : $"Threads - [{gameName}]";
         }
     }
 }

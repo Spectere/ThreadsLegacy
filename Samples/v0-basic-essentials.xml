@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Story>
+  <Information />
+  <Configuration />
+  <Pages>
+    <Page Name="Intro">
+      <Text>You find yourself in a white room. There is an exit to the north.</Text>
+      <Choice Target="GoNorth" Shortcut="1">Go north.</Choice>
+      <Choice Target="Wait" Shortcut="2">Wait.</Choice>
+    </Page>
+
+    <Page Name="Wait">
+      <Text>You wait for five minutes, tapping your feet and pacing. You occasionally glance at the exit, contemplating your decision.</Text>
+      <Choice Target="GoNorth" Shortcut="1">Go north.</Choice>
+      <Choice Target="Wait2" Shortcut="2">Never go north!</Choice>
+    </Page>
+
+    <Page Name="Wait2">
+      <Text>Minutes turn to hours, hours turn to days, days turn to weeks. You never do find out what's to the north.</Text>
+    </Page>
+
+    <Page Name="GoNorth">
+      <Text>You cautiously step through the door to the north. As you do, the door closes behind you with a rumble, leaving you trapped in the eerie, mostly-featureless room. Pressing forward, you see two figurines on a stone pedestal in front of you: a jade tiger and an emerald wolf.</Text>
+      <Choice Target="JadeTiger" Shortcut="1">Take the jade tiger.</Choice>
+      <Choice Target="EmeraldWolf" Shortcut="2">Take the emerald wolf.</Choice>
+      <Choice Target="Search" Shortcut="3">Search for another exit.</Choice>
+    </Page>
+
+    <Page Name="Search">
+      <Text>As you begin to search the room, the figurines sink down into the pedistal right before the pedistal itself sinks into the ground. You find nothing.</Text>
+      <Choice Target="Search2" Shortcut="1">Continue searching.</Choice>
+      <Choice Target="GiveUp" Shortcut="2">Give up.</Choice>
+    </Page>
+
+    <Page Name="Search2">
+      <Text>The search is fruitless. The walls are all black as pitch and smooth as glass. The floor contains no hidden trapdoors. You're trapped.</Text>
+      <Choice Target="GiveUp" Shortcut="1">Give up.</Choice>
+    </Page>
+
+    <Page Name="GiveUp">
+      <Text>With a sigh, you resign yourself to your fate, sitting glumly against the smooth, blank wall. The coming week is not going to be pleasant.</Text>
+    </Page>
+
+    <Page Name="JadeTiger">
+      <Text>As you pick up the tiger figurine, a feeling of power surges through you. An exit to the north slides open noisily, the incoming light blinding you.</Text>
+      <Choice Target="NorthEndTiger" Shortcut="1">Go north.</Choice>
+      <Choice Target="HesitateEndTiger" Shortcut="2">Wait.</Choice>
+    </Page>
+
+    <Page Name="EmeraldWolf">
+      <Text>As you pick up the wolf figurine, a feeling of power surges through you. An exit to the north slides open noisily, the incoming light blinding you.</Text>
+      <Choice Target="NorthEndWolf" Shortcut="1">Go north.</Choice>
+      <Choice Target="HesitateEndWolf" Shortcut="2">Wait.</Choice>
+    </Page>
+
+    <Page Name="HesitateEndTiger">
+      <Text>A sudden gust of wind hits you hard, forcing you through the northern exit. You barely manage to keep your balance as you stumble through the door.</Text>
+      <Choice Target="NorthEndTiger" Shortcut="1">Wheeeeee!</Choice>
+    </Page>
+
+    <Page Name="HesitateEndWolf">
+      <Text>A sudden gust of wind hits you hard, forcing you through the northern exit. You barely manage to keep your balance as you stumble through the door.</Text>
+      <Choice Target="NorthEndWolf" Shortcut="1">Wheeeeee!</Choice>
+    </Page>
+
+    <Page Name="NorthEndTiger">
+      <Text>As soon as your eyes adjust, you look around curiously, examining and admiring your surroundings. You're in a jungle, and the world is your oyster! You let out a mighty roar, charging into the wilds, eager to hunt.</Text>
+    </Page>
+
+    <Page Name="NorthEndWolf">
+      <Text>As soon as your eyes adjust, you look around curiously, examining and admiring your surroundings. Your feet are buried in snow, your belly quietly grumbling. You look around to see your packmates meandering around the area. Throwing your head back, you let out a howl to gather them. It's time to hunt.</Text>
+    </Page>
+  </Pages>
+</Story>
