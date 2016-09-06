@@ -5,8 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Threads.Editor.Objects;
 using Threads.Interpreter.Objects;
-using Threads.Interpreter.Objects.Page;
-using Threads.Marker;
 
 namespace Threads.Editor {
     /// <summary>
@@ -34,17 +32,17 @@ namespace Threads.Editor {
         public delegate void OnObjectChanged(object sender, IObject e);
 
         /// <summary>
-        /// Fired when a <see cref="PageObject" /> is created by the Object list.
+        /// Fired when a <see cref="IObject" /> is created by the Object list.
         /// </summary>
         public event OnObjectChanged AddObject;
 
         /// <summary>
-        /// Fired when a <see cref="PageObject" /> is deleted from the Object list.
+        /// Fired when a <see cref="IObject" /> is deleted from the Object list.
         /// </summary>
         public event OnObjectChanged DeleteObject;
 
         /// <summary>
-        /// Fired when a <see cref="PageObject" /> is selected in the Object list.
+        /// Fired when a <see cref="IObject" /> is selected in the Object list.
         /// </summary>
         public event OnObjectChanged SelectionChanged;
 
@@ -69,19 +67,18 @@ namespace Threads.Editor {
             PopulatePageObjects();
 
             var newLabel = new Label {
-                Content = "Action ObjectListBox",
+                Content = "Action Objects",
                 BorderBrush = Brushes.Silver,
                 BorderThickness = new Thickness(0.0, 0.0, 0.0, 1.0),
                 Margin = new Thickness(4.0, 12.0, 4.0, 2.0)
             };
-            
             ObjectToolbox.Children.Add(newLabel);
 
             PopulateActionObjects();
         }
 
         /// <summary>
-        /// Populates the object toolbox with all of the available <see cref="ActionObject" />s.
+        /// Populates the object toolbox with all of the available <see cref="Interpreter.Objects.Action.ActionObject" />s.
         /// </summary>
         private void PopulateActionObjects() {
             var actionObjectList = EditorObjectList.GetActionObjects();
@@ -101,7 +98,7 @@ namespace Threads.Editor {
         }
 
         /// <summary>
-        /// Populates the object toolbox with all of the available <see cref="PageObject" />s.
+        /// Populates the object toolbox with all of the available <see cref="Interpreter.Objects.Page.PageObject" />s.
         /// </summary>
         private void PopulatePageObjects() {
             var pageObjectList = EditorObjectList.GetPageObjects();
