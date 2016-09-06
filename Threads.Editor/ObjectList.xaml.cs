@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Threads.Editor.Objects;
+using Threads.Interpreter.Objects;
 using Threads.Interpreter.Objects.Page;
 using Threads.Marker;
 
@@ -11,25 +13,25 @@ namespace Threads.Editor {
     /// Interaction logic for PageObjectList.xaml
     /// </summary>
     public partial class ObjectList {
-        public static readonly DependencyProperty PageObjectsProperty = DependencyProperty.Register("PageObjects", typeof(List<PageObject>), typeof(ObjectList));
+        public static readonly DependencyProperty ObjectsProperty = DependencyProperty.Register("Objects", typeof(List<IObject>), typeof(ObjectList));
 
         /// <summary>
-        /// Sets the list of <see cref="PageObject" />s that this <see cref="ObjectList" /> control will display.
+        /// Sets the list of <see cref="IObject" />s that this <see cref="ObjectList" /> control will display.
         /// </summary>
-        public List<PageObject> PageObjects {
-            get { return (List<PageObject>)GetValue(PageObjectsProperty); }
+        public List<IObject> Objects {
+            get { return (List<IObject>)GetValue(ObjectsProperty); }
             set {
-                SetValue(PageObjectsProperty, value);
-                Objects?.Items.Refresh();
+                SetValue(ObjectsProperty, value);
+                ObjectListBox?.Items.Refresh();
             }
         }
 
         /// <summary>
-        /// The currently selected <see cref="PageObject" />.
+        /// The currently selected <see cref="IObject" />.
         /// </summary>
-        public PageObject SelectedObject => Objects.SelectedItems.Count > 0 ? (PageObject)Objects.SelectedItems[0] : null;
+        public IObject SelectedObject => ObjectListBox.SelectedItems.Count > 0 ? (IObject)ObjectListBox.SelectedItems[0] : null;
 
-        public delegate void OnObjectChanged(object sender, PageObject e);
+        public delegate void OnObjectChanged(object sender, IObject e);
 
         /// <summary>
         /// Fired when a <see cref="PageObject" /> is created by the Object list.
@@ -47,7 +49,7 @@ namespace Threads.Editor {
         public event OnObjectChanged SelectionChanged;
 
         public ObjectList() {
-            PageObjects = new List<PageObject>();
+            Objects = new List<IObject>();
             InitializeComponent();
             PopulateObjectToolbox();
         }
@@ -56,8 +58,8 @@ namespace Threads.Editor {
         /// Clears all objects from the list and updates the view accordingly.
         /// </summary>
         public void ClearObjectList() {
-            PageObjects = new List<PageObject>();
-            Objects.Items.Refresh();
+            Objects = new List<IObject>();
+            ObjectListBox.Items.Refresh();
         }
 
         /// <summary>
@@ -65,6 +67,37 @@ namespace Threads.Editor {
         /// </summary>
         private void PopulateObjectToolbox() {
             PopulatePageObjects();
+
+            var newLabel = new Label {
+                Content = "Action ObjectListBox",
+                BorderBrush = Brushes.Silver,
+                BorderThickness = new Thickness(0.0, 0.0, 0.0, 1.0),
+                Margin = new Thickness(4.0, 12.0, 4.0, 2.0)
+            };
+            
+            ObjectToolbox.Children.Add(newLabel);
+
+            PopulateActionObjects();
+        }
+
+        /// <summary>
+        /// Populates the object toolbox with all of the available <see cref="ActionObject" />s.
+        /// </summary>
+        private void PopulateActionObjects() {
+            var actionObjectList = EditorObjectList.GetActionObjects();
+            foreach(var obj in actionObjectList) {
+                var newButton = new Button {
+                    Name = obj.ObjectName,
+                    Content = obj.ObjectName,
+                    ToolTip = obj.Description,
+                    Style = FindResource("ToolboxButtonStyle") as Style,
+                    Tag = obj.HandledType
+                };
+
+                newButton.Click += AddObject_Click;
+
+                ObjectToolbox.Children.Add(newButton);
+            }
         }
 
         /// <summary>
@@ -90,8 +123,7 @@ namespace Threads.Editor {
         private void AddObject_Click(object sender, RoutedEventArgs e) {
             var thisButton = (Button)sender;
             var objectType = (Type)thisButton.Tag;
-            var newObject = (PageObject)Activator.CreateInstance(objectType);
-            newObject.FormattedText = new TextSequence();
+            var newObject = (IObject)Activator.CreateInstance(objectType);
             AddObject?.Invoke(this, newObject);
         }
 
@@ -100,27 +132,27 @@ namespace Threads.Editor {
         }
 
         private void UpButton_OnClick(object sender, RoutedEventArgs e) {
-            var pos = Objects.SelectedIndex;
+            var pos = ObjectListBox.SelectedIndex;
             if(pos > 0)
                 MoveItem(pos, pos - 1);
         }
 
         private void DownButton_OnClick(object sender, RoutedEventArgs e) {
-            var pos = Objects.SelectedIndex;
-            if(pos < Objects.Items.Count - 1)
+            var pos = ObjectListBox.SelectedIndex;
+            if(pos < ObjectListBox.Items.Count - 1)
                 MoveItem(pos, pos + 1);
         }
 
         private void MoveItem(int oldIndex, int newIndex) {
-            var item = PageObjects[oldIndex];
-            PageObjects.RemoveAt(oldIndex);
-            PageObjects.Insert(newIndex, item);
-            Objects.Items.Refresh();
+            var item = Objects[oldIndex];
+            Objects.RemoveAt(oldIndex);
+            Objects.Insert(newIndex, item);
+            ObjectListBox.Items.Refresh();
         }
 
         private void DeleteButton_OnClick(object sender, RoutedEventArgs e) {
-            if(Objects.SelectedItem == null) return;
-            DeleteObject?.Invoke(this, (PageObject)Objects.SelectedItem);
+            if(ObjectListBox.SelectedItem == null) return;
+            DeleteObject?.Invoke(this, (IObject)ObjectListBox.SelectedItem);
         }
     }
 }

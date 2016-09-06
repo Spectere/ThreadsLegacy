@@ -55,6 +55,9 @@
     <Compile Include="NameEntry.xaml.cs">
       <DependentUpon>NameEntry.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Objects\Action\ActionObject.cs" />
+    <Compile Include="Objects\Action\Flag.cs" />
+    <Compile Include="Objects\Action\Redirect.cs" />
     <Compile Include="Objects\EditorObjectFactory.cs" />
     <Compile Include="Objects\EditorObjectList.cs" />
     <Compile Include="Objects\Page\Choice.cs" />

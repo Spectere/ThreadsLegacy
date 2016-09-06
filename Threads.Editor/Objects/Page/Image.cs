@@ -7,7 +7,7 @@ namespace Threads.Editor.Objects.Page {
         public override string ObjectName => "Image";
         public override string Description => "An object that displays images.";
         public override Type HandledType => typeof(ThreadsImage);
-        public Image(Interpreter.Objects.Page.PageObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) {}
+        public Image(Interpreter.Objects.IObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) {}
 
         protected override void BuildPageObjectEditor() {
             AppendRow(new Label { Content = "Path" },

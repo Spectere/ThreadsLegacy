@@ -1,7 +1,7 @@
 ﻿using Threads.Marker;
 
 namespace Threads.Interpreter.Objects.Page {
-    public interface IPageObject {
+    public interface IPageObject : IObject {
         /// <summary>
         /// The formatted text sequence for this <see cref="IPageObject" />.
         /// </summary>

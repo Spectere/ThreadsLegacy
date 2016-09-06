@@ -7,6 +7,8 @@ namespace Threads.Interpreter.Objects.Page {
     /// A class implementing <see cref="IPageObject" />. This class must be inherited.
     /// </summary>
     public abstract class PageObject : IPageObject {
+        public string Name { get; set; }
+
         /// <summary>
         /// The formatted <see cref="TextSequence" /> for this <see cref="PageObject" />.
         /// </summary>
@@ -31,8 +33,8 @@ namespace Threads.Interpreter.Objects.Page {
         /// Initializes a new instance of this <see cref="PageObject"/>.
         /// </summary>
         protected PageObject() {
-            // ReSharper disable once VirtualMemberCallInConstructor
             Style = DefaultStyle;
+            FormattedText = new TextSequence();
         }
 
         /// <summary>
@@ -40,7 +42,7 @@ namespace Threads.Interpreter.Objects.Page {
         /// </summary>
         /// <returns>An XML <see cref="Schema.PageObject" /> object.</returns>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-        internal Schema.PageObject Export() {
+        public object Export() {
             var xmlObject = ExportObject();
 
             // Export the text in this object.

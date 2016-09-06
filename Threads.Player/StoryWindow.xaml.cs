@@ -38,14 +38,17 @@ namespace Threads.Player {
 
             // Display room text.
             foreach(var obj in page.Objects) {
+                if(obj.GetType().BaseType != typeof(PageObject)) continue;
+
+                var pObj = (IPageObject)obj;
                 if(obj.GetType() == typeof(Paragraph)) {
-                    Stack.Children.Add(new UIParagraph(obj));
+                    Stack.Children.Add(new UIParagraph(pObj));
                 } else if(obj.GetType() == typeof(Choice)) {
-                    var button = new UIChoice((Choice)obj);
+                    var button = new UIChoice((Choice)pObj);
                     button.ChoiceClick += Choice_Click;
                     Stack.Children.Add(button);
                 } else if(obj.GetType() == typeof(PageObjectImage)) {
-                    Stack.Children.Add(new UIImage((PageObjectImage)obj));
+                    Stack.Children.Add(new UIImage((PageObjectImage)pObj));
                 }
             }
         }

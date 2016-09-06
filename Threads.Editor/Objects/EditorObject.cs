@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Threads.Interpreter.Objects.Page;
+using Threads.Interpreter.Objects;
 using Threads.Interpreter.Types;
 
 namespace Threads.Editor.Objects {
@@ -17,10 +17,10 @@ namespace Threads.Editor.Objects {
         public static DependencyProperty StoryProperty = DependencyProperty.Register("GameState", typeof(Story), typeof(EditorObject));
 
         /// <summary>
-        /// A <see cref="DependencyProperty" /> that contains the current <see cref="PageObject" /> information.
+        /// A <see cref="DependencyProperty" /> that contains the current <see cref="IObject" /> information.
         /// This is used for objects that only need to access data relating to the selected object.
         /// </summary>
-        public static DependencyProperty PageObjectProperty = DependencyProperty.Register("PageObject", typeof(PageObject), typeof(EditorObject));
+        public static DependencyProperty ObjectProperty = DependencyProperty.Register("Object", typeof(IObject), typeof(EditorObject));
 
         /// <summary>
         /// The designer view that this <see cref="EditorObject" /> should display on a WPF form.
@@ -43,11 +43,11 @@ namespace Threads.Editor.Objects {
         public abstract Type HandledType { get; }
 
         /// <summary>
-        /// The instance of the <see cref="PageObject" /> that this <see cref="EditorObject" /> instance is modifying.
+        /// The instance of the <see cref="IObject" /> that this <see cref="EditorObject" /> instance is modifying.
         /// </summary>
-        public PageObject ObjectData {
-            get { return (PageObject)GetValue(PageObjectProperty); }
-            set { SetValue(PageObjectProperty, value); }
+        public IObject ObjectData {
+            get { return (IObject)GetValue(ObjectProperty); }
+            set { SetValue(ObjectProperty, value); }
         }
 
         /// <summary>
@@ -59,11 +59,11 @@ namespace Threads.Editor.Objects {
         }
 
         /// <summary>
-        /// Configures the <see cref="PageObject" /> that should be modified.
+        /// Configures the <see cref="IObject" /> that should be modified.
         /// </summary>
-        /// <param name="objectData">The <see cref="PageObject" /> that this <see cref="EditorObject" /> should modify.</param>
+        /// <param name="objectData">The <see cref="IObject" /> that this <see cref="EditorObject" /> should modify.</param>
         /// <param name="storyData">The <see cref="Story" /> that this <see cref="EditorObject" /> can access.</param>
-        protected EditorObject(PageObject objectData, Story storyData) {
+        protected EditorObject(IObject objectData, Story storyData) {
             ObjectData = objectData;
             StoryData = storyData;
         }
@@ -114,6 +114,8 @@ namespace Threads.Editor.Objects {
                 DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
                 DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition());
             }
+
+            AppendRow(new Label { Content = "Name" }, CreateBoundTextBox(ObjectData, "Name"));
         }
 
         /// <summary>

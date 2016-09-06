@@ -7,7 +7,7 @@ namespace Threads.Editor.Objects.Page {
         public override string ObjectName => "Choice";
         public override string Description => "An object that allows the player to choose their next page.";
         public override Type HandledType => typeof(StoryObject.Page.Choice);
-        public Choice(StoryObject.Page.PageObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) { }
+        public Choice(StoryObject.IObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) { }
 
         protected override void BuildPageObjectEditor() {
             var roomList = new ComboBox {

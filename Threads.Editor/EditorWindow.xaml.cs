@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using Threads.Editor.Exceptions;
 using Threads.Editor.Objects;
 using Threads.Interpreter;
+using Threads.Interpreter.Objects;
 using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
 using Page = Threads.Interpreter.Types.Page;
@@ -52,7 +53,7 @@ namespace Threads.Editor {
             var replacementPage = _engine.Story.Pages.FirstOrDefault(page => page != pageToRemove);
             var nukeChoices = replacementPage == null;
 
-            // Evaluate all PageObjects and remove Choice references to the deleted page.
+            // Evaluate all ObjectListBox and remove Choice references to the deleted page.
             foreach(var page in _engine.Story.Pages) {
                 foreach(var pageObject in page.Objects.Where(o => o.GetType() == typeof(Choice))) {
                     var obj = (Choice)pageObject;
@@ -195,7 +196,7 @@ namespace Threads.Editor {
                 ObjectList.ClearObjectList();
                 return;
             }
-            ObjectList.PageObjects = PageList.SelectedPage.Objects;
+            ObjectList.Objects = PageList.SelectedPage.Objects;
         }
 
         private void PageList_OnAdd(object sender, RoutedEventArgs e) {
@@ -215,17 +216,17 @@ namespace Threads.Editor {
             UpdateObjectList();
         }
 
-        private void ObjectList_OnSelectionChanged(object sender, PageObject e) {
+        private void ObjectList_OnSelectionChanged(object sender, IObject e) {
             UpdateObjectEditor();
         }
 
-        private void ObjectList_OnAddObject(object sender, PageObject e) {
+        private void ObjectList_OnAddObject(object sender, IObject e) {
             if(PageList.SelectedPage == null) return;
             PageList.SelectedPage.Objects.Add(e);
             UpdateObjectList();
         }
-
-        private void ObjectList_OnDeleteObject(object sender, PageObject e) {
+        
+        private void ObjectList_OnDeleteObject(object sender, IObject e) {
             if(e == null) return;
             PageList.SelectedPage.Objects.Remove(e);
             UpdateObjectList();

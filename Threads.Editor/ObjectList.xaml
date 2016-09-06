@@ -59,7 +59,7 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Page Objects" Style="{StaticResource HeaderStyle}" />
+        <Label Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Content="Page ObjectListBox" Style="{StaticResource HeaderStyle}" />
         
         <Border Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" Style="{StaticResource ObjectPaletteStyle}">
             <ScrollViewer VerticalScrollBarVisibility="Auto" PanningMode="VerticalOnly">
@@ -67,8 +67,8 @@
             </ScrollViewer>
         </Border>
 
-        <ListBox Grid.Column="1" Grid.Row="1" Name="Objects" Style="{StaticResource ObjectListStyle}"
-                 ItemsSource="{Binding ElementName=ObjectListControl, Path=PageObjects}"
+        <ListBox Grid.Column="1" Grid.Row="1" Name="ObjectListBox" Style="{StaticResource ObjectListStyle}"
+                 ItemsSource="{Binding ElementName=ObjectListControl, Path=Objects}"
                  SelectionMode="Single" SelectionChanged="Objects_OnSelectionChanged" KeyUp="DeleteButton_OnClick">
             <ListBox.ItemTemplate>
                 <DataTemplate>

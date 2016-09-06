@@ -40,6 +40,11 @@
     <Compile Include="Exceptions\NullStoryException.cs" />
     <Compile Include="Exceptions\NoPagesFoundException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
+    <Compile Include="Objects\Action\ActionObject.cs" />
+    <Compile Include="Objects\Action\Flag.cs" />
+    <Compile Include="Objects\Action\IActionObject.cs" />
+    <Compile Include="Objects\Action\Redirect.cs" />
+    <Compile Include="Objects\IObject.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />
     <Compile Include="Objects\Page\PageObject.cs" />
@@ -47,6 +52,7 @@
     <Compile Include="Objects\Page\Paragraph.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Types\Configuration.cs" />
+    <Compile Include="Types\Data.cs" />
     <Compile Include="Types\Information.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

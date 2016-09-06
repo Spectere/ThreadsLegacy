@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Threads.Interpreter.Objects.Page;
+using Threads.Interpreter.Objects;
+using Threads.Interpreter.Schema;
 
 namespace Threads.Interpreter.Types {
     /// <summary>
@@ -13,25 +14,25 @@ namespace Threads.Interpreter.Types {
         public string Name { get; set; }
 
         /// <summary>
-        /// The <see cref="PageObject" />s associated with this page.
+        /// The <see cref="IObject" />s associated with this page.
         /// </summary>
-        public List<PageObject> Objects { get; set; }
+        public List<IObject> Objects { get; set; }
 
         /// <summary>
         /// Creates a new instance of the <see cref="Page" /> class.
         /// </summary>
         public Page() {
-            Objects = new List<PageObject>();
+            Objects = new List<IObject>();
         }
 
         /// <summary>
         /// Exports this <see cref="Page" /> instance into an XML object.
         /// </summary>
-        /// <returns>An XML <see cref="Schema.PageType" /> object.</returns>
-        internal Schema.PageType Export() {
-            return new Schema.PageType {
+        /// <returns>An XML <see cref="PageType" /> object.</returns>
+        internal PageType Export() {
+            return new PageType {
                 Name = Name,
-                Items = Objects.Select(e => e.Export()).ToArray()
+                Items = Objects.Select(e => e.Export()).ToArray() as Object[]
             };
         }
 
