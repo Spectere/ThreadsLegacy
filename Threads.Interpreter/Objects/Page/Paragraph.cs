@@ -9,9 +9,7 @@
         };
 
         internal override Schema.PageObject ExportObject() {
-            // Paragraphs don't have any special fields to export,
-            // so just create a new empty object.
-            return new Schema.PageObject();
+            return new Schema.ParagraphObject();
         }
     }
 }

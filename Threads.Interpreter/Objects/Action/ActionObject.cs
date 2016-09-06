@@ -5,7 +5,7 @@ namespace Threads.Interpreter.Objects.Action {
         public string Name { get; set; }
         public abstract void Activate();
 
-        public object Export() {
+        public Schema.Object Export() {
             throw new NotImplementedException();
         }
     }

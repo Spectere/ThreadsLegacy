@@ -32,7 +32,7 @@ namespace Threads.Interpreter.Types {
         internal PageType Export() {
             return new PageType {
                 Name = Name,
-                Items = Objects.Select(e => e.Export()).ToArray() as Object[]
+                Items = Objects.Select(e => e.Export()).ToArray()
             };
         }
 

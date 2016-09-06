@@ -12,6 +12,6 @@
         /// Exports this <see cref="IObject" /> instance into an XML object.
         /// </summary>
         /// <returns>An XML element representing this object.</returns>
-        object Export();
+        Schema.Object Export();
     }
 }

@@ -32,6 +32,7 @@ namespace Threads.Interpreter.Objects.Page {
         /// <summary>
         /// Initializes a new instance of this <see cref="PageObject"/>.
         /// </summary>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor")]
         protected PageObject() {
             Style = DefaultStyle;
             FormattedText = new TextSequence();
@@ -42,7 +43,7 @@ namespace Threads.Interpreter.Objects.Page {
         /// </summary>
         /// <returns>An XML <see cref="Schema.PageObject" /> object.</returns>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
-        public object Export() {
+        public Schema.Object Export() {
             var xmlObject = ExportObject();
 
             // Export the text in this object.
