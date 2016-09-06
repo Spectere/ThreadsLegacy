@@ -129,7 +129,8 @@ namespace Threads.Interpreter {
 
                 if(page.Items != null) {
                     foreach(var obj in page.Items) {
-                        newPage.Objects.Add(TransformPageObject(obj));
+                        if(obj.GetType().BaseType == typeof(Schema.PageObject))
+                            newPage.Objects.Add(TransformPageObject((Schema.PageObject)obj));
                     }
                 }
 
