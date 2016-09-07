@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="2">
+  <Information>
+    <Name>Redirect Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>RedirectStart</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="RedirectStart">
+      <Text Name="ShowMe1">*RedirectStart:* This paragraph should be shown.</Text>
+      <Redirect Name="Redirector1" Target="RedirectSecond" />
+      <Text Name="HideMe1">*RedirectStart:* This paragraph should _not_ be shown.</Text>
+    </Page>
+    <Page Name="RedirectSecond">
+      <Text Name="ShowMe2">*RedirectSecond:* This paragraph should be shown.</Text>
+      <Redirect Name="Redirector2" Target="RedirectLast" />
+      <Text Name="HideMe2">*RedirectSecond:* This paragraph should _not_ be shown.</Text>
+    </Page>
+    <Page Name="RedirectLast">
+      <Text Name="ShowMe4">*RedirectLast:* This is the end of the redirect chain.</Text>
+    </Page>
+    <Page Name="SecondPage">
+      <Text Name="AltPageText">A choice in the middle of a redirect chain was able to successfully jump to another page.</Text>
+      <Choice Name="AltPageJumpStart" Target="RedirectStart" Shortcut="1">Jump to the start of the redirect chain.</Choice>
+      <Choice Name="AltPageJumpSecond" Target="RedirectSecond" Shortcut="2">Jump to the middle of the redirect chain.</Choice>
+      <Choice Name="AltPageJumpLast" Target="RedirectLast" Shortcut="3">Jump to the end of the redirect chain.</Choice>
+    </Page>
+  </Pages>
+</Story>
