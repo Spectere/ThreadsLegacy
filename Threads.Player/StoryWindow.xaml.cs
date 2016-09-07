@@ -30,14 +30,14 @@ namespace Threads.Player {
 
         private void DisplayPage() {
             var globalConfig = _engine.Story.Configuration;
-            var page = _engine.CurrentPage;
+            var displayList = _engine.DisplayList;
 
             Stack.Children.Clear();
             StoryScroll.ScrollToTop();
             Stack.Margin = new Thickness(globalConfig.StoryMarginLeft, 40.0, globalConfig.StoryMarginRight, 20.0);
 
             // Display room text.
-            foreach(var obj in page.Objects) {
+            foreach(var obj in displayList) {
                 if(obj.GetType().BaseType != typeof(PageObject)) continue;
 
                 var pObj = (IPageObject)obj;

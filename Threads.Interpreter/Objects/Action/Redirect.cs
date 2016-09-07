@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Threads.Interpreter.Objects.Action {
+﻿namespace Threads.Interpreter.Objects.Action {
     public class Redirect : ActionObject {
         private Types.Page _target;
 
@@ -21,7 +19,7 @@ namespace Threads.Interpreter.Objects.Action {
         public string TargetName { get; set; }
 
         public override void Activate() {
-            throw new NotImplementedException();
+            Engine.CurrentPage = Target;
         }
 
         internal override Schema.ActionObject ExportObject() {

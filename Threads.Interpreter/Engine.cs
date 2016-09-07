@@ -1,7 +1,11 @@
-﻿using StorySerializer = Threads.Interpreter.Schema.Story;
+﻿using System;
+using System.Collections.Generic;
+using StorySerializer = Threads.Interpreter.Schema.Story;
 using System.IO;
 using System.Xml.Serialization;
 using Threads.Interpreter.Exceptions;
+using Threads.Interpreter.Objects;
+using Threads.Interpreter.Objects.Action;
 using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
 
@@ -23,7 +27,9 @@ namespace Threads.Interpreter {
         /// <summary>
         /// The currently active page in the story.
         /// </summary>
-        public Page CurrentPage { get; private set; }
+        public Page CurrentPage { get; internal set; }
+
+        public List<IObject> DisplayList { get; }
 
         /// <summary>
         /// The validated form of the story file.
@@ -34,6 +40,7 @@ namespace Threads.Interpreter {
         /// Initializes a new engine. This creates a new <see cref="Story" />.
         /// </summary>
         public Engine() {
+            DisplayList = new List<IObject>();
             Story = new Story();
         }
 
@@ -42,6 +49,7 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="filename">The path to the story file.</param>
         public Engine(string filename) {
+            DisplayList = new List<IObject>();
             Load(filename);
         }
 
@@ -60,11 +68,38 @@ namespace Threads.Interpreter {
         }
 
         /// <summary>
+        /// Processes all of the <see cref="Objects.Action.ActionObject" />s on the page and builds a display list for the player.
+        /// </summary>
+        private void ProcessPage() {
+            DisplayList.Clear();
+            var oldPage = CurrentPage;
+            var idx = 0;
+
+            while(true) {
+                if(oldPage.Objects.Count <= idx) break;
+                var thisObject = oldPage.Objects[idx++];
+
+                if(thisObject.GetType().BaseType == typeof(PageObject)) {
+                    DisplayList.Add(thisObject);
+                    continue;
+                }
+
+                ((ActionObject)thisObject).Activate();
+                if(CurrentPage == oldPage) continue;
+
+                // Page changed; process controls from the top.
+                idx = 0;
+                oldPage = CurrentPage;
+            }
+        }
+
+        /// <summary>
         /// Restarts the game engine.
         /// </summary>
         public void Restart() {
             if(_story == null) throw new StoryNotLoadedException();
             CurrentPage = Story.Configuration.FirstPage;
+            ProcessPage();
         }
 
         /// <summary>
@@ -83,10 +118,9 @@ namespace Threads.Interpreter {
         /// Sends the player's choice to the interpreter.
         /// </summary>
         /// <param name="choice">The choice object that the player selected.</param>
-        /// <returns>The page that the choice leads to.</returns>
-        public Page SubmitChoice(Choice choice) {
+        public void SubmitChoice(Choice choice) {
             CurrentPage = choice.Target;
-            return CurrentPage;
+            ProcessPage();
         }
     }
 }

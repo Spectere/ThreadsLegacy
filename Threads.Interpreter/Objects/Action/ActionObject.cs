@@ -10,9 +10,9 @@ namespace Threads.Interpreter.Objects.Action {
         public abstract void Activate();
 
         /// <summary>
-        /// A reference to the active <see cref="Story" />.
+        /// A reference to the active <see cref="Engine" />.
         /// </summary>
-        public Story Story { get; set; }
+        public Engine Engine { get; set; }
 
         /// <summary>
         /// Exports this <see cref="ActionObject" /> instance into an XML object.

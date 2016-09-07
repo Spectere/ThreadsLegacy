@@ -24,16 +24,17 @@ namespace Threads.Interpreter.Objects.Action {
         }
 
         public override void Activate() {
+            var data = Engine.Story.Data;
             switch(Setting) {
                 case FlagAction.Set:
-                    Story.Data.SetFlag(Name);
+                    data.SetFlag(Name);
                     break;
                 case FlagAction.Unset:
-                    Story.Data.ClearFlag(Name);
+                    data.ClearFlag(Name);
                     break;
                 case FlagAction.Toggle:
-                    if(Story.Data.GetFlag(Name)) Story.Data.ClearFlag(Name);
-                    else Story.Data.SetFlag(Name);
+                    if(data.GetFlag(Name)) data.ClearFlag(Name);
+                    else data.SetFlag(Name);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
