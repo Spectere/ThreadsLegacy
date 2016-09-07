@@ -40,6 +40,7 @@
       <xs:element name="Choice" type="ChoiceObject" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Image" type="ImageObject" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Flag" type="FlagObject" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Redirect" type="RedirectObject" minOccurs="0" maxOccurs="unbounded" />
     </xs:choice>
     <xs:attribute name="Name" type="xs:string" use="required" />
   </xs:complexType>
