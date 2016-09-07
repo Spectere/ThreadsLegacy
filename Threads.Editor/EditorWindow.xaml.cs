@@ -53,7 +53,7 @@ namespace Threads.Editor {
             var replacementPage = _engine.Story.Pages.FirstOrDefault(page => page != pageToRemove);
             var nukeChoices = replacementPage == null;
 
-            // Evaluate all ObjectListBox and remove Choice references to the deleted page.
+            // Evaluate all Objects and remove Choice references to the deleted page.
             foreach(var page in _engine.Story.Pages) {
                 foreach(var pageObject in page.Objects.Where(o => o.GetType() == typeof(Choice))) {
                     var obj = (Choice)pageObject;

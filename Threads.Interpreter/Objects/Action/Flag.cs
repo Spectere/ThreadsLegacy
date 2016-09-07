@@ -1,10 +1,9 @@
 ﻿using System;
+using Threads.Interpreter.Schema;
 using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter.Objects.Action {
     public class Flag : ActionObject {
-        private Data _data;
-
         /// <summary>
         /// Determines how the flag should be set when this <see cref="ActionObject" /> is activated.
         /// </summary>
@@ -24,29 +23,45 @@ namespace Threads.Interpreter.Objects.Action {
             Toggle
         }
 
-        /// <summary>
-        /// Initializes a new <see cref="Flag" /> <see cref="ActionObject" />.
-        /// </summary>
-        /// <param name="data">The <see cref="Data" /> object for the active story.</param>
-        public Flag(Data data) {
-            _data = data;
-        }
-
         public override void Activate() {
             switch(Setting) {
                 case FlagAction.Set:
-                    _data.SetFlag(Name);
+                    Story.Data.SetFlag(Name);
                     break;
                 case FlagAction.Unset:
-                    _data.ClearFlag(Name);
+                    Story.Data.ClearFlag(Name);
                     break;
                 case FlagAction.Toggle:
-                    if(_data.GetFlag(Name)) _data.ClearFlag(Name);
-                    else _data.SetFlag(Name);
+                    if(Story.Data.GetFlag(Name)) Story.Data.ClearFlag(Name);
+                    else Story.Data.SetFlag(Name);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+        }
+
+        internal override Schema.ActionObject ExportObject() {
+            var setting = FlagObjectSetting.toggle;
+            var settingSpecified = true;
+            switch(Setting) {
+                case FlagAction.Set:
+                    setting = FlagObjectSetting.set;
+                    break;
+                case FlagAction.Unset:
+                    setting = FlagObjectSetting.unset;
+                    break;
+                case FlagAction.Toggle:
+                    setting = FlagObjectSetting.toggle;
+                    break;
+                default:
+                    settingSpecified = false;
+                    break;
+            }
+
+            return new FlagObject {
+                Setting = setting,
+                SettingSpecified = settingSpecified
+            };
         }
     }
 }

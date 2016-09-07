@@ -116,6 +116,8 @@ namespace Threads.Editor.Objects {
             }
 
             AppendRow(new Label { Content = "Name" }, CreateBoundTextBox(ObjectData, "Name"));
+            AppendRow(new Label { Content = "Show If" }, CreateBoundTextBox(ObjectData, "ShowIf"));
+            AppendRow(new Label { Content = "Hide If" }, CreateBoundTextBox(ObjectData, "HideIf"));
         }
 
         /// <summary>

@@ -13,9 +13,10 @@ namespace Threads.Editor.Objects.Action {
         protected override void BuildActionObjectEditor() {
             var roomList = new ComboBox {
                 ItemsSource = StoryData.Pages,
-                SelectedItem = ((StoryObject.Page.Choice)ObjectData).Target
+                SelectedItem = ((StoryObject.Action.Redirect)ObjectData).Target
             };
             roomList.SelectionChanged += RoomList_SelectionChanged;
+            AppendRow(new Label { Content = "Destination" }, roomList);
         }
 
         private void RoomList_SelectionChanged(object sender, SelectionChangedEventArgs e) {

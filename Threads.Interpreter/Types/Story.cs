@@ -28,6 +28,11 @@ namespace Threads.Interpreter.Types {
         public ICollection<Page> Pages { get; set; }
 
         /// <summary>
+        /// The runtime data storage used by the story.
+        /// </summary>
+        public Data Data { get; set; }
+
+        /// <summary>
         /// Creates a new <see cref="Story" />.
         /// </summary>
         public Story() {
@@ -35,6 +40,7 @@ namespace Threads.Interpreter.Types {
             Information = new Information();
             Configuration = new Configuration();
             Pages = new List<Page>();
+            Data = new Data();
         }
 
         /// <summary>

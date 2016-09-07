@@ -8,6 +8,8 @@ namespace Threads.Interpreter.Objects.Page {
     /// </summary>
     public abstract class PageObject : IPageObject {
         public string Name { get; set; }
+        public string HideIf { get; set; }
+        public string ShowIf { get; set; }
 
         /// <summary>
         /// The formatted <see cref="TextSequence" /> for this <see cref="PageObject" />.
@@ -41,10 +43,13 @@ namespace Threads.Interpreter.Objects.Page {
         /// <summary>
         /// Exports this <see cref="PageObject" /> instance into an XML object.
         /// </summary>
-        /// <returns>An XML <see cref="Schema.PageObject" /> object.</returns>
+        /// <returns>An XML <see cref="Schema.PageObject" />.</returns>
         [SuppressMessage("ReSharper", "CompareOfFloatsByEqualityOperator")]
         public Schema.Object Export() {
             var xmlObject = ExportObject();
+
+            // Export the name of this object.
+            xmlObject.Name = Name;
 
             // Export the text in this object.
             xmlObject.Value = FormattedText.MarkupText;
@@ -61,13 +66,17 @@ namespace Threads.Interpreter.Objects.Page {
             xmlObject.MarginRight = Style.MarginRight;
             xmlObject.MarginTop = Style.MarginTop;
 
+            // Export the conditionals.
+            xmlObject.ShowIf = ShowIf;
+            xmlObject.HideIf = HideIf;
+
             return xmlObject;
         }
 
         /// <summary>
         /// Exports this <see cref="PageObject" /> instance into an XML object. This method must be implemented.
         /// </summary>
-        /// <returns>An XML <see cref="Schema.PageObject" /> object.</returns>
+        /// <returns>An XML <see cref="Schema.PageObject" />.</returns>
         internal abstract Schema.PageObject ExportObject();
 
         public override string ToString() {

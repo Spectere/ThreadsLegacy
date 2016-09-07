@@ -15,7 +15,7 @@ namespace Threads.Editor.Objects {
         /// <param name="storyData">The <see cref="Interpreter.Types.Story" /> that this object exists in.</param>
         /// <returns>A specific <see cref="EditorObject" /> that is appropriate for the passed <see cref="PageObject" />. If no suitable object exists, null is returned.</returns>
         public static EditorObject Get(IObject storyObject, Interpreter.Types.Story storyData) {
-            // Page ObjectListBox
+            // Page Objects
             if(storyObject.GetType() == typeof(EngineObjects.Page.Paragraph))
                 return new Paragraph(storyObject, storyData);
             if(storyObject.GetType() == typeof(EngineObjects.Page.Image))
@@ -23,7 +23,7 @@ namespace Threads.Editor.Objects {
             if(storyObject.GetType() == typeof(EngineObjects.Page.Choice))
                 return new Choice(storyObject, storyData);
 
-            // Action ObjectListBox
+            // Action Objects
             if(storyObject.GetType() == typeof(EngineObjects.Action.Flag))
                 return new Flag(storyObject, storyData);
             if(storyObject.GetType() == typeof(EngineObjects.Action.Redirect))

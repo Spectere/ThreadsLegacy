@@ -1,25 +1,33 @@
 ﻿using System;
-using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter.Objects.Action {
     public class Redirect : ActionObject {
-        private Story _story;
+        private Types.Page _target;
 
         /// <summary>
         /// The target <see cref="Types.Page" /> that this redirect should point to.
         /// </summary>
-        public Types.Page Target { get; set; }
+        public Types.Page Target {
+            get { return _target; }
+            set {
+                _target = value;
+                TargetName = _target.Name;
+            }
+        }
 
         /// <summary>
-        /// Initializes a new <see cref="Redirect" /> <see cref="ActionObject" />.
+        /// The name of the target page that this redirect leads to.
         /// </summary>
-        /// <param name="story">A reference to the active story.</param>
-        public Redirect(Story story) {
-            _story = story;
-        }
+        public string TargetName { get; set; }
 
         public override void Activate() {
             throw new NotImplementedException();
+        }
+
+        internal override Schema.ActionObject ExportObject() {
+            return new Schema.RedirectObject {
+                Target = Target.Name
+            };
         }
     }
 }
