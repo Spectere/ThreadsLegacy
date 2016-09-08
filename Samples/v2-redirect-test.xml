@@ -17,6 +17,7 @@
     </Page>
     <Page Name="RedirectSecond">
       <Text Name="ShowMe2">*RedirectSecond:* This paragraph should be shown.</Text>
+      <Choice Name="AltPageJump" Target="SecondPage" Shortcut="1">Jump to another page.</Choice>
       <Redirect Name="Redirector2" Target="RedirectLast" />
       <Text Name="HideMe2">*RedirectSecond:* This paragraph should _not_ be shown.</Text>
     </Page>
