@@ -138,7 +138,7 @@ namespace Threads.Interpreter {
             newObject.HideIf = obj.HideIf;
 
             // Apply style (if this is a PaegObject)
-            if(obj.GetType().BaseType == typeof(StoryPageObject)) {
+            if(obj.GetType().BaseType == typeof(Schema.PageObject)) {
                 var pageObject = (StoryPageObject)newObject;
                 pageObject.Style = TransformStyle((Schema.PageObject)obj, pageObject.Style);
             }
