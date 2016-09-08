@@ -62,7 +62,7 @@ namespace Threads.Interpreter {
             var serializer = new XmlSerializer(typeof(StorySerializer));
 
             _story = (StorySerializer)serializer.Deserialize(File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read));
-            Story = Transform.TransformStory(_story);
+            Story = Transform.TransformStory(_story, this);
 
             Restart();
         }

@@ -14,8 +14,9 @@ namespace Threads.Marker {
         /// <returns>A <see cref="TextSequence" /> based on the marked up text.</returns>
         public static List<IInstruction> Parse(string text) {
             var instructions = new List<IInstruction>();
-            var sb = new StringBuilder();
+            if(string.IsNullOrWhiteSpace(text)) return instructions;
 
+            var sb = new StringBuilder();
             var skip = false;
             foreach(var ch in text) {
                 IInstruction command;

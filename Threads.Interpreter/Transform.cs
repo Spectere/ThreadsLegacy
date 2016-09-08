@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Threads.Interpreter.Exceptions;
+using Threads.Interpreter.Objects;
+using Threads.Interpreter.Objects.Action;
 using Threads.Interpreter.Objects.Page;
 using StoryPageObject = Threads.Interpreter.Objects.Page.PageObject;
 using Threads.Interpreter.Schema;
@@ -15,8 +17,9 @@ namespace Threads.Interpreter {
         /// Transforms a deserialized XML into a validated set of story objects.
         /// </summary>
         /// <param name="storyData">A set of deserialized story data.</param>
+        /// <param name="engine">A reference to the active <see cref="Engine" />.</param>
         /// <returns>A <see cref="Story"/> object containing the validated story data.</returns>
-        internal static Story TransformStory(Schema.Story storyData) {
+        internal static Story TransformStory(Schema.Story storyData, Engine engine) {
             var story = new Story();
 
             // If our story element is null, uh...abort?
@@ -30,7 +33,7 @@ namespace Threads.Interpreter {
             // Bail if we don't have any pages.
             if(storyData.Pages == null)
                 throw new NullPagesException();
-            story.Pages = TransformPages(storyData.Pages);
+            story.Pages = TransformPages(storyData.Pages, engine);
             if(story.Pages.Count == 0)
                 throw new NoPagesFoundException();
 
@@ -80,34 +83,65 @@ namespace Threads.Interpreter {
         /// <summary>
         /// Transform an XML object into a page object.
         /// </summary>
-        /// <param name="pageObject">The XML object to transform.</param>
+        /// <param name="obj">The XML object to transform.</param>
+        /// <param name="engine">A reference to the active <see cref="Engine" />.</param>
         /// <returns>A page object based on the XML object data.</returns>
-        private static StoryPageObject TransformPageObject(Schema.PageObject pageObject) {
-            StoryPageObject newObject;
+        private static IObject TransformObject(Schema.Object obj, Engine engine) {
+            IObject newObject;
 
-            // Determine the specific type of PageObject and add it to the list.
-            if(pageObject.GetType() == typeof(ChoiceObject)) {
-                var choice = (ChoiceObject)pageObject;
-                newObject = new Choice {
-                    FormattedText = new TextSequence(choice.Value),
-                    Shortcut = string.IsNullOrEmpty(choice.Shortcut) ? (char?)null : Convert.ToChar(choice.Shortcut.Substring(0, 1)),
-                    TargetName = choice.Target
+            // Determine the specific type of Object and add it to the list.
+            // TODO: This sucks. Make it suck less.
+            if(obj.GetType() == typeof(FlagObject)) {
+                var flag = (FlagObject)obj;
+                newObject = new Flag();
+                if(flag.SettingSpecified) {
+                    switch(flag.Setting) {
+                        case FlagObjectSetting.set:
+                            ((Flag)newObject).Setting = Flag.FlagAction.Set;
+                            break;
+                        case FlagObjectSetting.unset:
+                            ((Flag)newObject).Setting = Flag.FlagAction.Unset;
+                            break;
+                        case FlagObjectSetting.toggle:
+                            ((Flag)newObject).Setting = Flag.FlagAction.Toggle;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+            } else if(obj.GetType() == typeof(RedirectObject)) {
+                var redirect = (RedirectObject)obj;
+                newObject = new Redirect {
+                    Engine = engine,
+                    TargetName = redirect.Target
                 };
-            } else if(pageObject.GetType() == typeof(ImageObject)) {
-                var image = (ImageObject)pageObject;
+            } else if(obj.GetType() == typeof(ChoiceObject)) {
+                var choice = (ChoiceObject)obj;
+                newObject = new Choice {
+                    FormattedText = new TextSequence(choice.Value), Shortcut = string.IsNullOrEmpty(choice.Shortcut) ? (char?)null : Convert.ToChar(choice.Shortcut.Substring(0, 1)), TargetName = choice.Target
+                };
+            } else if(obj.GetType() == typeof(ImageObject)) {
+                var image = (ImageObject)obj;
                 newObject = new Image {
-                    FormattedText = new TextSequence(image.Value),
-                    Source = image.Source
+                    FormattedText = new TextSequence(image.Value), Source = image.Source
                 };
             } else {
                 // If all else fails, it's probably a paragraph.
                 newObject = new Paragraph {
-                    FormattedText = new TextSequence(pageObject.Value)
+                    FormattedText = new TextSequence(obj.Value)
                 };
             }
 
-            // Apply style.
-            newObject.Style = TransformStyle(pageObject, newObject.Style);
+            // Transform common properties.
+            newObject.Name = obj.Name;
+            newObject.ShowIf = obj.ShowIf;
+            newObject.HideIf = obj.HideIf;
+
+            // Apply style (if this is a PaegObject)
+            if(obj.GetType().BaseType == typeof(StoryPageObject)) {
+                var pageObject = (StoryPageObject)newObject;
+                pageObject.Style = TransformStyle((Schema.PageObject)obj, pageObject.Style);
+            }
 
             return newObject;
         }
@@ -116,8 +150,9 @@ namespace Threads.Interpreter {
         /// Transforms deserialized page data into a story object and validates the contained choices.
         /// </summary>
         /// <param name="pages">A set of deserialized page data.</param>
+        /// <param name="engine">A reference to the active <see cref="Engine" />.</param>
         /// <returns>A collection of <see cref="Page"/> objects containing the story information.</returns>
-        private static ICollection<Page> TransformPages(IEnumerable<PageType> pages) {
+        private static ICollection<Page> TransformPages(IEnumerable<PageType> pages, Engine engine) {
             var output = new List<Page>();
             var pageList = pages.ToList();
 
@@ -129,19 +164,24 @@ namespace Threads.Interpreter {
 
                 if(page.Items != null) {
                     foreach(var obj in page.Items) {
-                        if(obj.GetType().BaseType == typeof(Schema.PageObject))
-                            newPage.Objects.Add(TransformPageObject((Schema.PageObject)obj));
+                        newPage.Objects.Add(TransformObject(obj, engine));
                     }
                 }
 
                 output.Add(newPage);
             }
 
-            // Make sure that choices are tied to valid pages.
+            // Make sure that choices and redirects are tied to valid pages.
+            // TODO: This implementation kind of sucks. Come up with a better way.
             foreach(var page in output) {
                 foreach(var choiceObject in page.Objects.Where(e => e.GetType() == typeof(Choice))) {
                     var choice = (Choice)choiceObject;
                     choice.Target = output.First(c => c.Name == choice.TargetName);
+                }
+
+                foreach(var redirectObject in page.Objects.Where(e => e.GetType() == typeof(Redirect))) {
+                    var redirect = (Redirect)redirectObject;
+                    redirect.Target = output.First(r => r.Name == redirect.TargetName);
                 }
             }
 
