@@ -69,7 +69,7 @@ namespace Threads.Player {
             if((inKey.StartsWith("D") && inKey.Length == 2) || inKey.StartsWith("NUMPAD"))
                 inKey = inKey.Substring(inKey.Length - 1, 1);
 
-            foreach(var choiceObject in _engine.CurrentPage.Objects.Where(o => o.GetType() == typeof(Choice))) {
+            foreach(var choiceObject in _engine.DisplayList.Where(o => o.GetType() == typeof(Choice))) {
                 var choice = (Choice)choiceObject;
                 if(inKey == choice.Shortcut.ToString().ToUpper()) {
                     _engine.SubmitChoice(choice);
