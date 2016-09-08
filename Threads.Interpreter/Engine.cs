@@ -80,6 +80,10 @@ namespace Threads.Interpreter {
                 if(oldPage.Objects.Count <= idx) break;
                 var thisObject = oldPage.Objects[idx++];
 
+                // Evaluate the expressions (hide takes precidence).
+                if(!Expression.Parse(thisObject.ShowIf, Story.Data)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && Expression.Parse(thisObject.HideIf, Story.Data)) continue;
+
                 if(thisObject.GetType().BaseType == typeof(PageObject)) {
                     DisplayList.Add(thisObject);
                     continue;
