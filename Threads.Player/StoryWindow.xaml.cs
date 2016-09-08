@@ -60,7 +60,7 @@ namespace Threads.Player {
             }
 
             // Handle game input (if a page is active).
-            if(_engine.CurrentPage == null) return;
+            if(_engine?.CurrentPage == null) return;
             var inKey = e.Key.ToString().ToUpper();
 
             /* Adjust numeric entry.
