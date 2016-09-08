@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="2">
+  <Information>
+    <Name>My Story</Name>
+    <Author>You!</Author>
+    <Version>1.0</Version>
+    <Website>http://mysite.local/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>FlagTest</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="FlagTest">
+      <Text>Basic flag test!</Text>
+      <Text ShowIf="FlagA" HideIf="">*FlagA* is set.</Text>
+      <Text HideIf="FlagA">*FlagA* is _not_ set.</Text>
+      <Text ShowIf="FlagB" HideIf="">*FlagB* is set.</Text>
+      <Text HideIf="FlagB">*FlagB* is _not_ set.</Text>
+      <Choice HideIf="FlagA" Target="FlagASet" Shortcut="A">Set *FlagA*</Choice>
+      <Choice ShowIf="FlagA" HideIf="" Target="FlagAClear" Shortcut="A">Clear *FlagA*</Choice>
+      <Choice Target="FlagBToggle" Shortcut="B">Toggle *FlagB*</Choice>
+    </Page>
+    <Page Name="FlagASet">
+      <Flag Name="FlagA" Setting="set" />
+      <Redirect Target="FlagTest" />
+    </Page>
+    <Page Name="FlagAClear">
+      <Flag Name="FlagA" Setting="unset" />
+      <Redirect Target="FlagTest" />
+    </Page>
+    <Page Name="FlagBToggle">
+      <Flag Name="FlagB" Setting="toggle" />
+      <Redirect Target="FlagTest" />
+    </Page>
+  </Pages>
+</Story>

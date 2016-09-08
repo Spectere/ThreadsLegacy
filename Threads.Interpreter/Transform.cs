@@ -5,6 +5,7 @@ using Threads.Interpreter.Exceptions;
 using Threads.Interpreter.Objects;
 using Threads.Interpreter.Objects.Action;
 using Threads.Interpreter.Objects.Page;
+using StoryActionObject = Threads.Interpreter.Objects.Action.ActionObject;
 using StoryPageObject = Threads.Interpreter.Objects.Page.PageObject;
 using Threads.Interpreter.Schema;
 using Threads.Interpreter.Types;
@@ -112,7 +113,6 @@ namespace Threads.Interpreter {
             } else if(obj.GetType() == typeof(RedirectObject)) {
                 var redirect = (RedirectObject)obj;
                 newObject = new Redirect {
-                    Engine = engine,
                     TargetName = redirect.Target
                 };
             } else if(obj.GetType() == typeof(ChoiceObject)) {
@@ -141,6 +141,12 @@ namespace Threads.Interpreter {
             if(obj.GetType().BaseType == typeof(Schema.PageObject)) {
                 var pageObject = (StoryPageObject)newObject;
                 pageObject.Style = TransformStyle((Schema.PageObject)obj, pageObject.Style);
+            }
+
+            // Apply ActionObject properties (if applicable).
+            if(obj.GetType().BaseType == typeof(Schema.ActionObject)) {
+                var actionObject = (StoryActionObject)newObject;
+                actionObject.Engine = engine;
             }
 
             return newObject;
