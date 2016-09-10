@@ -1,5 +1,6 @@
 ﻿using StoryObject = Threads.Interpreter.Objects;
 using System;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace Threads.Editor.Objects.Page {
@@ -10,9 +11,15 @@ namespace Threads.Editor.Objects.Page {
         public Choice(StoryObject.IObject objectData, Interpreter.Types.Story storyData) : base(objectData, storyData) { }
 
         protected override void BuildPageObjectEditor() {
+            // If no page is selected, set it to a sensible value.
+            var obj = (StoryObject.Page.Choice)ObjectData;
+            if(obj.Target == null) {
+                obj.Target = StoryData.Pages.First();
+            }
+
             var roomList = new ComboBox {
                 ItemsSource = StoryData.Pages,
-                SelectedItem = ((StoryObject.Page.Choice)ObjectData).Target
+                SelectedItem = obj.Target
             };
             roomList.SelectionChanged += RoomList_SelectionChanged;
             AppendRow(new Label { Content = "Destination" }, roomList);

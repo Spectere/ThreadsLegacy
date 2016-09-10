@@ -1,5 +1,6 @@
 ﻿using StoryObject = Threads.Interpreter.Objects;
 using System;
+using System.Linq;
 using System.Windows.Controls;
 using Threads.Interpreter.Types;
 
@@ -11,9 +12,15 @@ namespace Threads.Editor.Objects.Action {
         public Redirect(StoryObject.IObject objectData, Story storyData) : base(objectData, storyData) {}
 
         protected override void BuildActionObjectEditor() {
+            // If no page is selected, set it to a sensible value.
+            var obj = (StoryObject.Action.Redirect)ObjectData;
+            if(obj.Target == null) {
+                obj.Target = StoryData.Pages.First();
+            }
+
             var roomList = new ComboBox {
                 ItemsSource = StoryData.Pages,
-                SelectedItem = ((StoryObject.Action.Redirect)ObjectData).Target
+                SelectedItem = obj.Target
             };
             roomList.SelectionChanged += RoomList_SelectionChanged;
             AppendRow(new Label { Content = "Destination" }, roomList);
