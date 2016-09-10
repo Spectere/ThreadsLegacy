@@ -24,6 +24,7 @@ namespace Threads.Editor.Objects.Page {
             if(e.AddedItems.Count < 1) return;
             var thisObject = (StoryObject.Page.Choice)ObjectData;
             thisObject.Target = (Interpreter.Types.Page)e.AddedItems[0];
+            UpdateObjectName();
         }
     }
 }

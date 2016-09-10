@@ -10,6 +10,13 @@ namespace Threads.Editor.Objects {
     /// The base class that all editor objects are derived from. Editor objects implement the UI and logic necessary to modify story objects.
     /// </summary>
     internal abstract class EditorObject : UserControl {
+        public delegate void OnNameChange(object sender, string name);
+
+        /// <summary>
+        /// Fired when a property that changes the displayed name of the object is changed.
+        /// </summary>
+        public event OnNameChange NameChange;
+
         /// <summary>
         /// A <see cref="DependencyProperty" /> that contains the loaded <see cref="Story" /> object.
         /// This is used for objects that need information about the story as a whole.
@@ -115,7 +122,10 @@ namespace Threads.Editor.Objects {
                 DesignerPanel.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
-            AppendRow(new Label { Content = "Name" }, CreateBoundTextBox(ObjectData, "Name"));
+            var nameBox = CreateBoundTextBox(ObjectData, "Name");
+            nameBox.TextChanged += (sender, args) => { UpdateObjectName(); };
+
+            AppendRow(new Label { Content = "Name" }, nameBox);
             AppendRow(new Label { Content = "Show If" }, CreateBoundTextBox(ObjectData, "ShowIf"));
             AppendRow(new Label { Content = "Hide If" }, CreateBoundTextBox(ObjectData, "HideIf"));
         }
@@ -161,6 +171,13 @@ namespace Threads.Editor.Objects {
             CommonSetup();
             BuildEditor();
             parent.Children.Add(DesignerPanel);
+        }
+
+        /// <summary>
+        /// Triggers the host control to update the object name.
+        /// </summary>
+        protected void UpdateObjectName() {
+            NameChange?.Invoke(this, ToString());
         }
     }
 }

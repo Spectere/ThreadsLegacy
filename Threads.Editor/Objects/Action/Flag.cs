@@ -21,6 +21,7 @@ namespace Threads.Editor.Objects.Action {
                                                 if(args.AddedItems.Count < 1) return;
                                                 var thisObject = (StoryObject.Flag)ObjectData;
                                                 thisObject.Setting = (StoryObject.Flag.FlagAction)args.AddedItems[0];
+                                                UpdateObjectName();
                                             };
 
             AppendRow(new Label { Content = "Setting" }, settingList);

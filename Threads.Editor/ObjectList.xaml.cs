@@ -61,6 +61,13 @@ namespace Threads.Editor {
         }
 
         /// <summary>
+        /// Refreshes the list of objects.
+        /// </summary>
+        public void RefreshObjects() {
+            ObjectListBox?.Items.Refresh();
+        }
+
+        /// <summary>
         /// Populates the list of available <see cref="EditorObject" />s.
         /// </summary>
         private void PopulateObjectToolbox() {

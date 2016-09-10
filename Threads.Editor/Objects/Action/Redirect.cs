@@ -23,6 +23,7 @@ namespace Threads.Editor.Objects.Action {
             if(e.AddedItems.Count < 1) return;
             var thisObject = (StoryObject.Action.Redirect)ObjectData;
             thisObject.Target = (Interpreter.Types.Page)e.AddedItems[0];
+            UpdateObjectName();
         }
     }
 }

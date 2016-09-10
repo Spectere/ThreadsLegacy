@@ -244,5 +244,9 @@ namespace Threads.Editor {
             e.Name = nameEntry.EnteredName;
             UpdatePageList();
         }
+
+        private void ObjectEditor_OnNameChange(object sender, string name) {
+            ObjectList?.RefreshObjects();
+        }
     }
 }

@@ -7,6 +7,13 @@ namespace Threads.Editor {
     public partial class ObjectEditor {
         private EditorObject _thisEditor;
 
+        public delegate void OnNameChange(object sender, string name);
+
+        /// <summary>
+        /// Fired when the name of the object changes.
+        /// </summary>
+        public event OnNameChange NameChange;
+
         /// <summary>
         /// Sets the active <see cref="EditorObject" /> that this control should be editing.
         /// </summary>
@@ -17,6 +24,7 @@ namespace Threads.Editor {
 
                 _thisEditor = value;
                 _thisEditor?.DisplayControls(ObjectProperties);
+                if(_thisEditor != null) _thisEditor.NameChange += (sender, name) => NameChange?.Invoke(sender, name);
                 ObjectEditorScroll.ScrollToTop();
             }
         }

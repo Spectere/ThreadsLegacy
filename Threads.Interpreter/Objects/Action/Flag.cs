@@ -1,6 +1,5 @@
 ﻿using System;
 using Threads.Interpreter.Schema;
-using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter.Objects.Action {
     public class Flag : ActionObject {
