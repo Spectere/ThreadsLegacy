@@ -16,6 +16,7 @@ namespace Threads.Editor.Objects.Action {
             settingList.Items.Add(StoryObject.Flag.FlagAction.Set);
             settingList.Items.Add(StoryObject.Flag.FlagAction.Unset);
             settingList.Items.Add(StoryObject.Flag.FlagAction.Toggle);
+            settingList.SelectedItem = ((StoryObject.Flag)ObjectData).Setting;
             settingList.SelectionChanged += (sender, args) => {
                                                 if(args.AddedItems.Count < 1) return;
                                                 var thisObject = (StoryObject.Flag)ObjectData;
