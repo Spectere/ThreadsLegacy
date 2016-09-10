@@ -129,6 +129,7 @@ namespace Threads.Editor {
             var objectType = (Type)thisButton.Tag;
             var newObject = (IObject)Activator.CreateInstance(objectType);
             AddObject?.Invoke(this, newObject);
+            ObjectListBox.SelectedItem = newObject;
         }
 
         private void Objects_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {

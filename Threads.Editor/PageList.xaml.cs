@@ -25,7 +25,10 @@ namespace Threads.Editor {
         /// <summary>
         /// Returns the currently selected page from this <see cref="PageList" /> control.
         /// </summary>
-        public Page SelectedPage => Pages.SelectedItems.Count > 0 ? (Page)Pages.SelectedItems[0] : null;
+        public Page SelectedPage {
+            get { return (Page)Pages.SelectedItem; }
+            set { Pages.SelectedItem = value; }
+        }
 
         public delegate void OnUpdate(object sender, RoutedEventArgs e);
         public delegate void OnPageUpdate(object sender, Page e);

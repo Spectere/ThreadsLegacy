@@ -30,15 +30,15 @@ namespace Threads.Editor {
             if(_engine.Story.Pages.Count(p => p.Name == pageName) > 0)
                 throw new PageAlreadyExistsException(pageName);
 
-            _engine.Story.Pages.Add(new Page {
-                Name = pageName
-            });
+            var newPage = new Page { Name = pageName };
+            _engine.Story.Pages.Add(newPage);
 
             // If no page was configured in the story configuration, set it now.
             if(_engine.Story.Configuration.FirstPage == null)
                 _engine.Story.Configuration.FirstPage = _engine.Story.Pages.First();
 
             UpdatePageList();
+            PageList.SelectedPage = newPage;
         }
 
         /// <summary>
