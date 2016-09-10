@@ -40,6 +40,8 @@
     <Compile Include="Exceptions\NullStoryException.cs" />
     <Compile Include="Exceptions\NoPagesFoundException.cs" />
     <Compile Include="Exceptions\PageNotFoundException.cs" />
+    <Compile Include="Exceptions\InvalidOperatorException.cs" />
+    <Compile Include="Exceptions\UnbalancedParenthesisException.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Objects\Action\ActionObject.cs" />
     <Compile Include="Objects\Action\Flag.cs" />

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="2">
+  <Information>
+    <Name>Expressions Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>StartingPage</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="StartingPage">
+      <Text>This paragraph will always appear.</Text>
+      <Text Name="A-Set" ShowIf="FlagA">*FlagA* is set.</Text>
+      <Text Name="B-Set" ShowIf="FlagB">*FlagB* is set.</Text>
+      <Text Name="C-Set" ShowIf="FlagC">*FlagC* is set.</Text>
+      <Text Name="AB-Set" ShowIf="FlagA &amp; FlagB">Both *FlagA* and *FlagB* are set.</Text>
+      <Text Name="B-Set-A-Clear-HideIf" ShowIf="FlagB" HideIf="FlagA">*FlagB* is set; *FlagA* is cleared (handled with _HideIf_).</Text>
+      <Text Name="B-Set-A-Clear-ShowIf" ShowIf="FlagB &amp; !FlagA">*FlagB* is set; *FlagA* is cleared (handled in _ShowIf_ using negation).</Text>
+      <Text Name="ABorC-Set" ShowIf="(FlagA &amp; FlagB) | FlagC">Either both *FlagA* and *FlagB* are set, or *FlagC* is set.</Text>
+      <Choice Name="A" Target="ToggleA" Shortcut="1">Toggle *FlagA*</Choice>
+      <Choice Name="B" Target="ToggleB" Shortcut="2">Toggle *FlagB*</Choice>
+      <Choice Name="C" Target="ToggleC" Shortcut="3">Toggle *FlagC*</Choice>
+    </Page>
+    <Page Name="ToggleA">
+      <Flag Name="FlagA" Setting="toggle" />
+      <Redirect Target="StartingPage" />
+    </Page>
+    <Page Name="ToggleB">
+      <Flag Name="FlagB" Setting="toggle" />
+      <Redirect Target="StartingPage" />
+    </Page>
+    <Page Name="ToggleC">
+      <Flag Name="FlagC" Setting="toggle" />
+      <Redirect Target="StartingPage" />
+    </Page>
+  </Pages>
+</Story>
