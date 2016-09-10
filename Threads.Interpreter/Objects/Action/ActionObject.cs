@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Threads.Interpreter.Types;
+﻿using System.Linq;
 
 namespace Threads.Interpreter.Objects.Action {
     public abstract class ActionObject : IActionObject {
@@ -38,7 +36,8 @@ namespace Threads.Interpreter.Objects.Action {
         internal abstract Schema.ActionObject ExportObject();
 
         public override string ToString() {
-            return GetType().ToString().Split('.').Last();
+            var typeName = GetType().ToString().Split('.').Last();
+            return string.IsNullOrWhiteSpace(Name) ? typeName : string.Format($"{typeName} - {Name}");
         }
     }
 }

@@ -80,7 +80,8 @@ namespace Threads.Interpreter.Objects.Page {
         internal abstract Schema.PageObject ExportObject();
 
         public override string ToString() {
-            return GetType().ToString().Split('.').Last();
+            var typeName = GetType().ToString().Split('.').Last();
+            return string.IsNullOrWhiteSpace(Name) ? typeName : string.Format($"{typeName} - {Name}");
         }
     }
 }

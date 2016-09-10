@@ -37,5 +37,10 @@
                 Shortcut = Shortcut == null ? null : Shortcut.ToString()
             };
         }
+
+        public override string ToString() {
+            var baseName = base.ToString();
+            return TargetName == null ? baseName : string.Format($"{baseName} [{TargetName}]");
+        }
     }
 }

@@ -27,5 +27,10 @@
                 Target = Target.Name
             };
         }
+
+        public override string ToString() {
+            var baseName = base.ToString();
+            return TargetName == null ? baseName : string.Format($"{baseName} [{TargetName}]");
+        }
     }
 }
