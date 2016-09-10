@@ -25,7 +25,7 @@
       <Redirect Target="FlagTest" />
     </Page>
     <Page Name="FlagAClear">
-      <Flag Name="FlagA" Setting="unset" />
+      <Flag Name="FlagA" Setting="clear" />
       <Redirect Target="FlagTest" />
     </Page>
     <Page Name="FlagBToggle">

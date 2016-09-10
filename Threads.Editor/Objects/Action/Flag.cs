@@ -14,7 +14,7 @@ namespace Threads.Editor.Objects.Action {
         protected override void BuildActionObjectEditor() {
             var settingList = new ComboBox();
             settingList.Items.Add(StoryObject.Flag.FlagAction.Set);
-            settingList.Items.Add(StoryObject.Flag.FlagAction.Unset);
+            settingList.Items.Add(StoryObject.Flag.FlagAction.Clear);
             settingList.Items.Add(StoryObject.Flag.FlagAction.Toggle);
             settingList.SelectedItem = ((StoryObject.Flag)ObjectData).Setting;
             settingList.SelectionChanged += (sender, args) => {

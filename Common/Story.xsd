@@ -111,7 +111,7 @@
           <xs:simpleType>
             <xs:restriction base="xs:string">
               <xs:enumeration value="set" />
-              <xs:enumeration value="unset" />
+              <xs:enumeration value="clear" />
               <xs:enumeration value="toggle" />
             </xs:restriction>
           </xs:simpleType>

@@ -100,8 +100,8 @@ namespace Threads.Interpreter {
                         case FlagObjectSetting.set:
                             ((Flag)newObject).Setting = Flag.FlagAction.Set;
                             break;
-                        case FlagObjectSetting.unset:
-                            ((Flag)newObject).Setting = Flag.FlagAction.Unset;
+                        case FlagObjectSetting.clear:
+                            ((Flag)newObject).Setting = Flag.FlagAction.Clear;
                             break;
                         case FlagObjectSetting.toggle:
                             ((Flag)newObject).Setting = Flag.FlagAction.Toggle;

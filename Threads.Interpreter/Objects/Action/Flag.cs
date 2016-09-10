@@ -17,7 +17,7 @@ namespace Threads.Interpreter.Objects.Action {
             Set,
 
             /// <summary>Unsets the named flag.</summary>
-            Unset,
+            Clear,
 
             /// <summary>Toggles the named flag.</summary>
             Toggle
@@ -29,7 +29,7 @@ namespace Threads.Interpreter.Objects.Action {
                 case FlagAction.Set:
                     data.SetFlag(Name);
                     break;
-                case FlagAction.Unset:
+                case FlagAction.Clear:
                     data.ClearFlag(Name);
                     break;
                 case FlagAction.Toggle:
@@ -48,8 +48,8 @@ namespace Threads.Interpreter.Objects.Action {
                 case FlagAction.Set:
                     setting = FlagObjectSetting.set;
                     break;
-                case FlagAction.Unset:
-                    setting = FlagObjectSetting.unset;
+                case FlagAction.Clear:
+                    setting = FlagObjectSetting.clear;
                     break;
                 case FlagAction.Toggle:
                     setting = FlagObjectSetting.toggle;
