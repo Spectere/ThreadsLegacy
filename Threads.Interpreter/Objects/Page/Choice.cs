@@ -33,8 +33,8 @@
 
         internal override Schema.PageObject ExportObject() {
             return new Schema.ChoiceObject {
-                Target = Target.Name,
-                Shortcut = Shortcut.ToString()
+                Target = Target?.Name,
+                Shortcut = Shortcut == null ? null : Shortcut.ToString()
             };
         }
     }
