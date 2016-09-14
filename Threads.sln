@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4C6D0A59-E937-4AD3-9AC3-096D60E78D64}"
 	ProjectSection(SolutionItems) = preProject
 		Common\Story.xsd = Common\Story.xsd
+		Common\VersionInfo.cs = Common\VersionInfo.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{3295FFAE-B9EA-4BF1-A673-C4E0B52F2CD2}"

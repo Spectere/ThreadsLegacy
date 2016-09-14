@@ -35,6 +35,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Commands\NoneCommand.cs" />
     <Compile Include="Commands\StyleCommand.cs" />
     <Compile Include="Commands\EscapeCommand.cs" />
