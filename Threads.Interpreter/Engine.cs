@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using StorySerializer = Threads.Interpreter.Schema.Story;
 using System.IO;
 using System.Xml.Serialization;
@@ -115,8 +116,13 @@ namespace Threads.Interpreter {
             // TODO: Write a proper exception handler.
             var serializer = new XmlSerializer(typeof(StorySerializer));
 
-            using(var fileStream = File.Open(filename, FileMode.Create))
-                serializer.Serialize(fileStream, Story.Export());
+            using(var outputStream = new MemoryStream()) {
+                serializer.Serialize(outputStream, Story.Export());
+
+                outputStream.Position = 0;
+                using(var fileStream = File.Open(filename, FileMode.Create))
+                    outputStream.CopyTo(fileStream);
+            }
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Microsoft.Win32;
@@ -111,11 +112,19 @@ namespace Threads.Editor {
             UpdateObjectEditor();
         }
 
+        private void SaveStory(string filename) {
+            try {
+                _engine.Save(filename);
+            } catch(Exception ex) {
+                MessageBox.Show($"An error occured during save:\n\n{ex.Message}\n\n{ex.StackTrace}");
+            }
+        }
+
         private void Save_OnClick(object sender, RoutedEventArgs e) {
             if(_filename == null)
                 SaveAs();
 
-            _engine.Save(_filename);
+            SaveStory(_filename);
         }
 
         private void SaveAs() {
@@ -130,7 +139,7 @@ namespace Threads.Editor {
 
             // ReSharper disable once AssignNullToNotNullAttribute
             Directory.SetCurrentDirectory(Path.GetDirectoryName(_filename));
-            _engine.Save(_filename);
+            SaveStory(_filename);
 
             Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
         }
