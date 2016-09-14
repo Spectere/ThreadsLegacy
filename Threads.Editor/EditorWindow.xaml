@@ -8,6 +8,9 @@
         Title="Threads Editor - [Untitled.xml]" Height="540" Width="960"
         MinWidth="960" MinHeight="480">
     <Window.Resources>
+        <RoutedUICommand x:Key="StoryInfoCommand" />
+        <RoutedUICommand x:Key="StoryConfigCommand" />
+        
         <Style x:Key="MenuItemStyle" TargetType="MenuItem">
             <Setter Property="Background" Value="Silver"/>
             <Setter Property="BorderBrush" Value="Gray"/>
@@ -20,7 +23,27 @@
             <Setter Property="BorderThickness" Value="1 2 1 1" />
         </Style>
     </Window.Resources>
-    
+
+    <Window.CommandBindings>
+        <CommandBinding Command="New" Executed="New_OnClick" />
+        <CommandBinding Command="Open" Executed="Open_OnClick" />
+        <CommandBinding Command="Save" Executed="Save_OnClick" />
+        <CommandBinding Command="SaveAs" Executed="SaveAs_OnClick" />
+
+        <CommandBinding Command="{StaticResource StoryInfoCommand}" Executed="StoryInfo_OnClick" />
+        <CommandBinding Command="{StaticResource StoryConfigCommand}" Executed="StoryConfig_OnClick" />
+    </Window.CommandBindings>
+
+    <Window.InputBindings>
+        <KeyBinding Command="New" Key="N" Modifiers="Control" />
+        <KeyBinding Command="Open" Key="O" Modifiers="Control" />
+        <KeyBinding Command="Save" Key="S" Modifiers="Control" />
+        <KeyBinding Command="SaveAs" Key="F12" />
+
+        <KeyBinding Command="{StaticResource StoryInfoCommand}" Key="I" Modifiers="Control" />
+        <KeyBinding Command="{StaticResource StoryConfigCommand}" Key="K" Modifiers="Control" />
+    </Window.InputBindings>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -34,13 +57,13 @@
         </Grid.ColumnDefinitions>
         
         <Menu Grid.Row="0" Grid.ColumnSpan="3" Height="Auto">
-            <MenuItem Click="New_OnClick" Style="{StaticResource MenuItemStyle}" Header="New" />
-            <MenuItem Click="Open_OnClick" Style="{StaticResource MenuItemStyle}" Header="Open" />
-            <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" />
-            <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" />
+            <MenuItem Click="New_OnClick" Style="{StaticResource MenuItemStyle}" Header="New" Command="New" />
+            <MenuItem Click="Open_OnClick" Style="{StaticResource MenuItemStyle}" Header="Open" Command="Open" />
+            <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" Command="Save" />
+            <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" Command="SaveAs" />
             <Separator />
-            <MenuItem Click="StoryInfo_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Info" />
-            <MenuItem Click="StoryConfig_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Config" />
+            <MenuItem Name="StoryInfoButton" Click="StoryInfo_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Info" Command="{StaticResource StoryInfoCommand}" />
+            <MenuItem Click="StoryConfig_OnClick" Style="{StaticResource MenuItemStyle}" Header="Story Config" Command="{StaticResource StoryConfigCommand}" />
         </Menu>
         
         <local:PageList Grid.Row="1" Grid.Column="0" x:Name="PageList" Style="{StaticResource EditorStyle}" SelectionChanged="PageList_OnSelectionChanged" Add="PageList_OnAdd" Delete="PageList_OnDelete" PageDoubleClicked="PageList_OnPageDoubleClicked" />
