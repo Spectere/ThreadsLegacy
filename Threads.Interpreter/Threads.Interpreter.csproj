@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml" />
@@ -67,6 +68,7 @@
     <Compile Include="Objects\Page\IPageObject.cs" />
     <Compile Include="Types\Page.cs" />
     <Compile Include="Types\Story.cs" />
+    <Compile Include="Types\Variable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Threads.Marker\Threads.Marker.csproj">
