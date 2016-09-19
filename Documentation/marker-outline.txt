@@ -7,7 +7,7 @@ _text_ - Italics
 
 Marker v2 (v0.2.0.0)
 
-{variable|format} - Substitution
+{variable|format} - Substitution (can't be interpreted by Threads.Marker; must be done by the Threads.Interpreter)
 	- Variable: the name of the variable to print.
 	- Format: a comma-separated list containing one or more of the following (omit the pipe to display the variable as-is):
 		- caps - Defaults to caps=first.
