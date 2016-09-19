@@ -40,7 +40,7 @@
     <Compile Include="..\Common\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Exceptions\InvalidTypeConversionException.cs" />
+    <Compile Include="Exceptions\InvalidVariableOperationException.cs" />
     <Compile Include="Exceptions\NullPagesException.cs" />
     <Compile Include="Exceptions\NullStoryException.cs" />
     <Compile Include="Exceptions\NoPagesFoundException.cs" />
