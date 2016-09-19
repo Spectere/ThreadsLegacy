@@ -18,7 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 		LICENSE = LICENSE
 		Documentation\marker-outline.txt = Documentation\marker-outline.txt
 		README.md = README.md
-		Documentation\xml-outline.txt = Documentation\xml-outline.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{068DA925-034A-4D7C-B344-083CC846F7D9}"
