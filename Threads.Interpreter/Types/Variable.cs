@@ -126,9 +126,11 @@ namespace Threads.Interpreter.Types {
             if(v1 is bool && v2 is bool)  // Handle boolean comparison in a separate method.
                 return CompareBoolean(op, (bool)v1, (bool)v2);
 
-            // Comparing booleans and other types is invalid.
-            if(v1 is bool || v2 is bool)
-                throw new InvalidVariableOperationException($"Attempted to compare a {v1.GetType().ToString()} with a {v2.GetType().ToString()}.");
+            // Handle comparisons between boolean and numeric values.
+            if(v1 is bool)
+                return CompareBoolean(op, (bool)v1, v2 != 0);
+            if(v2 is bool)
+                return CompareBoolean(op, (bool)v2, v1 != 0);
 
             // Match up decimal/double types.
             TypeMatch(ref v1, ref v2);
