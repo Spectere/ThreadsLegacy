@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Threads.Interpreter.Schema;
 
 namespace Threads.Interpreter.Types {
     /// <summary>

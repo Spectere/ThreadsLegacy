@@ -8,7 +8,7 @@ using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter {
     internal static class Expression {
-        private static List<string> delimiters = new List<string> { "(", ")", "!", "&", "|" };
+        private static readonly List<string> Delimiters = new List<string> { "(", ")", "!", "&", "|" };
 
         /// <summary>
         /// Parses an expression and returns the result of the evaluation.
@@ -108,7 +108,7 @@ namespace Threads.Interpreter {
             var tokens = SplitExpression(expression);
             foreach(var s in tokens) {
                 if(string.IsNullOrWhiteSpace(s)) continue;
-                if(delimiters.Contains(s)) {
+                if(Delimiters.Contains(s)) {
                     sb.Append(s);
                     continue;
                 }
@@ -118,7 +118,7 @@ namespace Threads.Interpreter {
         }
 
         private static IEnumerable<string> SplitExpression(string expression) {
-            var pattern = string.Format($"({string.Join("|", delimiters.Select(d => Regex.Escape(d)).ToArray())})");
+            var pattern = string.Format($"({string.Join("|", Delimiters.Select(Regex.Escape).ToArray())})");
             return Regex.Split(expression, pattern);
         }
     }
