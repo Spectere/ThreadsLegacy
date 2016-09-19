@@ -1,5 +1,20 @@
-Marker v0
+Marker v1 (v0.1.0.0)
 
 \ - Displays the following character as-is.
 *text* - Bold
 _text_ - Italics
+
+
+Marker v2 (v0.2.0.0)
+
+{variable|format} - Substitution
+	- Variable: the name of the variable to print.
+	- Format: a comma-separated list containing one or more of the following (omit the pipe to display the variable as-is):
+		- caps - Defaults to caps=first.
+			- caps=first - Capitalizes the first letter.
+			- caps=lower - Displays the entire string in lowercase.
+			- caps=upper - Displays the entire string in uppercase.
+		- flag - Defaults to flag=yesno
+			- flag=truefalse - Displays booleans as true/false.
+			- flag=yesno - Displays booleans as yes/no.
+			- flag=num - Displays booleans as 1/0.
