@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Threads.Interpreter.Exceptions;
 
 namespace Threads.Interpreter.Types {
     /// <summary>
@@ -66,6 +67,10 @@ namespace Threads.Interpreter.Types {
 
             if(v1 == null || v2 == null)
                 throw new NullReferenceException();
+
+            // Throw exception for bools.
+            if(v1 is bool || v2 is bool)
+                throw new InvalidTypeConversion($"Attempted to perform an {op} operation on a boolean value.");
 
             // Decimals and Floats don't play well together. Ints/Floats and Int/Decimals both do.
             if(v1 is double && v2 is decimal)
