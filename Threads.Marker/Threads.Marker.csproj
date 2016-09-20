@@ -41,6 +41,9 @@
     <Compile Include="Commands\NoneCommand.cs" />
     <Compile Include="Commands\StyleCommand.cs" />
     <Compile Include="Commands\EscapeCommand.cs" />
+    <Compile Include="Commands\SubstitutionCommand.cs" />
+    <Compile Include="Commands\SubstitutionProperties\FlagProperty.cs" />
+    <Compile Include="Commands\SubstitutionProperties\CapsProperty.cs" />
     <Compile Include="Commands\TextCommand.cs" />
     <Compile Include="Command.cs" />
     <Compile Include="IInstruction.cs" />

@@ -21,6 +21,11 @@
         /// <summary>
         /// A style to apply to the next <see cref="Text" /> run.
         /// </summary>
-        TextStyle
+        TextStyle,
+
+        /// <summary>
+        /// Indicates that the interpreter will need to replace this token with the contents of a variable.
+        /// </summary>
+        Substitution
     }
 }

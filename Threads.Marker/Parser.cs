@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Threads.Marker.Commands;
+using Threads.Marker.Commands.SubstitutionProperties;
 
 namespace Threads.Marker {
     /// <summary>
@@ -18,8 +20,21 @@ namespace Threads.Marker {
 
             var sb = new StringBuilder();
             var skip = false;
+            var substitution = false;
             foreach(var ch in text) {
                 IInstruction command;
+                if(substitution) {
+                    // Get the contents of the substitution token and parse it.
+                    if(ch != '}')
+                        sb.Append(ch);
+                    else {
+                        substitution = false;
+                        instructions.Add(ParseSubstitution(sb.ToString()));
+                        sb = new StringBuilder();
+                        continue;
+                    }
+                }
+
                 if(skip) {
                     command = new NoneCommand();
                     skip = false;
@@ -38,6 +53,13 @@ namespace Threads.Marker {
                         }
                         instructions.Add(command);
                         break;
+                    case Command.Substitution:
+                        if(sb.Length > 0) {
+                            instructions.Add(new TextCommand { Text = sb.ToString() });
+                            sb = new StringBuilder();
+                        }
+                        substitution = true;
+                        break;
                     default:
                         sb.Append(ch);
                         break;
@@ -49,6 +71,56 @@ namespace Threads.Marker {
                 instructions.Add(new TextCommand { Text = sb.ToString() });
             
             return instructions;
+        }
+
+        private static SubstitutionCommand ParseSubstitution(string value) {
+            var newCommand = new SubstitutionCommand();
+            var baseTokens = value.Split('|');
+
+            newCommand.Variable = baseTokens[0];
+            if(baseTokens.Length <= 1) return newCommand;
+
+            // Additional properties have been specified; handle them.
+            var properties = baseTokens[1].Split(',');
+
+            foreach(var property in properties) {
+                if(string.IsNullOrWhiteSpace(property)) continue;
+                var keyValue = property.Split('=');
+                var onlyKey = keyValue.Length == 1;
+
+                switch(keyValue[0].ToLower()) {
+                    case "caps":
+                        if(onlyKey) { newCommand.Caps = CapsProperty.None; continue; }
+                        switch(keyValue[1].ToLower()) {
+                            case "first":
+                                newCommand.Caps = CapsProperty.First;
+                                break;
+                            case "upper":
+                                newCommand.Caps = CapsProperty.Upper;
+                                break;
+                            case "lower":
+                                newCommand.Caps = CapsProperty.Lower;
+                                break;
+                        }
+                        break;
+                    case "flag":
+                        if(onlyKey) { newCommand.Flag = FlagProperty.TrueFalse; continue; }
+                        switch(keyValue[1].ToLower()) {
+                            case "truefalse":
+                                newCommand.Flag = FlagProperty.TrueFalse;
+                                break;
+                            case "yesno":
+                                newCommand.Flag = FlagProperty.YesNo;
+                                break;
+                            case "num":
+                                newCommand.Flag = FlagProperty.OneZero;
+                                break;
+                        }
+                        break;
+                }
+            }
+
+            return newCommand;
         }
     }
 }
