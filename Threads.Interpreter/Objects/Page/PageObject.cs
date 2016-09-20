@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using Threads.Interpreter.Types;
 using Threads.Marker;
+using Threads.Marker.Commands;
 
 namespace Threads.Interpreter.Objects.Page {
     /// <summary>
@@ -38,6 +40,39 @@ namespace Threads.Interpreter.Objects.Page {
         protected PageObject() {
             Style = DefaultStyle;
             FormattedText = new TextSequence();
+        }
+
+        /// <summary>
+        /// Returns a <see cref="TextSequence" /> object with variable substitutions performed.
+        /// </summary>
+        /// <param name="storyData">The <see cref="Data" /> object associated with the active story.</param>
+        /// <returns>A <see cref="TextSequence" /> with variable substitutions performed.</returns>
+        public TextSequence DisplayText(Data storyData) {
+            return DisplayText(FormattedText, storyData);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="TextSequence" /> object with variable substitutions performed.
+        /// </summary>
+        /// <param name="textSequence">A <see cref="TextSequence" /> object to perform substitutions on.</param>
+        /// <param name="storyData">The <see cref="Data" /> object associated with the active story.</param>
+        /// <returns>A <see cref="TextSequence" /> with variable substitutions performed.</returns>
+        protected TextSequence DisplayText(TextSequence textSequence, Data storyData) {
+            var newSequence = new TextSequence();
+
+            foreach(var instruction in textSequence.Instructions) {
+                switch(instruction.Command) {
+                    case Command.TextStyle:
+                        newSequence.Instructions.Add(instruction);
+                        break;
+                    case Command.Text:
+                        var newInstruction = new TextCommand { Text = Substitution.Parse(((TextCommand)instruction).Text, storyData) };
+                        newSequence.Instructions.Add(newInstruction);
+                        break;
+                }
+            }
+
+            return newSequence;
         }
 
         /// <summary>

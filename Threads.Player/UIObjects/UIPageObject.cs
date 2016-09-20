@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Threads.Interpreter.Objects.Page;
+using Threads.Interpreter.Types;
 using Threads.Marker;
 
 namespace Threads.Player.UIObjects {
@@ -45,14 +46,15 @@ namespace Threads.Player.UIObjects {
         /// Initializes a new <see cref="UIPageObject" /> with a <see cref="TextSequence" />.
         /// </summary>
         /// <param name="pageObject">A <see cref="PageObject" /> to use to populate and style this control.</param>
-        protected UIPageObject(IPageObject pageObject) {
+        /// <param name="storyData">The <see cref="Data" /> that corresponds to the loaded story.</param>
+        protected UIPageObject(IPageObject pageObject, Data storyData) {
             TextBlock = new TextBlock {
                 FontFamily = new FontFamily("Cambria"),
                 FontSize = 24.0,
                 TextWrapping = TextWrapping.WrapWithOverflow
             };
 
-            FormattedText = pageObject.FormattedText;
+            FormattedText = pageObject.DisplayText(storyData);
             PageObjectStyle = pageObject.Style;
         }
     }

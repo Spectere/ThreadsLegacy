@@ -1,4 +1,5 @@
-﻿using Threads.Marker;
+﻿using Threads.Interpreter.Types;
+using Threads.Marker;
 
 namespace Threads.Interpreter.Objects.Page {
     public interface IPageObject : IObject {
@@ -16,5 +17,12 @@ namespace Threads.Interpreter.Objects.Page {
         /// The style that should be applied to this <see cref="IPageObject" />.
         /// </summary>
         PageObjectStyle Style { get; set; }
+
+        /// <summary>
+        /// Returns a <see cref="TextSequence" /> object with variable substitutions performed.
+        /// </summary>
+        /// <param name="storyData"></param>
+        /// <returns></returns>
+        TextSequence DisplayText(Data storyData);
     }
 }

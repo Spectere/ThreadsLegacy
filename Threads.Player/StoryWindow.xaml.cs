@@ -42,13 +42,13 @@ namespace Threads.Player {
 
                 var pObj = (IPageObject)obj;
                 if(obj.GetType() == typeof(Paragraph)) {
-                    Stack.Children.Add(new UIParagraph(pObj));
+                    Stack.Children.Add(new UIParagraph(pObj, _engine.Story.Data));
                 } else if(obj.GetType() == typeof(Choice)) {
-                    var button = new UIChoice((Choice)pObj);
+                    var button = new UIChoice((Choice)pObj, _engine.Story.Data);
                     button.ChoiceClick += Choice_Click;
                     Stack.Children.Add(button);
                 } else if(obj.GetType() == typeof(PageObjectImage)) {
-                    Stack.Children.Add(new UIImage((PageObjectImage)pObj));
+                    Stack.Children.Add(new UIImage((PageObjectImage)pObj, _engine.Story.Data));
                 }
             }
         }
