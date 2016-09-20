@@ -58,7 +58,6 @@
     <Compile Include="Objects\Page\PageObject.cs" />
     <Compile Include="Objects\Page\PageObjectStyle.cs" />
     <Compile Include="Objects\Page\Paragraph.cs" />
-    <Compile Include="Substitution.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Types\Configuration.cs" />
     <Compile Include="Types\Data.cs" />

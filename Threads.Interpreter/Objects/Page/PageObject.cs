@@ -1,8 +1,11 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Linq;
 using Threads.Interpreter.Types;
 using Threads.Marker;
 using Threads.Marker.Commands;
+using Threads.Marker.Commands.SubstitutionProperties;
 
 namespace Threads.Interpreter.Objects.Page {
     /// <summary>
@@ -63,10 +66,45 @@ namespace Threads.Interpreter.Objects.Page {
             foreach(var instruction in textSequence.Instructions) {
                 switch(instruction.Command) {
                     case Command.TextStyle:
+                    case Command.Text:
                         newSequence.Instructions.Add(instruction);
                         break;
-                    case Command.Text:
-                        var newInstruction = new TextCommand { Text = Substitution.Parse(((TextCommand)instruction).Text, storyData) };
+                    case Command.Substitution:
+                        var substitution = (SubstitutionCommand)instruction;
+                        var newInstruction = new TextCommand();
+                        var value = storyData.GetFlag(substitution.Variable);
+
+                        // Handle flag settings.
+                        switch(substitution.Flag) {
+                            case FlagProperty.TrueFalse:
+                                newInstruction.Text = value ? "true" : "false";
+                                break;
+                            case FlagProperty.YesNo:
+                                newInstruction.Text = value ? "yes" : "no";
+                                break;
+                            case FlagProperty.OneZero:
+                                newInstruction.Text = value ? "1" : "0";
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+
+                        // Handle transformation (if applicable).
+                        if(newInstruction.Text.Length > 0) {
+                            switch(substitution.Caps) {
+                                case CapsProperty.First:
+                                    newInstruction.Text = newInstruction.Text.First().ToString().ToUpper() +
+                                                          newInstruction.Text.Substring(1);
+                                    break;
+                                case CapsProperty.Lower:
+                                    newInstruction.Text = newInstruction.Text.ToLower();
+                                    break;
+                                case CapsProperty.Upper:
+                                    newInstruction.Text = newInstruction.Text.ToUpper();
+                                    break;
+                            }
+                        }
+
                         newSequence.Instructions.Add(newInstruction);
                         break;
                 }

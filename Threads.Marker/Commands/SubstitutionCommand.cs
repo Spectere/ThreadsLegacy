@@ -1,7 +1,7 @@
 ﻿using Threads.Marker.Commands.SubstitutionProperties;
 
 namespace Threads.Marker.Commands {
-    class SubstitutionCommand : IInstruction {
+    public class SubstitutionCommand : IInstruction {
         public Command Command => Command.Substitution;
 
         /// <summary>
