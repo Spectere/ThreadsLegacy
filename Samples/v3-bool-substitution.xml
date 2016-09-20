@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="2">
+  <Information>
+    <Name>Boolean Substitution Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>TestPage</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="TestPage">
+      <Text Name="CapsNone">Caps.None: {A} / {A|flag=truefalse} / {A|Flag=YesNo} / {A | Flag=num}</Text>
+      <Text Name="CapsFirst">Caps.First: {A|caps=first} / {A|flag=truefalse,caps=first} / {A|Flag=YesNo,caps=first} / {A | Flag=num,caps=first}</Text>
+      <Text Name="CapsUpper">Caps.Upper: {A|caps=upper} / {A|flag=truefalse,caps=upper} / {A|Flag=YesNo,caps=upper} / {A | Flag=num,caps=upper}</Text>
+      <Text Name="CapsLower">Caps.Lower: {A|caps=lower} / {A|flag=truefalse,caps=lower} / {A|Flag=YesNo,caps=lower} / {A | Flag=num,caps=lower}</Text>
+      <Choice Target="ToggleA" Shortcut="A">Toggle Flag</Choice>
+    </Page>
+    <Page Name="ToggleA">
+      <Flag Name="A" Setting="toggle" />
+      <Redirect Target="TestPage" />
+    </Page>
+  </Pages>
+</Story>
