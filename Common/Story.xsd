@@ -127,4 +127,22 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:complexType name="Variable">
+    <xs:simpleContent>
+      <xs:extension base="ActionObject">
+        <xs:attribute name="Operation">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="set" />
+              <xs:enumeration value="add" />
+              <xs:enumeration value="subtract" />
+              <xs:enumeration value="multiply" />
+              <xs:enumeration value="divide" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 </xs:schema>
