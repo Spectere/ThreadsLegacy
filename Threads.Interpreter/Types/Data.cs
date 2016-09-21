@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Threads.Interpreter.Types {
     /// <summary>
@@ -35,6 +36,15 @@ namespace Threads.Interpreter.Types {
         }
 
         /// <summary>
+        /// Gets the <see cref="Variable" /> object with the given <paramref name="name" />.
+        /// </summary>
+        /// <param name="name">The name of the <see cref="Variable" /> to retrieve.</param>
+        /// <returns>The requested <see cref="Variable" />. If this variable does not exist, a new <see cref="Variable" /> with a zero value will be returned.</returns>
+        public Variable GetVariable(string name) {
+            return !_variables.ContainsKey(name) ? new Variable(0L) : _variables.First(n => n.Key == name).Value;
+        }
+
+        /// <summary>
         /// Sets a given flag.
         /// </summary>
         /// <param name="flag">The name of the flag to set.</param>
@@ -45,6 +55,45 @@ namespace Threads.Interpreter.Types {
             }
 
             if(_variables[flag] == false) _variables[flag] = true;
+        }
+
+        /// <summary>
+        /// Sets the given <see cref="Variable" /> to a certain value.
+        /// </summary>
+        /// <param name="name">The name of the <see cref="Variable" /> to set.</param>
+        /// <param name="value">The value to store in the specified <see cref="Variable" />.</param>
+        public void SetVariable(string name, decimal value) {
+            SetVariable(name, new Variable(value));
+        }
+
+        /// <summary>
+        /// Sets the given <see cref="Variable" /> to a certain value.
+        /// </summary>
+        /// <param name="name">The name of the <see cref="Variable" /> to set.</param>
+        /// <param name="value">The value to store in the specified <see cref="Variable" />.</param>
+        public void SetVariable(string name, double value) {
+            SetVariable(name, new Variable(value));
+        }
+
+        /// <summary>
+        /// Sets the given <see cref="Variable" /> to a certain value.
+        /// </summary>
+        /// <param name="name">The name of the <see cref="Variable" /> to set.</param>
+        /// <param name="value">The value to store in the specified <see cref="Variable" />.</param>
+        public void SetVariable(string name, long value) {
+            SetVariable(name, new Variable(value));
+        }
+
+        /// <summary>
+        /// Sets the given <see cref="Variable" /> to a certain value.
+        /// </summary>
+        /// <param name="name">The name of the <see cref="Variable" /> to set.</param>
+        /// <param name="value">A <see cref="Variable" /> to store in the variables collection.</param>
+        public void SetVariable(string name, Variable value) {
+            if(_variables.ContainsKey(name))
+                _variables[name] = value;
+            else
+                _variables.Add(name, value);
         }
     }
 }
