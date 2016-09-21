@@ -25,9 +25,7 @@ namespace Threads.Marker {
                 IInstruction command;
                 if(substitution) {
                     // Get the contents of the substitution token and parse it.
-                    if(ch != '}')
-                        sb.Append(ch);
-                    else {
+                    if(ch == '}') {
                         substitution = false;
                         instructions.Add(ParseSubstitution(sb.ToString()));
                         sb = new StringBuilder();
@@ -77,7 +75,7 @@ namespace Threads.Marker {
             var newCommand = new SubstitutionCommand();
             var baseTokens = value.Split('|');
 
-            newCommand.Variable = baseTokens[0];
+            newCommand.Variable = baseTokens[0].Trim();
             if(baseTokens.Length <= 1) return newCommand;
 
             // Additional properties have been specified; handle them.
@@ -88,10 +86,10 @@ namespace Threads.Marker {
                 var keyValue = property.Split('=');
                 var onlyKey = keyValue.Length == 1;
 
-                switch(keyValue[0].ToLower()) {
+                switch(keyValue[0].Trim().ToLower()) {
                     case "caps":
                         if(onlyKey) { newCommand.Caps = CapsProperty.None; continue; }
-                        switch(keyValue[1].ToLower()) {
+                        switch(keyValue[1].Trim().ToLower()) {
                             case "first":
                                 newCommand.Caps = CapsProperty.First;
                                 break;
@@ -105,7 +103,7 @@ namespace Threads.Marker {
                         break;
                     case "flag":
                         if(onlyKey) { newCommand.Flag = FlagProperty.TrueFalse; continue; }
-                        switch(keyValue[1].ToLower()) {
+                        switch(keyValue[1].Trim().ToLower()) {
                             case "truefalse":
                                 newCommand.Flag = FlagProperty.TrueFalse;
                                 break;
