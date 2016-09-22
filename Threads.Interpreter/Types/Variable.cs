@@ -7,7 +7,7 @@ namespace Threads.Interpreter.Types {
     /// Represents a variable in a Threads story.
     /// </summary>
     [SuppressMessage("ReSharper", "PossibleInvalidCastException")]
-    public class Variable {
+    public class Variable : IExpressionNode {
         private enum ArithmeticOperation {
             Add,
             Subtract,

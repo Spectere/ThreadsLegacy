@@ -30,6 +30,23 @@ namespace Threads.Interpreter {
             return EvaluateBoolean(work);
         }
 
+        /// <summary>
+        /// Evaluates an expression and returns the results of the evaluation.
+        /// </summary>
+        /// <param name="expression">The expression to evaluate.</param>
+        /// <param name="data">The <see cref="Data" /> object from the story <see cref="Engine" />.</param>
+        /// <returns>The result of the given expression.</returns>
+        internal static Variable Evaluate(string expression, Data data) {
+            if(string.IsNullOrWhiteSpace(expression)) return new Variable(true);
+
+            // Sanity check: make sure the number of open parens matches the number of closed ones.
+            if(expression.Count(l => l == '(') != expression.Count(r => r == ')'))
+                throw new UnbalancedParenthesisException();
+
+            // Remove spaces from expression.
+            var work = expression.Replace(" ", "");
+        }
+
         private static bool EvaluateBoolean(string expression) {
             var work = expression;
 
