@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Antlr4.4.5.3\build\Antlr4.props" Condition="Exists('..\packages\Antlr4.4.5.3\build\Antlr4.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr4.Runtime, Version=4.5.0.0, Culture=neutral, PublicKeyToken=09abb75b9ed49849, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr4.Runtime.4.5.3\lib\net45\Antlr4.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,7 +54,13 @@
     <Compile Include="Exceptions\PageNotFoundException.cs" />
     <Compile Include="Exceptions\InvalidOperatorException.cs" />
     <Compile Include="Exceptions\UnbalancedParenthesisException.cs" />
-    <Compile Include="Expression.cs" />
+    <Compile Include="ExpressionHandler.cs" />
+    <Compile Include="Expression\Math.g4.lexer.cs">
+      <DependentUpon>Math.g4</DependentUpon>
+    </Compile>
+    <Compile Include="Expression\Math.g4.parser.cs">
+      <DependentUpon>Math.g4</DependentUpon>
+    </Compile>
     <Compile Include="Objects\Action\ActionObject.cs" />
     <Compile Include="Objects\Action\Flag.cs" />
     <Compile Include="Objects\Action\IActionObject.cs" />
@@ -77,11 +90,26 @@
       <Name>Threads.Marker</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Antlr4 Include="Expression\Math.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>Threads.Interpreter.Expression</CustomToolNamespace>
+    </Antlr4>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if not exist "$(ProjectDir)Schema" mkdir "$(ProjectDir)Schema"
 "$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SDKs\Windows\v8.1A\@InstallationFolder)bin\NETFX 4.5.1 Tools\xsd.exe" $(SolutionDir)\Common\Story.xsd /c /n:Threads.Interpreter.Schema /o:$(ProjectDir)Schema</PreBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Antlr4.4.5.3\build\Antlr4.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr4.4.5.3\build\Antlr4.props'))" />
+    <Error Condition="!Exists('..\packages\Antlr4.4.5.3\build\Antlr4.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Antlr4.4.5.3\build\Antlr4.targets'))" />
+  </Target>
+  <Import Project="..\packages\Antlr4.4.5.3\build\Antlr4.targets" Condition="Exists('..\packages\Antlr4.4.5.3\build\Antlr4.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
