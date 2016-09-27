@@ -12,11 +12,35 @@ namespace Threads.Interpreter {
         /// </summary>
         internal Data Data { get; set; }
 
-        internal bool EvaluateBoolean(string expression) {
+        /// <summary>
+        /// Evaluates an expression and returns a <see cref="Variable" />.
+        /// </summary>
+        /// <param name="expression">The expression to evaluate.</param>
+        /// <returns>A <see cref="Variable" /> instance containing the results of the evaluation.</returns>
+        private Variable Evaluate(string expression) {
             var lexer = new MathLexer(new AntlrInputStream(expression));
             var parser = new MathParser(new CommonTokenStream(lexer));
+            var visitor = new MathVisitor { Data = Data };
+            return visitor.Visit(parser.expr());
+        }
 
-            return true;
+        /// <summary>
+        /// Evaluates an expression and returns a boolean value.
+        /// </summary>
+        /// <param name="expression">The expression to evaluate.</param>
+        /// <returns><c>true</c> if the <paramref name="expression" /> is true, otherwise <c>false</c>.</returns>
+        internal bool EvaluateBoolean(string expression) {
+            if(string.IsNullOrWhiteSpace(expression)) return true;
+            return Evaluate(expression) == true;
+        }
+
+        /// <summary>
+        /// Evaluates an expression and returns its final value in a <see cref="Variable" />.
+        /// </summary>
+        /// <param name="expression">The expression to evaluate.</param>
+        /// <returns>A <see cref="Variable " /> containing the final result of the calculation.</returns>
+        internal Variable EvaluateNumeric(string expression) {
+            return string.IsNullOrWhiteSpace(expression) ? new Variable(0) : Evaluate(expression);
         }
     }
 }

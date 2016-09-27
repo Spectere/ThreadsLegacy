@@ -85,8 +85,8 @@ namespace Threads.Interpreter {
                 var thisObject = oldPage.Objects[idx++];
 
                 // Evaluate the expressions (hide takes precidence).
-                //if(!ExpressionOld.Parse(thisObject.ShowIf, Story.Data)) continue;
-                //if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && ExpressionOld.Parse(thisObject.HideIf, Story.Data)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.ShowIf) && _expressionHandler.EvaluateBoolean(thisObject.ShowIf)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && _expressionHandler.EvaluateBoolean(thisObject.HideIf)) continue;
 
                 if(thisObject.GetType().BaseType == typeof(PageObject)) {
                     DisplayList.Add(thisObject);

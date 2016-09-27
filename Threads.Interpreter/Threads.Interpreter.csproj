@@ -61,6 +61,7 @@
     <Compile Include="Expression\Math.g4.parser.cs">
       <DependentUpon>Math.g4</DependentUpon>
     </Compile>
+    <Compile Include="Expression\MathVisitor.cs" />
     <Compile Include="Objects\Action\ActionObject.cs" />
     <Compile Include="Objects\Action\Flag.cs" />
     <Compile Include="Objects\Action\IActionObject.cs" />

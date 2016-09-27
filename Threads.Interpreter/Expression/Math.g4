@@ -76,3 +76,6 @@ LPAREN
     : '(';
 RPAREN
     : ')';
+WHITESPACE
+	: (' ' | '\r' | '\n' | '\t') -> channel(HIDDEN)
+	;
