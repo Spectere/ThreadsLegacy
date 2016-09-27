@@ -16,7 +16,7 @@ namespace Threads.Interpreter {
         /// <summary>
         /// The story file version that this interpreter is designed to read.
         /// </summary>
-        public const int EngineVersion = 2;
+        public const int EngineVersion = 3;
 
         /// <summary>
         /// A raw view of the data included in the loaded story file.
@@ -104,6 +104,7 @@ namespace Threads.Interpreter {
         public void Restart() {
             if(_story == null) throw new StoryNotLoadedException();
             CurrentPage = Story.Configuration.FirstPage;
+            Story.Data = new Data();
             ProcessPage();
         }
 
