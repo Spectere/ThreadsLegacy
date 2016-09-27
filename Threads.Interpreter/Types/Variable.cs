@@ -56,22 +56,65 @@ namespace Threads.Interpreter.Types {
         /// <summary>
         /// Initializes a <see cref="Variable" /> with a <see cref="bool" /> value.
         /// </summary>
+        /// <param name="value">The value to initialize this <see cref="Variable" /> to.</param>
         public Variable(bool value) { Value = value; }
 
         /// <summary>
         /// Initializes a <see cref="Variable" /> with a <see cref="long" /> value.
         /// </summary>
+        /// <param name="value">The value to initialize this <see cref="Variable" /> to.</param>
         public Variable(long value) { Value = value; }
 
         /// <summary>
         /// Initializes a <see cref="Variable" /> with a <see cref="decimal" /> value.
         /// </summary>
+        /// <param name="value">The value to initialize this <see cref="Variable" /> to.</param>
         public Variable(decimal value) { Value = DetermineBestType(value); }
 
         /// <summary>
         /// Initializes a <see cref="Variable" /> with a <see cref="double" /> value.
         /// </summary>
+        /// <param name="value">The value to initialize this <see cref="Variable" /> to.</param>
         public Variable(double value) { Value = DetermineBestType(value); }
+
+        /// <summary>
+        /// Initializes a <see cref="Variable" /> with a <see cref="string" /> value. The value specified is converted to the most appropriate format.
+        /// </summary>
+        /// <param name="value">The value to initialize this <see cref="Variable" /> to.</param>
+        public Variable(string value) {
+            // Handle basic boolean values.
+            switch(value.Trim().ToLower()) {
+                case "true":
+                case "yes":
+                    Value = true;
+                    return;
+                case "false":
+                case "no":
+                    Value = false;
+                    return;
+            }
+
+            // Try to convert it to an integer.
+            long tryLong;
+            if(long.TryParse(value, out tryLong)) {
+                Value = tryLong;
+                return;
+            }
+
+            // Decimal next.
+            decimal tryDecimal;
+            if(decimal.TryParse(value, out tryDecimal)) {
+                Value = tryDecimal;
+                return;
+            }
+
+            // And, finally, double.
+            double tryDouble;
+            if(double.TryParse(value, out tryDouble)) {
+                Value = tryDouble;
+                return;
+            }
+        }
 
         private static Variable Arithmetic(ArithmeticOperation op, Variable var1, Variable var2) {
             return Arithmetic(op, var1.Value, var2.Value);
