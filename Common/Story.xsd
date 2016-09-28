@@ -41,6 +41,7 @@
       <xs:element name="Image" type="ImageObject" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Flag" type="FlagObject" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="Redirect" type="RedirectObject" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Variable" type="VariableObject" minOccurs="0" maxOccurs="unbounded" />
     </xs:choice>
     <xs:attribute name="Name" type="xs:string" use="required" />
   </xs:complexType>
@@ -128,7 +129,7 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="Variable">
+  <xs:complexType name="VariableObject">
     <xs:simpleContent>
       <xs:extension base="ActionObject">
         <xs:attribute name="Operation">
@@ -139,9 +140,11 @@
               <xs:enumeration value="subtract" />
               <xs:enumeration value="multiply" />
               <xs:enumeration value="divide" />
+              <xs:enumeration value="modulus" />
             </xs:restriction>
           </xs:simpleType>
         </xs:attribute>
+        <xs:attribute name="Expression" type="xs:string" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

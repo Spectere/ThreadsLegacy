@@ -11,6 +11,7 @@ using Threads.Interpreter.Schema;
 using Threads.Interpreter.Types;
 using Threads.Marker;
 using Story = Threads.Interpreter.Types.Story;
+using Variable = Threads.Interpreter.Objects.Action.Variable;
 
 namespace Threads.Interpreter {
     internal static class Transform {
@@ -105,6 +106,33 @@ namespace Threads.Interpreter {
                             break;
                         case FlagObjectSetting.toggle:
                             ((Flag)newObject).Setting = Flag.FlagAction.Toggle;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                }
+            } else if(obj.GetType() == typeof(VariableObject)) {
+                var variable = (VariableObject)obj;
+                newObject = new Variable { Operation = Variable.VariableAction.Set, Expression = variable.Expression };
+                if(variable.OperationSpecified) {
+                    switch(variable.Operation) {
+                        case VariableObjectOperation.set:
+                            ((Variable)newObject).Operation = Variable.VariableAction.Set;
+                            break;
+                        case VariableObjectOperation.add:
+                            ((Variable)newObject).Operation = Variable.VariableAction.Add;
+                            break;
+                        case VariableObjectOperation.subtract:
+                            ((Variable)newObject).Operation = Variable.VariableAction.Subtract;
+                            break;
+                        case VariableObjectOperation.multiply:
+                            ((Variable)newObject).Operation = Variable.VariableAction.Multiply;
+                            break;
+                        case VariableObjectOperation.divide:
+                            ((Variable)newObject).Operation = Variable.VariableAction.Divide;
+                            break;
+                        case VariableObjectOperation.modulus:
+                            ((Variable)newObject).Operation = Variable.VariableAction.Modulus;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

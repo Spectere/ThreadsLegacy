@@ -28,6 +28,8 @@ namespace Threads.Editor.Objects {
                 return new Flag(storyObject, storyData);
             if(storyObject.GetType() == typeof(EngineObjects.Action.Redirect))
                 return new Redirect(storyObject, storyData);
+            if(storyObject.GetType() == typeof(EngineObjects.Action.Variable))
+                return new Variable(storyObject, storyData);
 
             return null;
         }
