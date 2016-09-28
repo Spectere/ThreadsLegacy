@@ -149,25 +149,64 @@ namespace Threads.Interpreter.Types {
             // Match up decimal/double types.
             TypeMatch(ref v1, ref v2);
 
+            // Convert longs to decimal/double before doing any operations.
+            if(v1 is long && v2 is double) v1 = Convert.ToDouble(v1);
+            else if(v2 is long && v1 is double) v2 = Convert.ToDouble(v2);
+            else if(v1 is long && v2 is decimal) v1 = Convert.ToDecimal(v1);
+            else if(v2 is long && v1 is decimal) v2 = Convert.ToDecimal(v2);
+            else if(v1 is long && v2 is long) {
+                v1 = Convert.ToDecimal(v1);
+                v2 = Convert.ToDecimal(v2);
+            }
+
             switch(op) {
                 case ArithmeticOperation.Add:
-                    return new Variable(v1 + v2);
+                    try {
+                        return new Variable(checked(v1 + v2));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) + Convert.ToDouble(v2));
+                    }
                 case ArithmeticOperation.Subtract:
-                    return new Variable(v1 - v2);
+                    try {
+                        return new Variable(checked(v1 - v2));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) - Convert.ToDouble(v2));
+                    }
                 case ArithmeticOperation.Multiply:
-                    return new Variable(v1 * v2);
+                    try {
+                        return new Variable(checked(v1 * v2));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) * Convert.ToDouble(v2));
+                    }
                 case ArithmeticOperation.Divide:
                     if(v1 is long && v2 is long)
                         v1 = (decimal)v1;
-                    return new Variable(v1 / v2);
+
+                    try {
+                        return new Variable(checked(v1 / v2));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) / Convert.ToDouble(v2));
+
+                    }
                 case ArithmeticOperation.Modulus:
-                    if(v1 is long && v2 is long)
-                        v1 = (decimal)v1;
-                    return new Variable(v1 % v2);
+                    try {
+                        return new Variable(checked(v1 / v2));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) % Convert.ToDouble(v2));
+
+                    }
                 case ArithmeticOperation.Increment:
-                    return new Variable(v1 + 1);
+                    try {
+                        return new Variable(checked(v1 + 1));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) + 1);
+                    }
                 case ArithmeticOperation.Decrement:
-                    return new Variable(v1 + 1);
+                    try {
+                        return new Variable(checked(v1 - 1));
+                    } catch(OverflowException) {
+                        return new Variable(Convert.ToDouble(v1) - 1);
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(op), op, null);
             }
