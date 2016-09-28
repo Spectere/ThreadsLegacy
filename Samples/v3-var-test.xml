@@ -46,6 +46,7 @@
     </Page>
     <Page Name="ClearVarE">
       <Variable Name="VarE" Operation="set" Expression="0" />
+      <Redirect Target="Init" />
     </Page>
     <Page Name="VarEPlusVarA">
       <Variable Name="VarE" Operation="add" Expression="VarA" />
