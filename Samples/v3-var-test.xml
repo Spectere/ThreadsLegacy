@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="3">
+  <Information>
+    <Name>Variable Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Init</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="Init">
+      <Variable Name="VarA" Operation="set" Expression="1 + 2 * 3" />
+      <Text>VarA = 1 + 2 \* 3 = {VarA}</Text>
+      <Variable Name="VarB" Operation="set" Expression="(5 * (3 - 1) / 5) + 2" />
+      <Text>VarB = (5 \* (3 - 1) / 5) + 2 = {VarB}</Text>
+      <Variable Name="VarC" Operation="set" Expression="VarA % VarB" />
+      <Text>VarC = VarA % VarB = {VarC}</Text>
+      <Variable Name="VarD" Operation="set" Expression="VarB / VarA" />
+      <Text>VarD = VarB / VarA = {VarD}</Text>
+      <Text>VarE = {VarE}</Text>
+      <Choice Target="ClearVarE" Shortcut="0">Zero VarE</Choice>
+      <Choice Target="AddVarE" Shortcut="1">Increment VarE</Choice>
+      <Choice Target="SubVarE" Shortcut="2">Decrement VarE</Choice>
+      <Choice Target="MulVarE" Shortcut="3">Double VarE</Choice>
+      <Choice Target="DivVarE" Shortcut="4">Halve VarE</Choice>
+      <Choice Target="VarEPlusVarA" Shortcut="A">VarE = {VarE} + {VarA}</Choice>
+      <Choice Target="NearOverflow" Shortcut="O">VarE = 2^63 - 1</Choice>
+    </Page>
+    <Page Name="AddVarE">
+      <Variable Name="VarE" Operation="add" Expression="1" />
+      <Redirect Target="Init" />
+    </Page>
+    <Page Name="SubVarE">
+      <Variable Name="VarE" Operation="subtract" Expression="1" />
+      <Redirect Target="Init" />
+    </Page>
+    <Page Name="MulVarE">
+      <Variable Name="VarE" Operation="multiply" Expression="2" />
+      <Redirect Target="Init" />
+    </Page>
+    <Page Name="DivVarE">
+      <Variable Name="VarE" Operation="divide" Expression="2" />
+      <Redirect Target="Init" />
+    </Page>
+    <Page Name="ClearVarE">
+      <Variable Name="VarE" Operation="set" Expression="0" />
+    </Page>
+    <Page Name="VarEPlusVarA">
+      <Variable Name="VarE" Operation="add" Expression="VarA" />
+      <Redirect Target="Init" />
+    </Page>
+    <Page Name="NearOverflow">
+      <Variable Name="VarE" Operation="set" Expression="9223372036854775807" />
+      <Redirect Target="Init" />
+    </Page>
+  </Pages>
+</Story>

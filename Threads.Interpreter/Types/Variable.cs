@@ -43,6 +43,7 @@ namespace Threads.Interpreter.Types {
         public static implicit operator decimal(Variable obj) { return GetDecimal(obj); }
         public static implicit operator double(Variable obj) { return GetDouble(obj); }
         public static implicit operator long(Variable obj) { return GetLong(obj); }
+        public static implicit operator string(Variable obj) { return obj.ToString(); }
 
         public static Variable operator +(Variable a, Variable b) { return Arithmetic(ArithmeticOperation.Add, a, b); }
         public static Variable operator -(Variable a, Variable b) { return Arithmetic(ArithmeticOperation.Subtract, a, b); }

@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{068D
 		Samples\v2-flag-test.xml = Samples\v2-flag-test.xml
 		Samples\v2-redirect-test.xml = Samples\v2-redirect-test.xml
 		Samples\v3-bool-substitution.xml = Samples\v3-bool-substitution.xml
+		Samples\v3-var-test.xml = Samples\v3-var-test.xml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads.Marker", "Threads.Marker\Threads.Marker.csproj", "{B76403C6-7856-439B-87F6-A315296CCC57}"

@@ -72,18 +72,18 @@ namespace Threads.Interpreter.Objects.Page {
                     case Command.Substitution:
                         var substitution = (SubstitutionCommand)instruction;
                         var newInstruction = new TextCommand();
-                        var value = storyData.GetFlag(substitution.Variable);
+                        var value = storyData.GetVariable(substitution.Variable);
 
                         // Handle flag settings.
                         switch(substitution.Flag) {
                             case FlagProperty.TrueFalse:
-                                newInstruction.Text = value ? "true" : "false";
+                                newInstruction.Text = value != 0 ? "true" : "false";
                                 break;
                             case FlagProperty.YesNo:
-                                newInstruction.Text = value ? "yes" : "no";
+                                newInstruction.Text = value != 0 ? "yes" : "no";
                                 break;
                             case FlagProperty.OneZero:
-                                newInstruction.Text = value ? "1" : "0";
+                                newInstruction.Text = value;
                                 break;
                             default:
                                 throw new ArgumentOutOfRangeException();

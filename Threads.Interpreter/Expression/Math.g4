@@ -18,8 +18,7 @@ expr
     | expr op=(EQ | NEQ
               | LT | LTEQ
               | GT | GTEQ) expr			# comparison
-    | literal = (NUMBER
-                | BOOLEAN)				# literal
+    | literal = (NUMBER | BOOLEAN)		# literal
     | variable = VARIABLE				# variable
     ;
 
