@@ -71,7 +71,7 @@ namespace Threads.Marker {
         }
 
         private static SubstitutionCommand ParseSubstitution(string value) {
-            var newCommand = new SubstitutionCommand();
+            var newCommand = new SubstitutionCommand { Flag = FlagProperty.OneZero };
             var baseTokens = value.Split('|');
 
             newCommand.Variable = baseTokens[0].Trim();
