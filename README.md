@@ -8,6 +8,8 @@
 
 You must have Microsoft Visual Studio (or a compatible IDE) with .NET 4.6.1 support in order to build *Threads*. It was designed using Visual Studio 2015 Community Edition, but you should be able to build it with versions as low as 2012 as long as you have the [Microsoft .NET 4.6.1 Developer Pack](https://www.microsoft.com/en-us/download/details.aspx?id=49978) installed on your system.
 
+In addition to Visual Studio, you will also need the [ANTLR Language Support](https://github.com/sharwell/antlr4cs/blob/master/Readme.md) extension installed. *Threads* uses ANTLR for its expression parser.
+
 Since it is a WPF application, it is also bound to Windows. **Threads.Interpreter** and **Threads.Markup** are not dependend on WPF in any way, so it should be relatively simple to reimplement **Threads.Player** using a different toolkit.
 
 ### Why WPF?

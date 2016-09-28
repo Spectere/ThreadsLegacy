@@ -16,7 +16,7 @@ namespace Threads.Interpreter {
         /// <summary>
         /// The story file version that this interpreter is designed to read.
         /// </summary>
-        public const int EngineVersion = 2;
+        public const int EngineVersion = 3;
 
         /// <summary>
         /// A raw view of the data included in the loaded story file.
@@ -81,8 +81,8 @@ namespace Threads.Interpreter {
                 var thisObject = oldPage.Objects[idx++];
 
                 // Evaluate the expressions (hide takes precidence).
-                if(!Expression.Parse(thisObject.ShowIf, Story.Data)) continue;
-                if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && Expression.Parse(thisObject.HideIf, Story.Data)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.ShowIf) && !ExpressionHandler.EvaluateBoolean(thisObject.ShowIf, Story.Data)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && ExpressionHandler.EvaluateBoolean(thisObject.HideIf, Story.Data)) continue;
 
                 if(thisObject.GetType().BaseType == typeof(PageObject)) {
                     DisplayList.Add(thisObject);
@@ -104,6 +104,7 @@ namespace Threads.Interpreter {
         public void Restart() {
             if(_story == null) throw new StoryNotLoadedException();
             CurrentPage = Story.Configuration.FirstPage;
+            Story.Data = new Data();
             ProcessPage();
         }
 
