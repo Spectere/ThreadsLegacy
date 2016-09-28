@@ -13,8 +13,6 @@ namespace Threads.Interpreter {
     /// Represents a Threads story.
     /// </summary>
     public class Engine {
-        private ExpressionHandler _expressionHandler;
-
         /// <summary>
         /// The story file version that this interpreter is designed to read.
         /// </summary>
@@ -43,7 +41,6 @@ namespace Threads.Interpreter {
         public Engine() {
             DisplayList = new List<IObject>();
             Story = new Story();
-            _expressionHandler = new ExpressionHandler { Data = Story.Data };
         }
 
         /// <summary>
@@ -66,7 +63,6 @@ namespace Threads.Interpreter {
             var storyFile = File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
             _story = (StorySerializer)serializer.Deserialize(storyFile);
             Story = Transform.TransformStory(_story, this);
-            _expressionHandler = new ExpressionHandler { Data = Story.Data };
             storyFile.Close();
 
             Restart();
@@ -85,8 +81,8 @@ namespace Threads.Interpreter {
                 var thisObject = oldPage.Objects[idx++];
 
                 // Evaluate the expressions (hide takes precidence).
-                if(!string.IsNullOrWhiteSpace(thisObject.ShowIf) && _expressionHandler.EvaluateBoolean(thisObject.ShowIf)) continue;
-                if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && _expressionHandler.EvaluateBoolean(thisObject.HideIf)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.ShowIf) && !ExpressionHandler.EvaluateBoolean(thisObject.ShowIf, Story.Data)) continue;
+                if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && ExpressionHandler.EvaluateBoolean(thisObject.HideIf, Story.Data)) continue;
 
                 if(thisObject.GetType().BaseType == typeof(PageObject)) {
                     DisplayList.Add(thisObject);

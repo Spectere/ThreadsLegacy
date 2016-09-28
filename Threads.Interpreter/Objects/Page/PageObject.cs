@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Linq;
 using Threads.Interpreter.Types;
 using Threads.Marker;
@@ -40,6 +39,7 @@ namespace Threads.Interpreter.Objects.Page {
         /// Initializes a new instance of this <see cref="PageObject"/>.
         /// </summary>
         [SuppressMessage("ReSharper", "VirtualMemberCallInConstructor")]
+        [SuppressMessage("ReSharper", "DoNotCallOverridableMethodsInConstructor")]
         protected PageObject() {
             Style = DefaultStyle;
             FormattedText = new TextSequence();

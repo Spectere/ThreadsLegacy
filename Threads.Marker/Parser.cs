@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Text;
 using Threads.Marker.Commands;
 using Threads.Marker.Commands.SubstitutionProperties;

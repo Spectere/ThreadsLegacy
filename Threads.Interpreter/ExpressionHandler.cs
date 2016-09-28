@@ -6,21 +6,17 @@ namespace Threads.Interpreter {
     /// <summary>
     /// Uses the ANTLR-generated lexer/parser to determine the final result of a given expression.
     /// </summary>
-    internal class ExpressionHandler {
-        /// <summary>
-        /// The <see cref="Data" /> instance that variables and other story data should be pulled from.
-        /// </summary>
-        internal Data Data { get; set; }
-
+    internal static class ExpressionHandler {
         /// <summary>
         /// Evaluates an expression and returns a <see cref="Variable" />.
         /// </summary>
         /// <param name="expression">The expression to evaluate.</param>
+        /// <param name="data">The <see cref="Data" /> object containing all of the story variables.</param>
         /// <returns>A <see cref="Variable" /> instance containing the results of the evaluation.</returns>
-        private Variable Evaluate(string expression) {
+        private static Variable Evaluate(string expression, Data data) {
             var lexer = new MathLexer(new AntlrInputStream(expression));
             var parser = new MathParser(new CommonTokenStream(lexer));
-            var visitor = new MathVisitor { Data = Data };
+            var visitor = new MathVisitor { Data = data };
             return visitor.Visit(parser.expr());
         }
 
@@ -28,19 +24,21 @@ namespace Threads.Interpreter {
         /// Evaluates an expression and returns a boolean value.
         /// </summary>
         /// <param name="expression">The expression to evaluate.</param>
+        /// <param name="data">The <see cref="Data" /> object containing all of the story variables.</param>
         /// <returns><c>true</c> if the <paramref name="expression" /> is true, otherwise <c>false</c>.</returns>
-        internal bool EvaluateBoolean(string expression) {
+        internal static bool EvaluateBoolean(string expression, Data data) {
             if(string.IsNullOrWhiteSpace(expression)) return true;
-            return Evaluate(expression) == true;
+            return Evaluate(expression, data) == true;
         }
 
         /// <summary>
         /// Evaluates an expression and returns its final value in a <see cref="Variable" />.
         /// </summary>
         /// <param name="expression">The expression to evaluate.</param>
+        /// <param name="data">The <see cref="Data" /> object containing all of the story variables.</param>
         /// <returns>A <see cref="Variable " /> containing the final result of the calculation.</returns>
-        internal Variable EvaluateNumeric(string expression) {
-            return string.IsNullOrWhiteSpace(expression) ? new Variable(0) : Evaluate(expression);
+        internal static Variable EvaluateNumeric(string expression, Data data) {
+            return string.IsNullOrWhiteSpace(expression) ? new Variable(0) : Evaluate(expression, data);
         }
     }
 }

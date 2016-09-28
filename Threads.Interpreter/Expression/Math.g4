@@ -9,36 +9,18 @@ options {
 }
 
 expr
-    : expr conditionalOp expr
-    | LPAREN expr RPAREN
-    | (NOT) expr
-    | (ADD | SUB) expr
-    | expr (MUL | DIV | MOD) expr
-    | expr (ADD | SUB) expr
-    | expr comparisonOp expr
+    : expr op=(CONDAND | CONDOR) expr	# conditional
+    | LPAREN expr RPAREN				# paren
+    | (NOT) expr						# negate
+    | sign=(ADD | SUB) expr				# sign
+    | expr op=(MUL | DIV | MOD) expr	# mulDiv
+    | expr op=(ADD | SUB) expr			# addSub
+    | expr op=(EQ | NEQ
+              | LT | LTEQ
+              | GT | GTEQ) expr			# comparison
     | literal = (NUMBER
-                | VARIABLE
-                | BOOLEAN)
-    ;
-
-conditionalOp
-    : CONDAND
-    | CONDOR
-    ;
-
-comparisonOp
-    : EQ
-    | NEQ
-    | LT
-    | LTEQ
-    | GT
-    | GTEQ
-    ;
-
-value
-    : NUMBER
-    | VARIABLE
-    | BOOLEAN
+                | BOOLEAN)				# literal
+    | variable = VARIABLE				# variable
     ;
 
 NUMBER
