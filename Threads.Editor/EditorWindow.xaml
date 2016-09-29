@@ -57,10 +57,10 @@
         </Grid.ColumnDefinitions>
         
         <Menu Grid.Row="0" Grid.ColumnSpan="3" Height="Auto">
-            <MenuItem Click="New_OnClick" Style="{StaticResource MenuItemStyle}" Header="New" Command="New" />
-            <MenuItem Click="Open_OnClick" Style="{StaticResource MenuItemStyle}" Header="Open" Command="Open" />
-            <MenuItem Click="Save_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save" Command="Save" />
-            <MenuItem Click="SaveAs_OnClick" Style="{StaticResource MenuItemStyle}" Header="Save As" Command="SaveAs" />
+            <MenuItem Style="{StaticResource MenuItemStyle}" Header="New" Command="New" />
+            <MenuItem Style="{StaticResource MenuItemStyle}" Header="Open" Command="Open" />
+            <MenuItem Style="{StaticResource MenuItemStyle}" Header="Save" Command="Save" />
+            <MenuItem Style="{StaticResource MenuItemStyle}" Header="Save As" Command="SaveAs" />
             <Separator />
             <MenuItem Style="{StaticResource MenuItemStyle}" Header="Story Info" Command="{StaticResource StoryInfoCommand}" />
             <MenuItem Style="{StaticResource MenuItemStyle}" Header="Story Config" Command="{StaticResource StoryConfigCommand}" />
