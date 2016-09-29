@@ -29,9 +29,6 @@ namespace Threads.Interpreter.Expression {
             var left = Visit(context.expr(0));
             var right = Visit(context.expr(1));
 
-            var l = context.expr(0);
-            var r = context.expr(1);
-
             switch(context.op.Type) {
                 case MathLexer.EQ:
                     return left == right;
