@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using Threads.Editor.Exceptions;
 using Threads.Editor.Objects;
 using Threads.Interpreter;
+using Threads.Interpreter.Exceptions;
 using Threads.Interpreter.Objects;
 using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
@@ -103,7 +104,12 @@ namespace Threads.Editor {
 
             // ReSharper disable once AssignNullToNotNullAttribute
             Directory.SetCurrentDirectory(Path.GetDirectoryName(_filename));
-            _engine = new Engine(_filename);
+            try {
+                _engine = new Engine(_filename);
+            } catch(Exception ex) when (ex is NoPagesFoundException || ex is NullPagesException) {
+                MessageBox.Show(this, "No pages found in the loaded story! Aborting.", null, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
 
             Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
 
@@ -112,11 +118,13 @@ namespace Threads.Editor {
             UpdateObjectEditor();
         }
 
-        private void SaveStory(string filename) {
+        private bool SaveStory(string filename) {
             try {
                 _engine.Save(filename);
+                return true;
             } catch(Exception ex) {
-                MessageBox.Show($"An error occured during save:\n\n{ex.Message}\n\n{ex.StackTrace}");
+                MessageBox.Show(this, $"An error occured during save:\n\n{ex.Message}\n\n{ex.StackTrace}", null, MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return false;
             }
         }
 
@@ -139,7 +147,7 @@ namespace Threads.Editor {
 
             // ReSharper disable once AssignNullToNotNullAttribute
             Directory.SetCurrentDirectory(Path.GetDirectoryName(_filename));
-            SaveStory(_filename);
+            if(!SaveStory(_filename)) return;
 
             Title = $"Threads Editor - [{Path.GetFileName(_filename)}]";
         }
