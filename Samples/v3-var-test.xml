@@ -20,11 +20,20 @@
       <Variable Name="VarD" Operation="set" Expression="VarB / VarA" />
       <Text>VarD = VarB / VarA = {VarD}</Text>
       <Text>VarE = {VarE}</Text>
+      <Text>FlagA = {FlagA|flag=truefalse}</Text>
+      <Text ShowIf="VarE &gt; 25">VarE is greater than 25.</Text>
+      <Text ShowIf="VarE != 25">VarE is not equal to 25.</Text>
+      <Text ShowIf="VarE == 25">VarE is equal to 25.</Text>
+      <Text ShowIf="VarE &lt; 25 &amp; !FlagA">VarE is less than 25 and FlagA is not set (via negation).</Text>
+      <Text ShowIf="!(VarE &lt; 25 &amp; !FlagA)">not (VarE is less than 25 and FlagA is not set (via negation).)</Text>
+      <Text ShowIf="VarE &lt; 25 &amp; FlagA = false">VarE is less than 25 and FlagA is not set (via equality).</Text>
+      <Text ShowIf="VarE &lt; 25 &amp; FlagA &lt;&gt; true">VarE is less than 25 and FlagA is not set (via inequality).</Text>
       <Choice Target="ClearVarE" Shortcut="0">Zero VarE</Choice>
       <Choice Target="AddVarE" Shortcut="1">Increment VarE</Choice>
       <Choice Target="SubVarE" Shortcut="2">Decrement VarE</Choice>
       <Choice Target="MulVarE" Shortcut="3">Double VarE</Choice>
       <Choice Target="DivVarE" Shortcut="4">Halve VarE</Choice>
+      <Choice Target="ToggleFlagA" Shortcut="F">Toggle FlagA</Choice>
       <Choice Target="VarEPlusVarA" Shortcut="A">VarE = {VarE} + {VarA}</Choice>
       <Choice Target="NearOverflow" Shortcut="O">VarE = 2^63 - 1</Choice>
     </Page>
@@ -54,6 +63,10 @@
     </Page>
     <Page Name="NearOverflow">
       <Variable Name="VarE" Operation="set" Expression="9223372036854775807" />
+      <Redirect Target="Init" />
+    </Page>
+    <Page Name="ToggleFlagA">
+      <Flag Name="FlagA" Setting="toggle" />
       <Redirect Target="Init" />
     </Page>
   </Pages>

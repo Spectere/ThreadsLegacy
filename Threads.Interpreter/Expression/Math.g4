@@ -9,8 +9,7 @@ options {
 }
 
 expr
-    : expr op=(CONDAND | CONDOR) expr	# conditional
-    | LPAREN expr RPAREN				# paren
+    : LPAREN expr RPAREN				# paren
     | (NOT) expr						# negate
     | sign=(ADD | SUB) expr				# sign
     | expr op=(MUL | DIV | MOD) expr	# mulDiv
@@ -18,19 +17,20 @@ expr
     | expr op=(EQ | NEQ
               | LT | LTEQ
               | GT | GTEQ) expr			# comparison
+    | expr op=(CONDAND | CONDOR) expr	# conditional
     | literal = (NUMBER | BOOLEAN)		# literal
     | variable = VARIABLE				# variable
     ;
 
+BOOLEAN
+    : 'true'
+    | 'false'
+    ;
 NUMBER
     : ('0'..'9')+ ('.' ('0'..'9')+)?
     ;
 VARIABLE
     : [a-zA-Z]+ [a-zA-Z0-9]*
-    ;
-BOOLEAN
-    : 'true'
-    | 'false'
     ;
 
 ADD : '+';
@@ -39,20 +39,18 @@ MUL : '*';
 DIV : '/';
 MOD : '%';
 CONDAND
-    : '&'
-    | 'and';
+    : '&';
 CONDOR
-    : '|'
-    | 'or';
-EQ  : '=';
+    : '|';
+EQ  : '='
+    | '==';
 NEQ : '!='
     | '<>';
 LT  : '<';
 LTEQ: '<=';
 GT  : '>';
 GTEQ: '>=';
-NOT : '!'
-    | 'not';
+NOT : '!';
 LPAREN
     : '(';
 RPAREN
