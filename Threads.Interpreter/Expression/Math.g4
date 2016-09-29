@@ -18,7 +18,8 @@ expr
               | LT | LTEQ
               | GT | GTEQ) expr			# comparison
     | expr op=(CONDAND | CONDOR) expr	# conditional
-    | literal = (NUMBER | BOOLEAN)		# literal
+    | literal = NUMBER					# literal
+    | truth = BOOLEAN					# boolean
     | variable = VARIABLE				# variable
     ;
 

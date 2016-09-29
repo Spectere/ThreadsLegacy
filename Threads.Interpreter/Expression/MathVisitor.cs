@@ -25,6 +25,17 @@ namespace Threads.Interpreter.Expression {
             }
         }
 
+        public override Variable VisitBoolean(MathParser.BooleanContext context) {
+            switch(context.truth.Text) {
+                case "true":
+                    return new Variable(true);
+                case "false":
+                    return new Variable(false);
+                default:
+                    throw new Exception("Invalid boolean value.");  // FileNotFound?
+            }
+        }
+
         public override Variable VisitComparison(MathParser.ComparisonContext context) {
             var left = Visit(context.expr(0));
             var right = Visit(context.expr(1));
