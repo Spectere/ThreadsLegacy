@@ -21,29 +21,47 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{068DA925-034A-4D7C-B344-083CC846F7D9}"
-	ProjectSection(SolutionItems) = preProject
-		Samples\creepy-derp-face.png = Samples\creepy-derp-face.png
-		Samples\v0-basic-essentials.xml = Samples\v0-basic-essentials.xml
-		Samples\v0-basic.xml = Samples\v0-basic.xml
-		Samples\v0-interleaved-choices.xml = Samples\v0-interleaved-choices.xml
-		Samples\v0-markertest.xml = Samples\v0-markertest.xml
-		Samples\v0-no-pages.xml = Samples\v0-no-pages.xml
-		Samples\v0-null-story.xml = Samples\v0-null-story.xml
-		Samples\v0-paragraphs.xml = Samples\v0-paragraphs.xml
-		Samples\v1-editor-test.xml = Samples\v1-editor-test.xml
-		Samples\v1-image.xml = Samples\v1-image.xml
-		Samples\v1-margin-test.xml = Samples\v1-margin-test.xml
-		Samples\v1-object-styling.xml = Samples\v1-object-styling.xml
-		Samples\v2-expressions.xml = Samples\v2-expressions.xml
-		Samples\v2-flag-test.xml = Samples\v2-flag-test.xml
-		Samples\v2-redirect-test.xml = Samples\v2-redirect-test.xml
-		Samples\v3-bool-substitution.xml = Samples\v3-bool-substitution.xml
-		Samples\v3-var-test.xml = Samples\v3-var-test.xml
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads.Marker", "Threads.Marker\Threads.Marker.csproj", "{B76403C6-7856-439B-87F6-A315296CCC57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Threads.Editor", "Threads.Editor\Threads.Editor.csproj", "{0B40B499-6A09-433D-846B-426FF71BCA6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{2696044A-7CF2-4BE1-A815-71ACCE9FF8C2}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\resources\creepy-derp-face.png = Samples\resources\creepy-derp-face.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v0", "v0", "{D690C6A5-F5E2-4F78-BDE6-600112967EC8}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\v0\v0-basic-essentials.xml = Samples\v0\v0-basic-essentials.xml
+		Samples\v0\v0-basic.xml = Samples\v0\v0-basic.xml
+		Samples\v0\v0-interleaved-choices.xml = Samples\v0\v0-interleaved-choices.xml
+		Samples\v0\v0-markertest.xml = Samples\v0\v0-markertest.xml
+		Samples\v0\v0-no-pages.xml = Samples\v0\v0-no-pages.xml
+		Samples\v0\v0-null-story.xml = Samples\v0\v0-null-story.xml
+		Samples\v0\v0-paragraphs.xml = Samples\v0\v0-paragraphs.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v1", "v1", "{D38F8F33-B729-4C35-B659-8CD86D9B55D7}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\v1\v1-editor-test.xml = Samples\v1\v1-editor-test.xml
+		Samples\v1\v1-image.xml = Samples\v1\v1-image.xml
+		Samples\v1\v1-margin-test.xml = Samples\v1\v1-margin-test.xml
+		Samples\v1\v1-object-styling.xml = Samples\v1\v1-object-styling.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v2", "v2", "{A16B9D0A-6081-4B0F-8501-AB1440A8D74F}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\v2\v2-expressions.xml = Samples\v2\v2-expressions.xml
+		Samples\v2\v2-flag-test.xml = Samples\v2\v2-flag-test.xml
+		Samples\v2\v2-redirect-test.xml = Samples\v2\v2-redirect-test.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v3", "v3", "{6D5E4B10-C0E6-4782-B7F2-46E639D9CD80}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\v3\v3-bool-substitution.xml = Samples\v3\v3-bool-substitution.xml
+		Samples\v3\v3-var-test.xml = Samples\v3\v3-var-test.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,5 +88,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2696044A-7CF2-4BE1-A815-71ACCE9FF8C2} = {068DA925-034A-4D7C-B344-083CC846F7D9}
+		{D690C6A5-F5E2-4F78-BDE6-600112967EC8} = {068DA925-034A-4D7C-B344-083CC846F7D9}
+		{D38F8F33-B729-4C35-B659-8CD86D9B55D7} = {068DA925-034A-4D7C-B344-083CC846F7D9}
+		{A16B9D0A-6081-4B0F-8501-AB1440A8D74F} = {068DA925-034A-4D7C-B344-083CC846F7D9}
+		{6D5E4B10-C0E6-4782-B7F2-46E639D9CD80} = {068DA925-034A-4D7C-B344-083CC846F7D9}
 	EndGlobalSection
 EndGlobal

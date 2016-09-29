@@ -24,7 +24,7 @@
 
     <Page Name="OhYes">
       <Text>_*Whelp, here it is:*_</Text>
-      <Image Source="creepy-derp-face.png">Creepy Face!</Image>
+      <Image Source="../resources/creepy-derp-face.png">Creepy Face!</Image>
       <Text>Did you like it? _Did you?_ I hope so! It took me almost *two minutes* to draw that.</Text>
       <Text>Next, here's what an invalid image looks like (some formatted alt text should pop up instead):</Text>
       <Image Source="purposely-invalid-image-file.png">This image is *borked*.</Image>
