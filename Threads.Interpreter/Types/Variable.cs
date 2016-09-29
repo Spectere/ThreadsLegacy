@@ -113,10 +113,15 @@ namespace Threads.Interpreter.Types {
                 return;
             }
 
-            // And, finally, double.
+            // Now a double.
             double tryDouble;
-            if(!double.TryParse(value, out tryDouble)) return;
-            Value = tryDouble;
+            if(double.TryParse(value, out tryDouble)) {
+                Value = tryDouble;
+                return;
+            }
+
+            // And, finally, a string.
+            Value = value;
         }
 
         private static Variable Arithmetic(ArithmeticOperation op, Variable var1, Variable var2) {
@@ -132,7 +137,11 @@ namespace Threads.Interpreter.Types {
 
             // Throw exception for bools.
             if(v1 is bool || v2 is bool)
-                throw new InvalidVariableOperationException($"Attempted to perform an {op} operation on a boolean value.");
+                throw new InvalidVariableOperationException($"Attempted to perform a(n) {op} operation on a boolean value.");
+
+            // Only addition (concatenation) can be performed on strings.
+            if((v1 is string || v2 is string) && op != ArithmeticOperation.Add)
+                throw new InvalidVariableOperationException($"Attempted to perform a(n) {op} operation on a string value.");
 
             // Match up decimal/double types.
             TypeMatch(ref v1, ref v2);

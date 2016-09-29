@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<Story xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Format="3">
+  <Information>
+    <Name>String Test</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Init</FirstPage>
+  </Configuration>
+  <Pages>
+    <Page Name="Init">
+      <Variable Name="StringA" Operation="set" Expression="&quot;Hello world (double quotes edition)!&quot;" />
+      <Variable Name="StringB" Operation="set" Expression="'Hello world (single quotes edition)!'" />
+      <Variable Name="StringC" Operation="set" Expression="&quot;John Doe's Test.&quot;" />
+      <Variable Name="StringD" Operation="set" Expression="'Jane Doe\'s Test.'" />
+      <Variable Name="StringE" Operation="set" Expression="&quot;And then I said, \&quot;Let there be Threads!\&quot;&quot;" />
+      <Text Name="A">{StringA}</Text>
+      <Text Name="B">{StringB}</Text>
+      <Text Name="C">{StringC}</Text>
+      <Text Name="D">{StringD}</Text>
+      <Text Name="E">{StringE}</Text>
+      <Choice Target="Concat" Shortcut="1">Concatenation</Choice>
+      <Choice Target="Comparison" Shortcut="2">Comparison</Choice>
+    </Page>
+    <Page Name="Concat">
+      <Variable Name="ConcatA" Operation="set" Expression="&quot;Hello&quot;" />
+      <Variable Name="ConcatB" Operation="set" Expression="&quot;World&quot;" />
+      <Text Name="Marker">*Marker String Joining:* {ConcatA} {ConcatB}</Text>
+      <Variable Name="ResultA" Operation="set" Expression="ConcatA + &quot; &quot; + ConcatB" />
+      <Text Name="Add Expression">*Adds (Expression):* {ResultA}</Text>
+      <Variable Name="ResultB" Operation="set" Expression="ConcatA" />
+      <Variable Name="ResultB" Operation="add" Expression="&quot; &quot;" />
+      <Variable Name="ResultB" Operation="add" Expression="ConcatB" />
+      <Text Name="Add Operation">*Adds (Operation):* {ResultB}</Text>
+      <Choice Target="Init" Shortcut="1">Back</Choice>
+    </Page>
+    <Page Name="Comparison">
+      <Variable Name="CompareA" Operation="set" Expression="&quot;Hello&quot;" />
+      <Variable Name="CompareB" Operation="set" Expression="&quot;World&quot;" />
+      <Variable Name="CompareC" Operation="set" Expression="&quot;World&quot;" />
+      <Variable Name="CompareD" Operation="set" Expression="CompareA + CompareB" />
+      <Variable Name="CompareE" Operation="set" Expression="20" />
+      <Text Name="CompareA">*CompareA* = {CompareA}</Text>
+      <Text Name="CompareB">*CompareB* = {CompareB}</Text>
+      <Text Name="CompareC">*CompareC* = {CompareC}</Text>
+      <Text Name="CompareD">*CompareD* = {CompareD}</Text>
+      <Text Name="CompareE">*CompareE* = {CompareE}</Text>
+      <Text Name="cA == cB" ShowIf="CompareA == CompareB">CompareA == CompareB</Text>
+      <Text Name="cA != cB" ShowIf="CompareA != CompareB">CompareA != CompareB</Text>
+      <Text Name="cB == cC" ShowIf="CompareB == CompareC">CompareB == CompareC</Text>
+      <Text Name="cA + cB == cD" ShowIf="CompareA + CompareB == CompareD">CompareA + CompareB == CompareD</Text>
+      <Text Name="cA + cE == Hello20" ShowIf="CompareA + CompareE == &quot;Hello20&quot;">CompareA + CompareE == "Hello20"</Text>
+      <Variable Name="Final" Operation="set" Expression="CompareA + CompareC + CompareE" />
+      <Text Name="Final">CompareA + CompareC + CompareE = {Final}</Text>
+      <Choice Name="" Target="Init" Shortcut="1">Back</Choice>
+    </Page>
+  </Pages>
+</Story>

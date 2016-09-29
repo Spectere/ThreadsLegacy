@@ -72,10 +72,6 @@ namespace Threads.Interpreter.Expression {
             }
         }
 
-        public override Variable VisitLiteral(MathParser.LiteralContext context) {
-            return new Variable(context.literal.Text);
-        }
-
         public override Variable VisitMulDiv(MathParser.MulDivContext context) {
             var left = Visit(context.expr(0));
             var right = Visit(context.expr(1));
@@ -97,6 +93,10 @@ namespace Threads.Interpreter.Expression {
             return !value;
         }
 
+        public override Variable VisitNumber(MathParser.NumberContext context) {
+            return new Variable(context.number.Text);
+        }
+
         public override Variable VisitParen(MathParser.ParenContext context) {
             return Visit(context.expr());
         }
@@ -112,6 +112,14 @@ namespace Threads.Interpreter.Expression {
                 default:
                     throw new Exception("Unknown sign.");
             }
+        }
+
+        public override Variable VisitString(MathParser.StringContext context) {
+            var text = context.@string.Text;
+            text = text.Substring(1, text.Length - 2)
+                       .Replace("\\\"", "\"")
+                       .Replace("\\'", "'");
+            return new Variable(text);
         }
 
         public override Variable VisitVariable(MathParser.VariableContext context) {

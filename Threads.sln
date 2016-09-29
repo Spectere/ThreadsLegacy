@@ -60,6 +60,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v3", "v3", "{6D5E4B10-C0E6-4782-B7F2-46E639D9CD80}"
 	ProjectSection(SolutionItems) = preProject
 		Samples\v3\v3-bool-substitution.xml = Samples\v3\v3-bool-substitution.xml
+		Samples\v3\v3-string-test.xml = Samples\v3\v3-string-test.xml
 		Samples\v3\v3-var-test.xml = Samples\v3\v3-var-test.xml
 	EndProjectSection
 EndProject
