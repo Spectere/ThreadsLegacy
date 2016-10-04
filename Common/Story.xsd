@@ -5,6 +5,19 @@
       <xs:sequence>
         <xs:element name="Information" type="InformationType" minOccurs="1" maxOccurs="1" />
         <xs:element name="Configuration" type="ConfigurationType" minOccurs="1" maxOccurs="1" />
+        <xs:element name="Styles" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Style" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="Inherits" type="xs:string" use="optional" />
+                  <xs:attributeGroup ref="StyleGroup" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="Pages" minOccurs="1" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
@@ -29,6 +42,14 @@
   <xs:complexType name="ConfigurationType">
     <xs:all>
       <xs:element name="FirstPage" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="DefaultStyle" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:attributeGroup ref="PageStyleGroup" />
+          <xs:attributeGroup ref="StyleGroup" />
+        </xs:complexType>
+      </xs:element>
+
+      <!-- Legacy (pre-v4) -->
       <xs:element name="StoryMarginLeft" type="xs:double" minOccurs="0" maxOccurs="1" />
       <xs:element name="StoryMarginRight" type="xs:double" minOccurs="0" maxOccurs="1" />
     </xs:all>
@@ -44,7 +65,27 @@
       <xs:element name="Variable" type="VariableObject" minOccurs="0" maxOccurs="unbounded" />
     </xs:choice>
     <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attributeGroup ref="PageStyleGroup" />
+    <xs:attributeGroup ref="StyleGroup" />
   </xs:complexType>
+
+  <!--
+    Style Attributes
+    -->
+  <xs:attributeGroup name="PageStyleGroup">
+    <xs:attribute name="PageMarginBottom" type="xs:double" use="optional" />
+    <xs:attribute name="PageMarginLeft" type="xs:double" use="optional" />
+    <xs:attribute name="PageMarginRight" type="xs:double" use="optional" />
+    <xs:attribute name="PageMarginTop" type="xs:double" use="optional" />
+  </xs:attributeGroup>
+  
+  <xs:attributeGroup name="StyleGroup">
+    <!-- Block Element Styles -->
+    <xs:attribute name="MarginBottom" type="xs:double" use="optional" />
+    <xs:attribute name="MarginLeft" type="xs:double" use="optional" />
+    <xs:attribute name="MarginRight" type="xs:double" use="optional" />
+    <xs:attribute name="MarginTop" type="xs:double" use="optional" />
+  </xs:attributeGroup>
 
   <!--
     Object Base
@@ -65,10 +106,8 @@
   <xs:complexType name="PageObject">
     <xs:simpleContent>
       <xs:extension base="Object">
-        <xs:attribute name="MarginBottom" type="xs:double" use="optional" />
-        <xs:attribute name="MarginLeft" type="xs:double" use="optional" />
-        <xs:attribute name="MarginRight" type="xs:double" use="optional" />
-        <xs:attribute name="MarginTop" type="xs:double" use="optional" />
+        <xs:attribute name="Style" use="optional" />
+        <xs:attributeGroup ref="StyleGroup" />
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
