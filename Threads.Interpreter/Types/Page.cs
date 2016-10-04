@@ -14,6 +14,16 @@ namespace Threads.Interpreter.Types {
         public string Name { get; set; }
 
         /// <summary>
+        /// The page-specific styles that should be applied to this object.
+        /// </summary>
+        public PageStyle PageStyle { get; set; }
+        
+        /// <summary>
+        /// The style that should be applied to all objects in this page.
+        /// </summary>
+        public Style Style { get; set; }
+
+        /// <summary>
         /// The <see cref="IObject" />s associated with this page.
         /// </summary>
         public List<IObject> Objects { get; set; }
