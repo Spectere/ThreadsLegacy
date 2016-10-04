@@ -16,7 +16,7 @@ namespace Threads.Interpreter {
         /// <summary>
         /// The story file version that this interpreter is designed to read.
         /// </summary>
-        public const int EngineVersion = 3;
+        public const int EngineVersion = 4;
 
         /// <summary>
         /// A raw view of the data included in the loaded story file.

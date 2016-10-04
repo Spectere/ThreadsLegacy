@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Story Format="4">
+  <Information>
+    <Name>Margin Test (Story v4)</Name>
+    <Author>Spectere</Author>
+    <Version>1.0</Version>
+    <Website>http://www.spectere.net/</Website>
+  </Information>
+  <Configuration>
+    <FirstPage>Page1</FirstPage>
+    <DefaultStyle PageMarginLeft="10.0" PageMarginRight="10.0" />
+  </Configuration>
+  <Styles>
+    <Style Name="PushLeft" MarginRight="80.0" />
+    <Style Name="PushRight" MarginLeft="80.0" />
+    <Style Name="Squeeze" Inherits="PushLeft" MarginLeft="80.0" />
+  </Styles>
+  <Pages>
+    <Page Name="Page1" PageMarginTop="80.0" PageMarginBottom="100.0">
+      <Text>This is an example of a story file with customized page margins (namely, _10.0_ on each side instead of the default _40.0_). In addition to that, we will also explore some PageObject margins while we're at it! This is going to be fun.</Text>
+      <Text Style="PushRight">This text should be shunted to the right a bit. The right edge should remain where you'd expect.</Text>
+      <Text Style="PushLeft">The left edge of this text should be where you'd expect, but the right edge is a bit more toward the left.</Text>
+      <Text Style="Squeeze">This text should be squashed from both the left and right sides. Yowzer!</Text>
+      <Text MarginTop="20.0">Normally, paragraphs have no top margin and a bottom margin of _20.0_. This paragraph has a top margin of _20.0_ with the default bottom margin, so it should be a bit further away from the above paragraph than you'd expect.</Text>
+      <Text MarginBottom="0.0">This paragraph's bottom margin has been forced to _0.0_. It should be nestled right against the text below.</Text>
+      <Text>Hi! I'm just here to prove the above paragraph's point.</Text>
+      <Text Style="Squeeze" MarginTop="20.0">I was added to test style overriding. Hopefully everything works as expected!</Text>
+      <Text>Oh, right. This page should have larger-than-normal top and bottom margins. That's another new feature in Story v4.</Text>
+    </Page>
+  </Pages>
+</Story>

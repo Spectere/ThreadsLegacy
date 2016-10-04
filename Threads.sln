@@ -64,6 +64,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v3", "v3", "{6D5E4B10-C0E6-
 		Samples\v3\v3-var-test.xml = Samples\v3\v3-var-test.xml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "v4", "v4", "{241AD33E-0288-4433-9023-B6CE5318C5A5}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\v4\v4-margin-test-styles.xml = Samples\v4\v4-margin-test-styles.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -96,5 +101,6 @@ Global
 		{D38F8F33-B729-4C35-B659-8CD86D9B55D7} = {068DA925-034A-4D7C-B344-083CC846F7D9}
 		{A16B9D0A-6081-4B0F-8501-AB1440A8D74F} = {068DA925-034A-4D7C-B344-083CC846F7D9}
 		{6D5E4B10-C0E6-4782-B7F2-46E639D9CD80} = {068DA925-034A-4D7C-B344-083CC846F7D9}
+		{241AD33E-0288-4433-9023-B6CE5318C5A5} = {068DA925-034A-4D7C-B344-083CC846F7D9}
 	EndGlobalSection
 EndGlobal
