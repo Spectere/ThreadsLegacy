@@ -22,6 +22,11 @@ namespace Threads.Interpreter.Types {
         public Information Information { get; set; }
 
         /// <summary>
+        /// The styles contained in the story.
+        /// </summary>
+        public ICollection<Style> Styles { get; set; }
+
+        /// <summary>
         /// The pages contained in the story.
         /// </summary>
         public ICollection<Page> Pages { get; set; }
@@ -38,6 +43,7 @@ namespace Threads.Interpreter.Types {
             Format = Engine.EngineVersion;
             Information = new Information();
             Configuration = new Configuration();
+            Styles = new List<Style>();
             Pages = new List<Page>();
             Data = new Data();
         }
@@ -51,6 +57,7 @@ namespace Threads.Interpreter.Types {
                 Configuration = Configuration.Export(),
                 Format = Format.ToString(),
                 Information = Information.Export(),
+                Styles = Styles.Select(style => style.Export()).ToArray(),
                 Pages = Pages.Select(page => page.Export()).ToArray()
             };
         }

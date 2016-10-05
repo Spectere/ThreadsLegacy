@@ -8,13 +8,7 @@
         <xs:element name="Styles" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="Style" minOccurs="0" maxOccurs="unbounded">
-                <xs:complexType>
-                  <xs:attribute name="Name" type="xs:string" use="required" />
-                  <xs:attribute name="Inherits" type="xs:string" use="optional" />
-                  <xs:attributeGroup ref="StyleGroup" />
-                </xs:complexType>
-              </xs:element>
+              <xs:element name="Style" type="StyleType" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -53,6 +47,12 @@
       <xs:element name="StoryMarginLeft" type="xs:double" minOccurs="0" maxOccurs="1" />
       <xs:element name="StoryMarginRight" type="xs:double" minOccurs="0" maxOccurs="1" />
     </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="StyleType">
+    <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Inherits" type="xs:string" use="optional" />
+    <xs:attributeGroup ref="StyleGroup" />
   </xs:complexType>
 
   <xs:complexType name="PageType">
