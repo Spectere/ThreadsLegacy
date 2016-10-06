@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
+using Style = Threads.Interpreter.Types.Style;
 using Threads.Marker;
 
 namespace Threads.Player.UIObjects {
@@ -38,8 +39,13 @@ namespace Threads.Player.UIObjects {
         /// <summary>
         /// Applies a <see cref="PageObjectStyle" /> to this object instance.
         /// </summary>
-        public PageObjectStyle PageObjectStyle {
-            set { Margin = new Thickness(value.MarginLeft, value.MarginTop, value.MarginRight, value.MarginBottom); }
+        public Style PageObjectStyle {
+            set {
+                Margin = new Thickness(value.MarginLeft.GetValueOrDefault(),
+                                       value.MarginTop.GetValueOrDefault(),
+                                       value.MarginRight.GetValueOrDefault(),
+                                       value.MarginBottom.GetValueOrDefault());
+            }
         }
 
         /// <summary>

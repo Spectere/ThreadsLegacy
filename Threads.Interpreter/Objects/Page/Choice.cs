@@ -1,11 +1,13 @@
-﻿namespace Threads.Interpreter.Objects.Page {
+﻿using Threads.Interpreter.Types;
+
+namespace Threads.Interpreter.Objects.Page {
     /// <summary>
     /// A page object representing a choice in the story.
     /// </summary>
     public class Choice : PageObject {
         private Types.Page _target;
 
-        public sealed override PageObjectStyle DefaultStyle => new PageObjectStyle {
+        public sealed override Style DefaultStyle => new Style {
             MarginTop = 0.0,
             MarginBottom = 7.5
         };

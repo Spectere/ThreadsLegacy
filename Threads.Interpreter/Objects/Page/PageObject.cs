@@ -28,12 +28,12 @@ namespace Threads.Interpreter.Objects.Page {
         /// <summary>
         /// The default style for this <see cref="PageObject" />.
         /// </summary>
-        public abstract PageObjectStyle DefaultStyle { get; }
+        public abstract Style DefaultStyle { get; }
 
         /// <summary>
         /// The style that should be applied to this <see cref="PageObject" />.
         /// </summary>
-        public PageObjectStyle Style { get; set; }
+        public Style Style { get; set; }
 
         /// <summary>
         /// Initializes a new instance of this <see cref="PageObject"/>.
@@ -134,10 +134,10 @@ namespace Threads.Interpreter.Objects.Page {
             xmlObject.MarginTopSpecified = Style.MarginTop != DefaultStyle.MarginTop;
 
             // Export the style values.
-            xmlObject.MarginBottom = Style.MarginBottom;
-            xmlObject.MarginLeft = Style.MarginLeft;
-            xmlObject.MarginRight = Style.MarginRight;
-            xmlObject.MarginTop = Style.MarginTop;
+            xmlObject.MarginBottom = Style.MarginBottom.GetValueOrDefault();
+            xmlObject.MarginLeft = Style.MarginLeft.GetValueOrDefault();
+            xmlObject.MarginRight = Style.MarginRight.GetValueOrDefault();
+            xmlObject.MarginTop = Style.MarginTop.GetValueOrDefault();
 
             // Export the conditionals.
             xmlObject.ShowIf = ShowIf;

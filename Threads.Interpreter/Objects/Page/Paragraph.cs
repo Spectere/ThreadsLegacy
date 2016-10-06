@@ -1,9 +1,11 @@
-﻿namespace Threads.Interpreter.Objects.Page {
+﻿using Threads.Interpreter.Types;
+
+namespace Threads.Interpreter.Objects.Page {
     /// <summary>
     /// A page object representing a paragraph of text.
     /// </summary>
     public class Paragraph : PageObject {
-        public sealed override PageObjectStyle DefaultStyle => new PageObjectStyle {
+        public sealed override Style DefaultStyle => new Style {
             MarginTop = 0.0,
             MarginBottom = 20.0
         };

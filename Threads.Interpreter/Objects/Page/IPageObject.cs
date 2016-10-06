@@ -16,7 +16,7 @@ namespace Threads.Interpreter.Objects.Page {
         /// <summary>
         /// The style that should be applied to this <see cref="IPageObject" />.
         /// </summary>
-        PageObjectStyle Style { get; set; }
+        Style Style { get; set; }
 
         /// <summary>
         /// Returns a <see cref="TextSequence" /> object with variable substitutions performed.

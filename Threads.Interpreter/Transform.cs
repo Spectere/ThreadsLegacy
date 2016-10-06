@@ -226,9 +226,9 @@ namespace Threads.Interpreter {
         /// Apples the style of an XML <see cref="Schema.PageObject" /> on top of a default style.
         /// </summary>
         /// <param name="pageObject">The <see cref="Schema.PageObject" /> to pull the style values from.</param>
-        /// <param name="defaultStyle">The <see cref="PageObjectStyle" /> to apply the updated style to.</param>
-        /// <returns>A <see cref="PageObjectStyle" /> containing the merged style data.</returns>
-        private static PageObjectStyle TransformStyle(Schema.PageObject pageObject, PageObjectStyle defaultStyle) {
+        /// <param name="defaultStyle">The <see cref="Style" /> to apply the updated style to.</param>
+        /// <returns>A <see cref="Style" /> containing the merged style data.</returns>
+        private static Style TransformStyle(Schema.PageObject pageObject, Style defaultStyle) {
             var newStyle = defaultStyle;
 
             if(pageObject.MarginBottomSpecified) newStyle.MarginBottom = pageObject.MarginBottom;
