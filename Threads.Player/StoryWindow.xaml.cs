@@ -37,18 +37,20 @@ namespace Threads.Player {
             Stack.Margin = new Thickness(globalConfig.StoryMarginLeft, 40.0, globalConfig.StoryMarginRight, 20.0);
 
             // Display room text.
-            foreach(var obj in displayList) {
+            foreach(var entry in displayList) {
+                var obj = entry.Item1;
+                var style = entry.Item2;
                 if(obj.GetType().BaseType != typeof(PageObject)) continue;
 
                 var pObj = (IPageObject)obj;
                 if(obj.GetType() == typeof(Paragraph)) {
-                    Stack.Children.Add(new UIParagraph(pObj, _engine.Story.Data));
+                    Stack.Children.Add(new UIParagraph(pObj, _engine.Story.Data, style));
                 } else if(obj.GetType() == typeof(Choice)) {
-                    var button = new UIChoice((Choice)pObj, _engine.Story.Data);
+                    var button = new UIChoice((Choice)pObj, _engine.Story.Data, style);
                     button.ChoiceClick += Choice_Click;
                     Stack.Children.Add(button);
                 } else if(obj.GetType() == typeof(PageObjectImage)) {
-                    Stack.Children.Add(new UIImage((PageObjectImage)pObj, _engine.Story.Data));
+                    Stack.Children.Add(new UIImage((PageObjectImage)pObj, _engine.Story.Data, style));
                 }
             }
         }
@@ -69,8 +71,8 @@ namespace Threads.Player {
             if((inKey.StartsWith("D") && inKey.Length == 2) || inKey.StartsWith("NUMPAD"))
                 inKey = inKey.Substring(inKey.Length - 1, 1);
 
-            foreach(var choiceObject in _engine.DisplayList.Where(o => o.GetType() == typeof(Choice))) {
-                var choice = (Choice)choiceObject;
+            foreach(var choiceObject in _engine.DisplayList.Where(o => o.Item1.GetType() == typeof(Choice))) {
+                var choice = (Choice)choiceObject.Item1;
                 if(inKey == choice.Shortcut.ToString().ToUpper()) {
                     _engine.SubmitChoice(choice);
                     DisplayPage();

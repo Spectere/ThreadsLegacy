@@ -5,6 +5,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using Threads.Interpreter.Objects.Page;
 using Threads.Interpreter.Types;
+using Style = Threads.Interpreter.Types.Style;
 
 namespace Threads.Player.UIObjects {
     internal class UIChoice : UIPageObject {
@@ -13,7 +14,7 @@ namespace Threads.Player.UIObjects {
         public delegate void OnChoiceClick(object sender, RoutedEventArgs e);
         public event OnChoiceClick ChoiceClick;
 
-        public UIChoice(Choice choiceObject, Data storyData) : base(choiceObject, storyData) {
+        public UIChoice(Choice choiceObject, Data storyData, Style style) : base(choiceObject, storyData, style) {
             TextBlock.FontSize = 18.0;
             var button = new Button {
                 FontFamily = new FontFamily("Cambria"),

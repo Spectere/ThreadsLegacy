@@ -53,7 +53,7 @@ namespace Threads.Player.UIObjects {
         /// </summary>
         /// <param name="pageObject">A <see cref="PageObject" /> to use to populate and style this control.</param>
         /// <param name="storyData">The <see cref="Data" /> that corresponds to the loaded story.</param>
-        protected UIPageObject(IPageObject pageObject, Data storyData) {
+        protected UIPageObject(IPageObject pageObject, Data storyData, Style style) {
             TextBlock = new TextBlock {
                 FontFamily = new FontFamily("Cambria"),
                 FontSize = 24.0,
@@ -61,7 +61,7 @@ namespace Threads.Player.UIObjects {
             };
 
             FormattedText = pageObject.DisplayText(storyData);
-            PageObjectStyle = pageObject.Style;
+            PageObjectStyle = style;
         }
     }
 }

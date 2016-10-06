@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using StorySerializer = Threads.Interpreter.Schema.Story;
 using System.IO;
 using System.Xml.Serialization;
@@ -28,7 +29,7 @@ namespace Threads.Interpreter {
         /// </summary>
         public Page CurrentPage { get; internal set; }
 
-        public List<IObject> DisplayList { get; }
+        public List<Tuple<IObject, Style>> DisplayList { get; }
 
         /// <summary>
         /// The validated form of the story file.
@@ -39,7 +40,7 @@ namespace Threads.Interpreter {
         /// Initializes a new engine. This creates a new <see cref="Story" />.
         /// </summary>
         public Engine() {
-            DisplayList = new List<IObject>();
+            DisplayList = new List<Tuple<IObject, Style>>();
             Story = new Story();
         }
 
@@ -48,7 +49,7 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="filename">The path to the story file.</param>
         public Engine(string filename) {
-            DisplayList = new List<IObject>();
+            DisplayList = new List<Tuple<IObject, Style>>();
             Load(filename);
         }
 
@@ -85,7 +86,7 @@ namespace Threads.Interpreter {
                 if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && ExpressionHandler.EvaluateBoolean(thisObject.HideIf, Story.Data)) continue;
 
                 if(thisObject.GetType().BaseType == typeof(PageObject)) {
-                    DisplayList.Add(thisObject);
+                    DisplayList.Add(new Tuple<IObject, Style>(thisObject, null));
                     continue;
                 }
 
