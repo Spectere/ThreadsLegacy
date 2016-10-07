@@ -1,4 +1,5 @@
-﻿using Threads.Interpreter.Types;
+﻿using Threads.Interpreter.StaticData;
+using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter.Objects.Page {
     /// <summary>
@@ -7,10 +8,7 @@ namespace Threads.Interpreter.Objects.Page {
     public class Choice : PageObject {
         private Types.Page _target;
 
-        public sealed override Style DefaultStyle => new Style {
-            MarginTop = 0.0,
-            MarginBottom = 7.5
-        };
+        public sealed override Style DefaultStyle => DefaultStyles.Style[typeof(Choice)];
 
         /// <summary>
         /// The target page that this choice leads to.

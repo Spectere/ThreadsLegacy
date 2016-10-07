@@ -11,6 +11,8 @@ namespace Threads.Interpreter.Objects.Page {
     /// A class implementing <see cref="IPageObject" />. This class must be inherited.
     /// </summary>
     public abstract class PageObject : IPageObject {
+        private Style _linkedStyle;
+
         public string Name { get; set; }
         public string HideIf { get; set; }
         public string ShowIf { get; set; }
@@ -26,12 +28,30 @@ namespace Threads.Interpreter.Objects.Page {
         public virtual string Text => FormattedText.ToString();
 
         /// <summary>
-        /// The default style for this <see cref="PageObject" />.
+        /// The default <see cref="Style" /> for this <see cref="PageObject" />.
         /// </summary>
         public abstract Style DefaultStyle { get; }
 
         /// <summary>
-        /// The style that should be applied to this <see cref="PageObject" />.
+        /// The <see cref="Story" />-wide <see cref="Style" /> that is linked to this <see cref="PageObject" />.
+        /// </summary>
+        public Style LinkedStyle {
+            get {
+                return _linkedStyle;
+            }
+            set {
+                _linkedStyle = value;
+                LinkedStyleName = _linkedStyle.Name;
+            }
+        }
+
+        /// <summary>
+        /// The name of the <see cref="Story" />-wide <see cref="Style" /> that is linked to this <see cref="PageObject" />.
+        /// </summary>
+        public string LinkedStyleName { get; set; }
+
+        /// <summary>
+        /// The <see cref="Style" /> that should be applied to this <see cref="PageObject" />.
         /// </summary>
         public Style Style { get; set; }
 
@@ -123,6 +143,9 @@ namespace Threads.Interpreter.Objects.Page {
 
             // Export the name of this object.
             xmlObject.Name = Name;
+
+            // Export the name of the linked style in this object (if any).
+            xmlObject.Style = LinkedStyleName;
 
             // Export the text in this object.
             xmlObject.Value = FormattedText.MarkupText;

@@ -1,12 +1,30 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Threads.Interpreter.Schema;
 
 namespace Threads.Interpreter.Types {
     /// <summary>
     /// Represents a story's configuration.
     /// </summary>
     public class Configuration {
-        public const double DefaultStoryMarginLeft = 40.0;
-        public const double DefaultStoryMarginRight = 40.0;
+        /// <summary>
+        /// The page-specific styles that should be applied to this object.
+        /// </summary>
+        public PageStyle PageStyle { get; set; }
+
+        /// <summary>
+        /// The default page-specific styles that should be applied to this object.
+        /// </summary>
+        public PageStyle DefaultPageStyle => StaticData.DefaultStyles.DefaultPageStyle;
+
+        /// <summary>
+        /// The default style that all objects in this story should use by default.
+        /// </summary>
+        public Style Style { get; set; }
+
+        /// <summary>
+        /// The default style that Threads uses for all objects.
+        /// </summary>
+        public Style DefaultStyle => StaticData.DefaultStyles.Style[typeof(Story)];
 
         /// <summary>
         /// The first page in the story.
@@ -27,8 +45,7 @@ namespace Threads.Interpreter.Types {
         /// Creates a new <see cref="Configuration" /> object.
         /// </summary>
         public Configuration() {
-            StoryMarginLeft = DefaultStoryMarginLeft;
-            StoryMarginRight = DefaultStoryMarginRight;
+            PageStyle = new PageStyle();
         }
 
         /// <summary>
@@ -39,10 +56,7 @@ namespace Threads.Interpreter.Types {
         internal Schema.ConfigurationType Export() {
             return new Schema.ConfigurationType {
                 FirstPage = FirstPage?.Name,
-                StoryMarginLeftSpecified = StoryMarginLeft != DefaultStoryMarginLeft,
-                StoryMarginLeft = StoryMarginLeft,
-                StoryMarginRightSpecified = StoryMarginRight != DefaultStoryMarginRight,
-                StoryMarginRight = StoryMarginRight
+                DefaultStyle = new ConfigurationTypeDefaultStyle()
             };
         }
     }

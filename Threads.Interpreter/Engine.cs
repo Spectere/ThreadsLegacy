@@ -86,7 +86,12 @@ namespace Threads.Interpreter {
                 if(!string.IsNullOrWhiteSpace(thisObject.HideIf) && ExpressionHandler.EvaluateBoolean(thisObject.HideIf, Story.Data)) continue;
 
                 if(thisObject.GetType().BaseType == typeof(PageObject)) {
-                    DisplayList.Add(new Tuple<IObject, Style>(thisObject, null));
+                    DisplayList.Add(
+                        new Tuple<IObject, Style>(
+                            thisObject,
+                            Style.CalculateStyle(Story, CurrentPage, (PageObject)thisObject)
+                        )
+                    );
                     continue;
                 }
 

@@ -17,11 +17,21 @@ namespace Threads.Interpreter.Types {
         /// The page-specific styles that should be applied to this object.
         /// </summary>
         public PageStyle PageStyle { get; set; }
+
+        /// <summary>
+        /// The default page-specific styles that should be applied to this object.
+        /// </summary>
+        public PageStyle DefaultPageStyle => StaticData.DefaultStyles.DefaultPageStyle;
         
         /// <summary>
         /// The style that should be applied to all objects in this page.
         /// </summary>
         public Style Style { get; set; }
+
+        /// <summary>
+        /// The default page style.
+        /// </summary>
+        public Style DefaultStyle => StaticData.DefaultStyles.Style[typeof(Page)];
 
         /// <summary>
         /// The <see cref="IObject" />s associated with this page.

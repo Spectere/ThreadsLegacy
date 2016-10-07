@@ -1,11 +1,9 @@
-﻿using Threads.Interpreter.Types;
+﻿using Threads.Interpreter.StaticData;
+using Threads.Interpreter.Types;
 
 namespace Threads.Interpreter.Objects.Page {
     public class Image : PageObject {
-        public sealed override Style DefaultStyle => new Style {
-            MarginTop = 0.0,
-            MarginBottom = 20.0
-        };
+        public sealed override Style DefaultStyle => DefaultStyles.Style[typeof(Image)];
 
         /// <summary>
         /// The filename of the image that should be loaded.

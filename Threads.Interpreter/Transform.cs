@@ -56,6 +56,7 @@ namespace Threads.Interpreter {
             var pageList = pages.ToList();
 
             var newConfig = new Configuration {
+                Style = TransformStyle(configuration.DefaultStyle),
                 FirstPage = configuration.FirstPage == null ? pageList.First() : pageList.First(e => e.Name == configuration.FirstPage),
                 StoryMarginLeft = configuration.StoryMarginLeftSpecified ? configuration.StoryMarginLeft : 40.0,
                 StoryMarginRight = configuration.StoryMarginRightSpecified ? configuration.StoryMarginRight : 40.0
@@ -168,7 +169,7 @@ namespace Threads.Interpreter {
             // Apply style (if this is a PaegObject)
             if(obj.GetType().BaseType == typeof(Schema.PageObject)) {
                 var pageObject = (StoryPageObject)newObject;
-                pageObject.Style = TransformStyle((Schema.PageObject)obj, pageObject.Style);
+                pageObject.Style = TransformStyle((Schema.PageObject)obj);
             }
 
             // Apply ActionObject properties (if applicable).
@@ -225,16 +226,24 @@ namespace Threads.Interpreter {
         /// <summary>
         /// Apples the style of an XML <see cref="Schema.PageObject" /> on top of a default style.
         /// </summary>
-        /// <param name="pageObject">The <see cref="Schema.PageObject" /> to pull the style values from.</param>
+        /// <param name="styledObject">An object to pull the style values from.</param>
         /// <param name="defaultStyle">The <see cref="Style" /> to apply the updated style to.</param>
         /// <returns>A <see cref="Style" /> containing the merged style data.</returns>
-        private static Style TransformStyle(Schema.PageObject pageObject, Style defaultStyle) {
-            var newStyle = defaultStyle;
+        private static Style TransformStyle(object styledObject) {
+            if(styledObject == null) return new Style();
 
-            if(pageObject.MarginBottomSpecified) newStyle.MarginBottom = pageObject.MarginBottom;
-            if(pageObject.MarginLeftSpecified) newStyle.MarginLeft = pageObject.MarginLeft;
-            if(pageObject.MarginRightSpecified) newStyle.MarginRight = pageObject.MarginRight;
-            if(pageObject.MarginTopSpecified) newStyle.MarginTop = pageObject.MarginTop;
+            dynamic obj = styledObject;
+            var newStyle = new Style();
+
+            if(obj is StyleType) {
+                newStyle.Name = obj.Name;
+                newStyle.InheritsName = obj.Inherits;
+            }
+
+            if(obj.MarginBottomSpecified) newStyle.MarginBottom = obj.MarginBottom;
+            if(obj.MarginLeftSpecified) newStyle.MarginLeft = obj.MarginLeft;
+            if(obj.MarginRightSpecified) newStyle.MarginRight = obj.MarginRight;
+            if(obj.MarginTopSpecified) newStyle.MarginTop = obj.MarginTop;
 
             return newStyle;
         }

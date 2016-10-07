@@ -67,6 +67,7 @@
     <Compile Include="Objects\Action\IActionObject.cs" />
     <Compile Include="Objects\Action\Redirect.cs" />
     <Compile Include="Objects\Action\Variable.cs" />
+    <Compile Include="StaticData\DefaultStyles.cs" />
     <Compile Include="Objects\IObject.cs" />
     <Compile Include="Objects\Page\Choice.cs" />
     <Compile Include="Objects\Page\Image.cs" />
