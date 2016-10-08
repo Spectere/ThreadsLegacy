@@ -32,10 +32,24 @@ namespace Threads.Interpreter {
             if(storyData.Information != null)
                 story.Information = TransformInformation(storyData.Information);
 
+            // We can also survive without a style block.
+            story.Styles = new List<Style>();
+            if(storyData.Styles != null) {
+                foreach(var style in storyData.Styles) {
+                    story.Styles.Add(TransformStyle(style));
+                }
+            }
+
+            // Link inherited styles appropriately.
+            foreach(var style in story.Styles) {
+                if(string.IsNullOrWhiteSpace(style.InheritsName)) continue;
+                style.Inherits = story.Styles.First(s => s.Name == style.InheritsName);
+            }
+
             // Bail if we don't have any pages.
             if(storyData.Pages == null)
                 throw new NullPagesException();
-            story.Pages = TransformPages(storyData.Pages, engine);
+            story.Pages = TransformPages(storyData.Pages, engine, story.Styles);
             if(story.Pages.Count == 0)
                 throw new NoPagesFoundException();
 
@@ -56,11 +70,15 @@ namespace Threads.Interpreter {
             var pageList = pages.ToList();
 
             var newConfig = new Configuration {
-                Style = TransformStyle(configuration.DefaultStyle),
                 FirstPage = configuration.FirstPage == null ? pageList.First() : pageList.First(e => e.Name == configuration.FirstPage),
-                StoryMarginLeft = configuration.StoryMarginLeftSpecified ? configuration.StoryMarginLeft : 40.0,
-                StoryMarginRight = configuration.StoryMarginRightSpecified ? configuration.StoryMarginRight : 40.0
+                PageStyle = new PageStyle(),
+                Style = TransformStyle(configuration.DefaultStyle)
             };
+
+            if(configuration.StoryMarginLeftSpecified) newConfig.DefaultPageStyle.PageMarginLeft = configuration.StoryMarginLeft;
+            if(configuration.StoryMarginRightSpecified) newConfig.DefaultPageStyle.PageMarginRight = configuration.StoryMarginRight;
+
+            newConfig.PageStyle = TransformPageStyle(configuration.DefaultStyle);
 
             // Check to see if the first page is valid.
             if(newConfig.FirstPage == null)
@@ -166,7 +184,7 @@ namespace Threads.Interpreter {
             newObject.ShowIf = obj.ShowIf;
             newObject.HideIf = obj.HideIf;
 
-            // Apply style (if this is a PaegObject)
+            // Apply style (if this is a PageObject)
             if(obj.GetType().BaseType == typeof(Schema.PageObject)) {
                 var pageObject = (StoryPageObject)newObject;
                 pageObject.Style = TransformStyle((Schema.PageObject)obj);
@@ -186,15 +204,18 @@ namespace Threads.Interpreter {
         /// </summary>
         /// <param name="pages">A set of deserialized page data.</param>
         /// <param name="engine">A reference to the active <see cref="Engine" />.</param>
+        /// <param name="styles">A reference to the collection of <see cref="Style" /> objects.</param>
         /// <returns>A collection of <see cref="Page"/> objects containing the story information.</returns>
-        private static ICollection<Page> TransformPages(IEnumerable<PageType> pages, Engine engine) {
+        private static ICollection<Page> TransformPages(IEnumerable<PageType> pages, Engine engine, ICollection<Style> styles) {
             var output = new List<Page>();
             var pageList = pages.ToList();
 
             // Convert page objects.
             foreach(var page in pageList) {
                 var newPage = new Page {
-                    Name = page.Name
+                    Name = page.Name,
+                    PageStyle = TransformPageStyle(page),
+                    Style = TransformStyle(page)
                 };
 
                 if(page.Items != null) {
@@ -218,16 +239,40 @@ namespace Threads.Interpreter {
                     var redirect = (Redirect)redirectObject;
                     redirect.Target = output.First(r => r.Name == redirect.TargetName);
                 }
+
+                foreach(var pageObject in page.Objects.Where(e => e.GetType().BaseType == typeof(StoryPageObject))) {
+                    var obj = (StoryPageObject)pageObject;
+                    if(string.IsNullOrWhiteSpace(obj.Style.InheritsName)) continue;
+                    obj.Style.Inherits = styles.FirstOrDefault(s => s.Name == obj.Style.InheritsName);
+                }
             }
 
             return output;
         }
 
         /// <summary>
+        /// Apples the style for a <see cref="Schema.PageType" /> on top of a default style.
+        /// </summary>
+        /// <param name="styledObject">An object to pull the style values from.</param>
+        /// <returns>A <see cref="Style" /> containing the merged style data.</returns>
+        private static PageStyle TransformPageStyle(object styledObject) {
+            if(styledObject == null) return new PageStyle();
+
+            dynamic obj = styledObject;
+            var newStyle = new PageStyle();
+
+            if(obj.PageMarginBottomSpecified) newStyle.PageMarginBottom = obj.PageMarginBottom;
+            if(obj.PageMarginLeftSpecified) newStyle.PageMarginLeft = obj.PageMarginLeft;
+            if(obj.PageMarginRightSpecified) newStyle.PageMarginRight = obj.PageMarginRight;
+            if(obj.PageMarginTopSpecified) newStyle.PageMarginTop = obj.PageMarginTop;
+
+            return newStyle;
+        }
+
+        /// <summary>
         /// Apples the style of an XML <see cref="Schema.PageObject" /> on top of a default style.
         /// </summary>
         /// <param name="styledObject">An object to pull the style values from.</param>
-        /// <param name="defaultStyle">The <see cref="Style" /> to apply the updated style to.</param>
         /// <returns>A <see cref="Style" /> containing the merged style data.</returns>
         private static Style TransformStyle(object styledObject) {
             if(styledObject == null) return new Style();
@@ -239,6 +284,9 @@ namespace Threads.Interpreter {
                 newStyle.Name = obj.Name;
                 newStyle.InheritsName = obj.Inherits;
             }
+
+            if(obj is PageType || obj is Schema.PageObject)
+                newStyle.InheritsName = obj.Style;
 
             if(obj.MarginBottomSpecified) newStyle.MarginBottom = obj.MarginBottom;
             if(obj.MarginLeftSpecified) newStyle.MarginLeft = obj.MarginLeft;

@@ -65,6 +65,7 @@
       <xs:element name="Variable" type="VariableObject" minOccurs="0" maxOccurs="unbounded" />
     </xs:choice>
     <xs:attribute name="Name" type="xs:string" use="required" />
+    <xs:attribute name="Style" type="xs:string" use="optional" />
     <xs:attributeGroup ref="PageStyleGroup" />
     <xs:attributeGroup ref="StyleGroup" />
   </xs:complexType>

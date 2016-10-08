@@ -35,27 +35,25 @@ namespace Threads.Interpreter.Types {
         public double? MarginTop { get; set; }
 
         /// <summary>
-        /// Evaluates the final <see cref="Style" /> that the interpreter should use when drawing a particular <see cref="IPageObject" />.
+        /// Evaluates the final <see cref="Style" /> that the interpreter should use when drawing a particular <see cref="PageObject" />.
         /// </summary>
         /// <param name="story">The active <see cref="Story" /> object.</param>
         /// <param name="page">The current <see cref="Page" /> object.</param>
-        /// <param name="obj">The <see cref="IPageObject" /> that should be drawn.</param>
+        /// <param name="obj">The <see cref="PageObject" /> that should be drawn.</param>
         /// <returns></returns>
         internal static Style CalculateStyle(Story story, Page page, PageObject obj) {
             var result = new Style();
 
-            // 1) Default object stayle.
+            // 1) Default object style.
             ProcessStyleInheritance(obj.DefaultStyle, ref result);
 
             // 2) Default story style.
             ProcessStyleInheritance(story.Configuration.Style, ref result);
 
-            // 3) Styles definitions.
-
-            // 4) Page styles.
+            // 3) Page styles.
             ProcessStyleInheritance(page.Style, ref result);
 
-            // 5) The object style.
+            // 4) The object style.
             ProcessStyleInheritance(obj.Style, ref result);
 
             return result;
@@ -94,6 +92,8 @@ namespace Threads.Interpreter.Types {
         }
 
         private static void ProcessStyleInheritance(Style overlay, ref Style baseStyle) {
+            if(overlay == null) return;
+            if(overlay.Inherits != null) ProcessStyleInheritance(overlay.Inherits, ref baseStyle);
             OverlayStyles(overlay, ref baseStyle);
         }
     }
